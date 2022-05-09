@@ -15,17 +15,28 @@ console.log(typeof nome)
 console.log(typeof idade)
 // Este tipo foi impresso pois nao possui atribuição e nem um valor
 
-const pergNome = prompt ("Qual é seu nome?")
-const pergIdade = prompt("Qual é sua idade?")
-console.log(typeof pergIdade,typeof pergNome)
-// Fez uma pergunta para o usuartesio, me dando informações para que efetue o proximo comando
+//const pergNome = prompt ("Qual é seu nome?")
+//const pergIdade = prompt("Qual é sua idade?")
+//console.log(typeof pergIdade,typeof pergNome)
+// Fez uma pergunta para o usuario, me dando informações para que efetue o proximo comando
 
-console.log("Olá", pergNome, "voce tem", pergIdade, "anos")
+//console.log("Olá", pergNome, "voce tem", pergIdade, "anos")
 
 // Exercicio 2
 
-let sim = true
-let não = false 
+//const pergAlmoco = prompt ("Você Almoçou hoje?")
+//const pergGostou = prompt ("Gostou do almoço?")
+//const pergAgua = prompt ("Bebeu agua hoje?")
 
-const pergAlmoco = prompt 
+//console.log("Voce almoçou hoje?",pergAlmoco,"Gostou do almoço?", pergGostou,"Bebeu agua hoje?", pergAgua )
 
+let resul1 = 10
+let resul2 = 25
+let ajuda = 0
+ajuda = resul1 
+resul1 = resul2
+resul2 = ajuda
+
+console.log ("O novo valor de a é", resul1) //resultado 25
+console.log ("O novo valor de b é", resul2) //resultado 10
+console.log ("teste ajuda", ajuda)
