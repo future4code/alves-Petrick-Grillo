@@ -100,21 +100,32 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
-let trocaPrimeiroEUltimo = array[array.length]
-trocaPrimeiroEUltimo = l
-return trocaPrimeiroEUltimo
+  let array2 = []
+  array2[0]= array[(array.length-1)]
+  array[(array.length-1)] = array[0]
+  array[0] = array2[0]
+return array
 }
 
 // EXERCÍCIO 12
 function checaIgualdadeDesconsiderandoCase(string1, string2) {
   // implemente sua lógica aqui
-
+let checkarNome = string1.toLowerCase() === string2.toLowerCase()
+return checkarNome
 }
 
 // EXERCÍCIO 13
 function checaRenovacaoRG() {
   // implemente sua lógica aqui
-
+  const pergAnoAtual = +prompt("Qual é o ano atual?")
+  const pergAnoNasc = +prompt("Qual é o ano de seu nascimento?")
+  const pergAnoCart = +prompt("Quando emitiu sua carteira de identidade")
+  let contaIdade = (pergAnoAtual)-(pergAnoNasc)
+  let contaEmissao = (pergAnoAtual)-(pergAnoCart)
+  let verificarIdade = (contaIdade) <= 50     //true = 10 anos false = 15
+  let verificarEmissao = (contaEmissao) >= 10    //true = tem q fazer
+let precisaOuNao = verificarEmissao && verificarIdade
+  return precisaOuNao
 }
 
 // EXERCÍCIO 14
