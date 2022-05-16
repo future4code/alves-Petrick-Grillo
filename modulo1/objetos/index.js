@@ -62,21 +62,23 @@
 let carrinho = []
 
 const melao = {
-    nome:melao,
-    disponibilidade:true
+    nome:"melao",
+    disponibilidade: true
 }
 const manga = {
-    nome:manga,
+    nome:"manga",
     disponibilidade:true
 }
 const uva = {
-    nome:uva,
+    nome:"uva",
     disponibilidade:true
 }
 colocarCarrinho = (parametro) =>{
-    parametro = (`${parametro.nome}`)
+    parametro = (`nome: ${parametro.nome}, disponibilidade: ${parametro.disponibilidade}`)
     return parametro
 }
-carrinho.push((melao))
+let addCarrinho1 = carrinho.push(colocarCarrinho(melao))
+let addCarrinho2 = carrinho.push(colocarCarrinho(manga))
+let addCarrinho3 = carrinho.push(colocarCarrinho(uva))
 console.log(carrinho)
 
