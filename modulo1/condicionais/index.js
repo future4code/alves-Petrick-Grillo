@@ -18,18 +18,53 @@
 //         console.log("Voce nao pode dirigir")
 //     }
 // 2 -
-let perguntaHorario = prompt("Qual turno do dia você estuda?\nSendo as opções M (matutino) V (vespertino) ou N (noturno)".toUpperCase()).toUpperCase()
+// let perguntaHorario = prompt("Qual turno do dia você estuda?\nSendo as opções M (matutino) V (vespertino) ou N (noturno)".toUpperCase()).toUpperCase()
 
-verificaoPeriodo = () => {
-    if (verificaoPeriodo === "M") {
-        console.log("Bom dia!")
-    }
-    else if (verificaoPeriodo === "V") {
-        console.log("Boa tarde!")
-    }
-    else (verificaoPeriodo === "N") {
-        console.log("Boa noite!")
-    }
+// verificaoPeriodo = (perguntaHorario) => {
+//     if (perguntaHorario === "M") {
+//         console.log("Bom dia!")
+//     }
+//     else if (perguntaHorario === "V") {
+//         console.log("Boa tarde!")
+//     }
+//     if (perguntaHorario === "N") 
+//         console.log("Boa noite!")
+//     }
+// perguntaTurno = verificaoPeriodo(perguntaHorario)
+// 3 - 
+// let perguntaHorario = prompt("Qual turno do dia você estuda?\nSendo as opções M (matutino) V (vespertino) ou N (noturno)".toUpperCase()).toUpperCase()
 
-}
-console.log(perguntaHorario)
+// switch (perguntaHorario){
+//     case "M":
+//         console.log("Bom dia!")
+//         break
+//     case "V":
+//         console.log("Boa tarde!")
+//     break
+//     case "N": 
+//         console.log("Boa noite!")
+//     break
+
+//     default:
+//         console.log("Por favor insira apenas as letras M,V ou N")
+//         break
+// }
+// 4 -
+// let perguntaGeneroFilme = prompt("Qual é o genero de filme que ira assistir?").toUpperCase()
+// let perguntaPreçoIngresso = +prompt("Qual o preço do filme?")
+
+// verificaçãoFilmePreço = (perguntaPreçoIngresso) =>{
+//     contaPreço = perguntaPreçoIngresso < 15
+//     return contaPreço
+// }
+
+// verificaçãoGeneroFilme = (perguntaGeneroFilme) =>{
+//     generoFilme = (perguntaGeneroFilme === "FANTASIA")
+//     return generoFilme
+// }
+//  if (verificaçãoFilmePreço(perguntaPreçoIngresso) && verificaçãoGeneroFilme(perguntaGeneroFilme)){
+//      console.log("Bom filme!")
+//  }
+//  else {
+//      console.log("Escolha outro filme :(")
+//  }
