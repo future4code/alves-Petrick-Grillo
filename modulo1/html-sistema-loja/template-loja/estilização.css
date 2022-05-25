@@ -1,0 +1,88 @@
+/* **A ordem das margens é: top, right, bottom, left** */
+* {padding: 0;
+margin: 0;
+}
+.Cabeçalho {
+    background-color: cornflowerblue;
+    /* border: 2px solid black; */
+    color: black;
+    padding: 0vw 0vw 5vw 27vw;
+    margin: 0vw 0vw 0vw 0vw;
+}
+
+.subt {
+    /* background-color: blueviolet; */
+    /* border: 1px solid black; */
+    color: black;
+    text-align: center;
+    /* margin: 0vw 0vw 0vw 44vw; */
+    /* padding: 0px 0px 0px 0px; */
+}
+
+.link1,.link2 {
+    /* background-color: black; */
+    /* border: 1px solid black; */
+    /* color: blue; */
+    margin: 0vw 0vw 0vw 40vw;
+    padding: 0px 0px 0px 0px;
+}
+
+/* .link2 {
+    /* background-color: black; */
+    /* border: 1px solid black; */
+    /* color: blue; */
+
+.site {
+    background-color: white;
+    /* border: 1px solid black; */
+    /* color: blue; */
+    /* margin: 5px 410px 0px 380px;
+     /* padding: 50vw 50vw 5vw 5vw; */
+}
+
+.redes-sociais {
+    /* border: 1px solid black; */
+    /* background-color: white; */
+    color: black;
+    margin: 5px 00px 0px 120px;
+    padding: 0px 0px 0px 0px;
+}
+
+.redes-sociaisfotos {
+    /* border: 1px solid black; */
+    /* background-color: white; */
+    color: black;
+    margin: 5px 00px 0px 165px;
+    padding: 0px 0px 0px 0px;
+}
+.controle {
+    /* background-color: blueviolet; */
+    /* border: 1px solid black; */
+    color: black;
+    /* margin: 0vw 35vw 0vw 40vw; */
+    text-align: center;
+    padding: 5px 0px 0px 0px;
+}
+.controle h2 {
+border: 2px solid black;
+display: inline-block;
+}
+.Display {
+    /* background-color: blueviolet; */
+    /* border: 1px solid black; */
+    color: black;
+    text-align: center;
+    margin: 3vw 0vw 0vw 35vw;
+    /* padding: 0px 0px 0px 0px; */
+}
+.Display{
+    border: 5px solid black;
+display: inline-block;
+}
+.funcionarios {
+    /* border: 1px solid black; */
+    /* background-color: white; */
+    color: black;
+    margin: 15px 0px 0px 20px;
+    padding: 0px 0px 0px 0px;
+}

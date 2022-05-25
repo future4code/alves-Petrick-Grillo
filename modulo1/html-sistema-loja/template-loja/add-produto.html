@@ -6,21 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Adicionar Produto</title>
 </head>
+<link rel="stylesheet" type="text/css" href="/estilização.css">
 <body>
     <header>
-        <p>Nome da lojinha</p>
+        <div class="subt">
+            <p>Loja do Pétrick</p>
+        </div>
     </header>
     
     <nav>
-        <a href="index.html">Página Inicial |</a>
-        <a href="ctrl-estoque.html">Controle de Estoque |</a>
-        <a href="add-produto.html">Adicionar Produto |</a>
-        <a href="funcionarios.html">Funcionários</a>
+        <div class="link1"><a href="index.html">Página Inicial |</a>
+            <a href="ctrl-estoque.html">Controle de Estoque |</a>
+        </div>
+        <div class="link2"><a href="add-produto.html">Adicionar Produto |</a>
+            <a href="funcionarios.html">Funcionários</a></divclass>
     </nav>
 
-    
-    <h2>Adicionar Produto</h2>
-    <form action="">
+    <div class=controle>
+    <h2>Adicione seu produto!</h2>
+    </div>
+    <div class="Display">
+        <form action="">
             <label for="link-foto">Link para foto: </label>
             <input type="url" name="link-foto" id="link-foto">
             <br>
@@ -37,8 +43,9 @@
             <br>
             <!-- Adicione ao type do botão abaixo o valor para que ele submeta o formulário -->
             <button type="submit">Adicionar</button>
-
-    </form>
-
-</body>
-</html>
+            
+        </form>
+    </div>
+        
+    </body>
+    </html>
