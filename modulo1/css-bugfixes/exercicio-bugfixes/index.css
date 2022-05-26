@@ -27,7 +27,7 @@ button:focus {
 }
 
 img {
-    max-width: 100%;
+    /* max-width: 100%; */
     height: 100px;
     width: 100px;
 }
@@ -37,9 +37,14 @@ div>p:first-child {
 }
 
 div img {
-    background: black;
+    /* background: black; */
+    height: 100px;
+    /* width: 100px; */
 }
-
+ol{
+    margin:auto;
+    width:fit-content
+}
 .botao-amarelo {
     background-color: #ffaf43;
     width: 250px;
