@@ -24,12 +24,20 @@ input {
 
 button:focus {
     color: white;
+        margin: 0px 0px 0px 250px;
 }
-
+.botao{
+    margin: 150px 0px 0px 450px;
+}
 img {
-    /* max-width: 100%; */
-    height: 100px;
-    width: 100px;
+    max-width: 100%;
+    height: 80px;
+    width: 80px;
+}
+img {
+    max-width: 100%;
+    height: 80px;
+    width: 80px;
 }
 
 div>p:first-child {
@@ -38,7 +46,7 @@ div>p:first-child {
 
 div img {
     /* background: black; */
-    height: 100px;
+    /* height: 100px; */
     /* width: 100px; */
 }
 ol{
@@ -53,7 +61,19 @@ ol{
     font-size: 20px;
     color: white;
 }
-
+.tabela{
+    /* text-align: center; */
+    /* background-color: black; */
+    margin: 0px 0px 0px 250px;
+}
+.imglupa{
+    /* text-align: center; */
+    /* background-color: black; */
+    margin: 0px 0px 0px 800px;
+    max-width: 100%;
+    width: 80px;
+    height: 400px;
+}
 .botao-amarelo:hover {
     background-color: #c44f00;
 }
@@ -121,8 +141,9 @@ td button {
 }
 
 .container-do-search {
-    margin-top: 20px;
+    margin-top: 0px;
     height: 100px;
+    margin: 10px 0px 10px 00px;
 }
 
 
