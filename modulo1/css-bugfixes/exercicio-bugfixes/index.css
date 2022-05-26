@@ -24,7 +24,7 @@ input {
 
 button:focus {
     color: white;
-        margin: 0px 0px 0px 250px;
+        margin: 0px 0px 0px 0px;
 }
 .botao{
     margin: 150px 0px 0px 450px;
@@ -34,21 +34,12 @@ img {
     height: 80px;
     width: 80px;
 }
-img {
-    max-width: 100%;
-    height: 80px;
-    width: 80px;
-}
+
 
 div>p:first-child {
     display: inline;
 }
 
-div img {
-    /* background: black; */
-    /* height: 100px; */
-    /* width: 100px; */
-}
 ol{
     margin:auto;
     width:fit-content
@@ -77,7 +68,10 @@ ol{
 .botao-amarelo:hover {
     background-color: #c44f00;
 }
-
+.botao-amarelo:active{
+    background-color: rgb(212, 255, 0);
+    color: rgb(93, 0, 255);
+} 
 .container {
     
     height: 48vh;
@@ -87,7 +81,9 @@ ol{
 }
 
 .icone {
-    height: 15px;
+    height: 20px;
+    width: 20px;
+    max-width: 100%;
 }
 
 
@@ -142,8 +138,8 @@ td button {
 
 .container-do-search {
     margin-top: 0px;
-    height: 100px;
-    margin: 10px 0px 10px 00px;
+    height: 0px;
+    margin: 10px 0px 100px 00px;
 }
 
 
@@ -154,9 +150,12 @@ td button {
     border: 1px solid black;
     border-radius: 5px;
     font-size: 10px;
-    color: black;
 }
 
 #back-button:hover {
     background-color: #635a3d
 }
+#back-button:active{
+    background-color: rgb(212, 255, 0);
+    color: rgb(93, 0, 255);
+} 
