@@ -29,11 +29,11 @@ function retornaNumerosPares(array) {
 function retornaNumerosParesElevadosADois(array) {
     let pares = array.filter((item) => {
         return item % 2 === 0
-})
-let numerosElevados = pares.map((item)=>{
-    return item**2
-})
-return numerosElevados
+    })
+    let numerosElevados = pares.map((item) => {
+        return item ** 2
+    })
+    return numerosElevados
 }
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
@@ -42,13 +42,18 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 07
 function retornaObjetoEntreDoisNumeros(num1, num2) {
-    const objeto = {
-        maiorNumero: Math.max.apply(null`${num1} ${num2}`),
-        maiorDivisivelPorMenor: (num1 % num2 === 0),
-        diferenca: (num1 - num2)
+    let maiorNumero = Math.max(num1, num2)
+    let menorNumero = Math.min(num1, num2)
+    let maiorDivisivelPorMenor = (Boolean(maiorNumero % menorNumero == 0))
+    let diferenca = (maiorNumero - menorNumero)
+    let objeto = {
+        maiorNumero,
+        maiorDivisivelPorMenor,
+        diferenca
     }
     return objeto
 }
+
 
 // EXERCÍCIO 08
 function retornaNPrimeirosPares(n) {
@@ -63,7 +68,15 @@ function retornaNPrimeirosPares(n) {
 
 // EXERCÍCIO 09
 function classificaTriangulo(ladoA, ladoB, ladoC) {
-
+    // let conferirEquiladotero = () => {
+    if (ladoA === ladoB && ladoB === ladoC && ladoA === ladoC) {
+        return ("Equilátero")
+    } else if (ladoA !== ladoB && ladoA !== ladoC && ladoB !== ladoC) {
+        return "Escaleno"
+    } else {
+        return "Isósceles"
+    // return conferirEquiladotero
+}
 }
 
 // EXERCÍCIO 10
@@ -80,6 +93,11 @@ function retornaSegundoMaiorESegundoMenor(array) {
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
+    let array = []
+    filme.atores.forEach(ator => {
+        array.push(ator= ` ${ator}`) 
+}); 
+return (`Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${array}.`)
 
 }
 
@@ -95,12 +113,12 @@ function retornaPessoasAutorizadas(pessoas) {
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-let pessoasNaoAutorizadas = pessoas.filter((pessoa)=>{
-    if (pessoa.altura <= 1.5 || pessoa.idade <= 14 || pessoa.idade >= 60){
-        return pessoa
-    }
-})
-return pessoasNaoAutorizadas
+    let pessoasNaoAutorizadas = pessoas.filter((pessoa) => {
+        if (pessoa.altura <= 1.5 || pessoa.idade <= 14 || pessoa.idade >= 60) {
+            return pessoa
+        }
+    })
+    return pessoasNaoAutorizadas
 }
 
 // EXERCÍCIO 14
