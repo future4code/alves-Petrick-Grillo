@@ -6,16 +6,24 @@
 .Pagina{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
+    
 }
 .img-bolin{
     height:20px;
-    /* width: 20px; */
+    width: 20px;
 }
 .cabeçalho{
-/* align-items: stretch; */
-color: black;
+    width: 100%;
+}
+.cabeçalho1{
+    background-color: mediumvioletred ;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px black solid;  */
+    /* flex-direction: row;    */
+    height: 50px;
 }
 .botao{
 /* flex-direction: row-reverse; */
@@ -23,13 +31,55 @@ color: black;
 /* padding: 0px 10px 0px 0px; */
 margin: 10px 10px 10px 0px;
 }
-header{
-    background-color: mediumvioletred ;
+/* header{ */
+    /* background-color: mediumvioletred ;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px black solid;    
+    border: 2px black solid; 
+    flex-direction: row;   
+    height: 50px; */
+/* } */
+.confeitaria{
+/* align-items: flex-start; */
+/* padding: 0px 1100px 0px 0px; */
+/* justify-content: flex-end; */
 }
 .Opçoes{
+    /* display: flex; */
+    /* flex-direction: column; */
+    background-color: #f2d0e0;
+    /* flex: 0 1 auto; */
+    /* border-right: 10px solid black; */
+}
+.Conteiner-Opçoes{
+    display: flex;
     flex-direction: column;
+    /* height: 100vh; */
+}
+.Seta{
+    width: 15px;
+}
+.Icone{
+width: 15px;
+/* height: 15px; */
+}
+.foto-bolo{
+    width:200px ;
+
+}
+.conteiner-Foto{
+    /* border: 1px solid black; */
+    width: 200px;
+display: flex;
+flex-direction: row;
+align-items: center;
+flex-wrap: nowrap;
+justify-content: space-between;
+flex-grow: 3;
+}
+footer{
+    display: flex;
+    flex-basis: 60px;
+    background-color: bisque;
 }
