@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+body{
+    height: 100%;
+}
+.Pagina{
+    height: 100%;
+}
+.img-bolin{
+    height:20px;
+    width: 20px;
+}
+.cabeçalho{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: mediumvioletred ;
+}
+.cabeçalho1{
+    display: flex; 
+    /* justify-content: space-between; */
+    align-items: center;
+    /* border: 2px black solid;  */
+    /* flex-direction: row;    */
+    height: 50px;
+}
+.botao{
+/* flex-direction: row-reverse; */
+/* justify-content: flex-end; */
+/* padding: 0px 10px 0px 0px; */
+margin: 10px 10px 10px 0px;
+}
+
+.Opçoes{
+    background-color: #f2d0e0;
+    height: 100%;
+    width: 150px;
+}
+.Conteiner-Opçoes{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+.Seta{
+    width: 15px;
+}
+.Icone{
+width: 15px;
+}
+.foto-bolo{
+    width:200px ;
+
+}
+.conteiner-Foto{
+display: flex;
+flex-grow: 3;
+flex-wrap: wrap;
+justify-content: space-between;
+gap: 8px;
+height: 80%;
+height: 100%;
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+bottom: 0;
+    background-color: bisque;
+}
+.conteiner2{
+display: flex;
+width: 100%;
+height: 100%;
+}
+.conteiner-produtos{
+display: flex;
+}
+.bolo-unidade{
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+    border: 1px solid black;
+    width: 200px;
+}

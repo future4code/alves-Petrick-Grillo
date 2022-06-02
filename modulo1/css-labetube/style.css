@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.Pagina {
+    height: 100%;
+}
+
+.cabeçalho {
+    display: flex;
+    background-color: orange;
+}
+
+.filho-cabeçalho {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-items: start;
+    padding: 16px;
+    width: 100%;
+}
+
+::placeholder {
+    padding-left: 20px;
+}
+
+#Buscar {
+    display: flex;
+    height: 30px;
+    margin: 10px 10px 10px 10px;
+}
+.midias {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 2fr;
+    gap: 10px;
+    padding: 10px;
+    /* width: 100%; */
+}
+
+.video {
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.videotxt {
+    border: 1px solid green;
+    padding-bottom: 10px;
+    /* margin: 10px ; */
+    text-align: start;
+}
+
+p {
+    margin-left: 10px;
+}
+
+footer {
+    background-color: grey;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.video1titulo{
+padding: 10px;
+text-align: center;
+}
+.videocentro{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+.videocentro2{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    width: 100%;
+    height: 400px;
+}
+/* celular */
+@media (min-width : 320px) and (max-width : 480px) {
+    .midias{
+display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr;
+    }
+    footer{
+        position: static;
+        width: 100%;
+        bottom: 0;
+    }
+    .videotxt{
+        text-align: center;
+    }
+}
+/* tablets */
+@media screen and (min-width : 481px) and (max-width : 800px) {
+    .midias{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+            }
+            footer{
+                position: static;
+                width: 100%;
+                bottom: 0;
+            }
+            .videotxt{
+                text-align: center;
+            }
+}
+/* Media 1 */
+@media (min-width : 481px) and (max-width : 800px) {
+    .videocentro{
+        display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr;
+display: flex;
+justify-content: center;
+padding-top: 50px;
+    }
+    footer{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+    video{
+        width: 70vh;
+    }
+}
