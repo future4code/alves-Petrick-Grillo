@@ -21,3 +21,7 @@ export const divInfo = styled.div`
 export const Paragrafo = styled.p`
     color: black;
 `
+export const Paragrafo2 = styled.p`
+    color: black;
+    padding-left:10px;
+`
