@@ -88,7 +88,7 @@ class Post extends React.Component {
     if (this.state.comentando) {
       componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} />
     }
-
+console.log(this.props)
     return <PostContainer>
       <PostHeader>
         <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'} />
@@ -96,7 +96,6 @@ class Post extends React.Component {
       </PostHeader>
 
       <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'} />
-
       <PostFooter>
         <IconeComContador
           icone={iconeCurtida}
