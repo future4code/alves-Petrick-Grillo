@@ -3,17 +3,18 @@ import styled from 'styled-components'
 
 const ConteinerMensagem = styled.div`
 display:flex;
-height: 800px;
+border: 1px solid white;
+background-color:white;
+margin:10px 10px 10px 10px;
 `
 const MensagensEnviadas = styled.div`
-  border: 1px solid gray;
-  width: 300px;
-  margin-bottom: 10px;
-`
-const FooterMensagem = styled.div`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
+  width:100%;
+  height:100%;
+  margin-bottom: 0.5%;
+  padding-top:0.6%;
+  padding-bottom:0.5%;
+  margin-top:0.5%;
+  padding-left:2%;
 `
 
 class Mensagem extends React.Component {
@@ -23,10 +24,11 @@ class Mensagem extends React.Component {
       <div>
             <ConteinerMensagem>
         <MensagensEnviadas>
+          <p>
+          {this.props.nomeUser}: {this.props.MsgUser}
+          </p>
         </MensagensEnviadas>
       </ConteinerMensagem>
-      <FooterMensagem>
-        </FooterMensagem>
 
       </div>
       );

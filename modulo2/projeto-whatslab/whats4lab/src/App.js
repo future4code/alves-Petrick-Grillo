@@ -5,27 +5,44 @@ import Mensagem from './components/Mensagem';
 
 const MainContainer = styled.div`
 display:flex;
-background-color:black;
 height:100vh;
   `
-const MolduraTexto = styled.div`
-background-color:black;
+  const ConteinerMolduraTexto = styled.footer`
+  display:flex;
+  justify-content:center;
+  `
+const MolduraTexto = styled.footer`
+display:flex;
 `
 const BotaoBaixo = styled.button`
-  bottom: 0;
-  position: fixed;
+  margin-top:3px;
   padding-left:20px;
   padding-right:20px;
-`
+  height:100%;
+  
+  `
 const InputBaixoUser = styled.input`
-  bottom: 0;
-  padding-left:202px;
-  padding-right:220px;
+  height:80%;
+  margin-top:3px;
 `
 const InputBaixoMsg = styled.input`
-  bottom: 0;
-  padding-left:202px;
-  padding-right:220px;
+  height:80%;
+  margin-top:3px;
+`
+const ConteinerMsg = styled.div`
+height:90%;
+width:100%;
+background-color:#E0B6AD;
+border: 5vh solid black;
+`
+const FilhoMsg = styled.div`
+display:flex;
+flex-direction:column;
+height:100%;
+width:100%;
+display:flex;
+flex-wrap:wrap;
+margin-top:2vh;
 `
 
 
@@ -38,11 +55,10 @@ class App extends React.Component {
   adicionaMsgUsuario = () => {
     const novaPessoa = {
       nomeUser: this.state.valorInputUsuario,
-      fotoUser: this.state.valorInputMsgUsuario,
+      MsgUser: this.state.valorInputMsgUsuario,
   }
   const addPessoas = [...this.state.infoUsuario, novaPessoa];
   this.setState({ infoUsuario: addPessoas })
-  this.setState({ valorInputUsuario: ""});
   this.setState({ valorInputMsgUsuario: ""});
 }
 
@@ -55,8 +71,16 @@ onChangeInputMsgU = (event) => {
 render() {
   return (
     <MainContainer>
-      <MolduraTexto>
-        <div>
+          <ConteinerMsg>
+              <FilhoMsg>
+      {this.state.infoUsuario.map((pessoa) => {
+        return (
+          <Mensagem nomeUser={pessoa.nomeUser} MsgUser={pessoa.MsgUser}/>
+          )
+        })}
+        </FilhoMsg>
+      <ConteinerMolduraTexto>
+        <MolduraTexto>
           <InputBaixoUser
             value={this.state.valorInputUsuario}
             onChange={this.onChangeInputUsuario}
@@ -65,17 +89,13 @@ render() {
           <InputBaixoMsg
             value={this.state.valorInputMsgUsuario}
             onChange={this.onChangeInputMsgU}
-            placeholder={"Foto de Usuario"}
+            placeholder={"Mensagem"}
             />
           <BotaoBaixo onClick={this.adicionaMsgUsuario}>Enviar</BotaoBaixo>
           
-        </div>
-      </MolduraTexto>
-      {this.state.infoUsuario.map((pessoa) => {
-          return (
-            <Mensagem nomeUser={pessoa.nomeUser} fotoUsuario={pessoa.fotoUser}/>
-          )
-        })}
+        </MolduraTexto>
+      </ConteinerMolduraTexto>
+        </ConteinerMsg>
       </MainContainer>
   );
 }
