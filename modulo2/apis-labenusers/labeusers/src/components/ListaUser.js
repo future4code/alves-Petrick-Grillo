@@ -35,16 +35,19 @@ class listaUser extends React.Component {
   };
 
   deletarUser = (id) => {
-    console.log(id)
-    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, {
-      headers: {
-        Authorization: "Petrick-Alves"
-      }
-    }).then (()=>{
-      alert("Usuario deletado com sucesso!")
-    })
+    const confirmar = window.confirm("Tem certeza?")
+    if(confirmar === true){
+axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, {
+  headers: {
+    Authorization: "Petrick-Alves"
+  }
+}).then (()=>{
+}).catch((erro)=>{
+  console.log(erro.data)
+})
+    }
   };
-
+  
   render() {
 
     const renderizarNomes = this.state.usuarios.map((usuario) => {
@@ -56,6 +59,8 @@ class listaUser extends React.Component {
     });
     return (
       <div>
+        <button onClick={this.props.irParaLista}>Voltar para Cadastro</button>
+        <button onClick={this.props.irParaDetalhe}>Detalhes do usuario</button>
         {renderizarNomes}
       </div>
     );

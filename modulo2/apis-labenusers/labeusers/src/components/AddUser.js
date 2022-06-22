@@ -1,5 +1,11 @@
 import axios from "axios";
 import React from "react";
+import styled from "styled-components";
+
+const Botao = styled.button`
+margin-left: 10px;
+margin-top:30px;
+`
 
 class AddUser extends React.Component {
     state = {
@@ -49,6 +55,7 @@ class AddUser extends React.Component {
           />
           <button onClick={this.criarUser}>Enviar</button>
           <div>
+          <button onClick={this.props.irParaAdd}>Usuarios</button>
           </div>
         </div>
   
