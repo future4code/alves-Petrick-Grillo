@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Playlist from "./Playlists";
 
 const MainContainer = styled.div`
-background-color:black;
+background-color:#D5FBFF;
+border: 20px solid #9FBCBF;
 `
 const ContainerTopo = styled.div`
 display:flex;
@@ -21,11 +22,19 @@ background-color: white;
 const ConteinerBotao = styled.div`
 padding-top:1%;
 margin-left:1%;
-
+`
+const ConteinerInfo = styled.div`
+/* display:flex; */
 `
 const BotaoEnvio = styled.button`
 box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-background-color:#92e27a;
+background-color:#59D8E6;
+:hover {
+    /* box-shadow: inset 1px 1px 10px white, 1px 1px 10px white; */
+    color: black;
+    border: 1px solid #E4F2E7;
+    cursor: pointer;
+}
 `
 
 class CriarPlaylist extends React.Component {
@@ -61,16 +70,19 @@ class CriarPlaylist extends React.Component {
         return (
             <MainContainer>
                 <ContainerTopo>
+
                     <EspaçoPergunta
                         placeholder="Nome da playlist"
                         value={this.state.playlist}
                         onChange={this.onChangePlaylist}
-                    />
+                        />
                     <ConteinerBotao>
                         <BotaoEnvio onClick={this.addPlay}>Enviar</BotaoEnvio>
                     </ConteinerBotao>
                 </ContainerTopo>
+                        <ConteinerInfo>
                 <Playlist attDados={this.state.attDados} setAttDados={() => this.setState({ attDados: false })} />
+                        </ConteinerInfo>
             </MainContainer>
         )
     }

@@ -5,36 +5,89 @@ import styled from "styled-components";
 const Botao = styled.button`
 `
 const TituloPlaylist = styled.p`
-background-color:black;
-color:white;
+background-color:#647678;
+color:black;
+font-weight: bold;
 margin-top:2%;
 border-radius:10px;
-box-shadow: 0 0 1em green;
 padding-top:1%;
 padding-bottom:1%;
 display:flex;
 justify-content:center;
 margin-left:40%;
 margin-right:40%;
+padding-left:0.5%;
 `
 const BotaoInteracao = styled.button`
 margin-left:40%;
 margin-right:40%;
 margin-top:1%;
 margin-bottom:1%;
+
+:hover {
+    box-shadow: inset 1px 1px 10px #63A69F, 1px 1px 10px white;
+    color: black;
+    border: 3px solid #E4F2E7;
+    cursor: pointer;
+}
+border-radius: 15px;
+background-color: #59D8E6;
 `
 const ConteinerInfo = styled.div`
-justify-content:center;
+display:flex;
+flex-direction: column;
+`
+const ConteinerGrade = styled.div`
 display: flex;
-    align-content: flex-start;
-    align-items: stretch;
+align-content: flex-start;
+align-items: stretch;
     flex-wrap: nowrap;
     flex-direction: column;
 `
 const ConteinerVideo = styled.div`
-display:flex;
 `
-
+const PerguntaInfo = styled.input`
+margin-top:1%;
+margin-left:1%;
+border: 2px solid black;
+background-color: white;
+  padding-left: 40px;
+  margin-bottom:1%;
+  display:flex;
+`
+const BotaoInfo = styled.button`
+  margin-bottom:1%;
+  margin-left:1%;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+background-color:#59D8E6;
+:hover {
+    color: black;
+    border: 1px solid #E4F2E7;
+    cursor: pointer;
+}
+`
+const VideoDetalhes = styled.iframe`
+`
+const ConteinerDetalhes = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+`
+const TituloMusica = styled.p`
+background-color:#C9DDFF;
+color:black;
+font-weight: bold;
+margin-top:2%;
+border-radius:10px;
+padding-top:1%;
+padding-bottom:1%;
+display:flex;
+justify-content:center;
+margin-left:40%;
+margin-right:40%;
+padding-left:1%;
+`
 class Playlist extends React.Component {
     state = {
         nomePlaylist: [],
@@ -132,9 +185,7 @@ class Playlist extends React.Component {
         const renderizarPlaylist = this.state.nomePlaylist.map((usuario) => {
             return <>
                 <ConteinerInfo>
-                    <div>
                 <TituloPlaylist>{usuario.name}</TituloPlaylist>
-                    </div>
                 <BotaoInteracao onClick={() => this.deletarUser(usuario.id)}>Excluir Playlist</BotaoInteracao>
                 <BotaoInteracao onClick={() => this.infoPlay(usuario.id)}>Detalhes Playlist</BotaoInteracao>
                 <BotaoInteracao onClick={() => this.setState({ idPlay: usuario.id })}>Modificar Playlist</BotaoInteracao>
@@ -144,35 +195,39 @@ class Playlist extends React.Component {
         const renderizarMusica = this.state.musicasPlaylists.map((musica) => {
 
             console.log(musica)
-            return <>
-                <p>Nome da musica: {musica.name}<br /> Banda ou Grupo:{musica.artist} <br /> 
-                </p>
-                <iframe width="420" height="315"
+            return <ConteinerDetalhes>
+                <TituloMusica>Nome da musica: {musica.name}<br /> Banda ou Grupo:{musica.artist} <br /> 
+                </TituloMusica>
+                <VideoDetalhes width="420" height="315"
 src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe> 
-            </>
+</VideoDetalhes> 
+            </ConteinerDetalhes>
         })
         return (
             <div>
+                <ConteinerGrade>
+                    <ConteinerVideo>
                 {renderizarPlaylist}
                 {renderizarMusica}
+                    </ConteinerVideo>
                 {this.state.idPlay.length > 0 ?
                     <div>
-                        <input
+                        <PerguntaInfo
                             placeholder="Nome da musica"
                             value={this.state.nomeMusica}
                             onChange={this.onChangeMusica} />
-                        <input
+                        <PerguntaInfo
                             placeholder="Banda/Artista"
                             value={this.state.nomeArtista}
                             onChange={this.onChangeArtista} />
-                        <input
+                        <PerguntaInfo
                             placeholder="Link da musica"
                             value={this.state.urlLink}
                             onChange={this.onChangeUrl} />
-                        <button onClick={this.addMusica}>Enviar</button>
+                        <BotaoInfo onClick={this.addMusica}>Enviar</BotaoInfo>
                     </div>
                     : null}
+                            </ConteinerGrade>
             </div>
         )
     }
