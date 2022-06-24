@@ -4,14 +4,17 @@ import axios from "axios";
 import CriarPlaylist from "./components/CriarPlaylist"
 import Playlist from "./components/Playlists"
 
+const MainContainer = styled.div`
+height:100vh;
+`
 
-class App extends React.Component{
-  render(){
-    return(
-      <div>
-  <CriarPlaylist/>
-  {/* <Playlist/> */}
-      </div>
+class App extends React.Component {
+  render() {
+    return (
+      <MainContainer>
+        <CriarPlaylist />
+        {/* <Playlist/> */}
+      </MainContainer>
     )
   }
 }

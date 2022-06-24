@@ -4,6 +4,36 @@ import styled from "styled-components";
 
 const Botao = styled.button`
 `
+const TituloPlaylist = styled.p`
+background-color:black;
+color:white;
+margin-top:2%;
+border-radius:10px;
+box-shadow: 0 0 1em green;
+padding-top:1%;
+padding-bottom:1%;
+display:flex;
+justify-content:center;
+margin-left:40%;
+margin-right:40%;
+`
+const BotaoInteracao = styled.button`
+margin-left:40%;
+margin-right:40%;
+margin-top:1%;
+margin-bottom:1%;
+`
+const ConteinerInfo = styled.div`
+justify-content:center;
+display: flex;
+    align-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    flex-direction: column;
+`
+const ConteinerVideo = styled.div`
+display:flex;
+`
 
 class Playlist extends React.Component {
     state = {
@@ -101,10 +131,14 @@ class Playlist extends React.Component {
         console.log(this.state.nomePlaylist)
         const renderizarPlaylist = this.state.nomePlaylist.map((usuario) => {
             return <>
-                <p>{usuario.name}</p>
-                <button onClick={() => this.deletarUser(usuario.id)}>Excluir Playlist</button>
-                <button onClick={() => this.infoPlay(usuario.id)}>Detalhes Playlist</button>
-                <button onClick={() => this.setState({ idPlay: usuario.id })}>Modificar Playlist</button>
+                <ConteinerInfo>
+                    <div>
+                <TituloPlaylist>{usuario.name}</TituloPlaylist>
+                    </div>
+                <BotaoInteracao onClick={() => this.deletarUser(usuario.id)}>Excluir Playlist</BotaoInteracao>
+                <BotaoInteracao onClick={() => this.infoPlay(usuario.id)}>Detalhes Playlist</BotaoInteracao>
+                <BotaoInteracao onClick={() => this.setState({ idPlay: usuario.id })}>Modificar Playlist</BotaoInteracao>
+                </ConteinerInfo>
             </>
         });
         const renderizarMusica = this.state.musicasPlaylists.map((musica) => {
@@ -113,17 +147,11 @@ class Playlist extends React.Component {
             return <>
                 <p>Nome da musica: {musica.name}<br /> Banda ou Grupo:{musica.artist} <br /> 
                 </p>
-                <video width="320" height="240" id="player" controls="controls">
-      <source src={`${musica.url}.mp4`} type="video/mp4" />
-    </video>
+                <iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe> 
             </>
         })
-        // const Selecionar = this.state.nomePlaylist.map((usuario) => {
-        //     return<option value="usuario.id">
-        //     <p>{usuario.name}</p>
-        //     </option>
-
-        // });
         return (
             <div>
                 {renderizarPlaylist}
