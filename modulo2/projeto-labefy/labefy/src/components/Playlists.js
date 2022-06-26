@@ -14,15 +14,17 @@ padding-top:1%;
 padding-bottom:1%;
 display:flex;
 justify-content:center;
-margin-left:40%;
-margin-right:40%;
-padding-left:0.5%;
+/* margin-left:40%; */
+/* margin-right:40%; */
+/* padding-left:0.5%; */
+width:100%;
 `
 const BotaoInteracao = styled.button`
-margin-left:40%;
-margin-right:40%;
+/* margin-left:40%; */
+/* margin-right:40%; */
 margin-top:1%;
 margin-bottom:1%;
+width:100%;
 
 :hover {
     box-shadow: inset 1px 1px 10px #63A69F, 1px 1px 10px white;
@@ -36,6 +38,8 @@ background-color: #59D8E6;
 const ConteinerInfo = styled.div`
 display:flex;
 flex-direction: column;
+width:33%;
+padding-left:2%;
 `
 const ConteinerGrade = styled.div`
 display: flex;
@@ -45,6 +49,8 @@ align-items: stretch;
     flex-direction: column;
 `
 const ConteinerVideo = styled.div`
+display:grid;
+grid-template-columns: 30%, 50%;
 `
 const PerguntaInfo = styled.input`
 margin-top:1%;
@@ -73,6 +79,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+width:40%;
 `
 const TituloMusica = styled.p`
 background-color:#C9DDFF;
@@ -84,9 +91,17 @@ padding-top:1%;
 padding-bottom:1%;
 display:flex;
 justify-content:center;
-margin-left:40%;
-margin-right:40%;
 padding-left:1%;
+width:50%;
+`
+const Teste1 = styled.div`
+width:100%;
+`
+const Teste2 = styled.div`
+width:90%;
+grid-column:2/2;
+display:flex;
+flex-wrap:wrap;
 `
 class Playlist extends React.Component {
     state = {
@@ -193,12 +208,11 @@ class Playlist extends React.Component {
             </>
         });
         const renderizarMusica = this.state.musicasPlaylists.map((musica) => {
-
             console.log(musica)
             return <ConteinerDetalhes>
                 <TituloMusica>Nome da musica: {musica.name}<br /> Banda ou Grupo:{musica.artist} <br /> 
                 </TituloMusica>
-                <VideoDetalhes width="420" height="315"
+                <VideoDetalhes width="220" height="215"
 src="https://www.youtube.com/embed/tgbNymZ7vqY">
 </VideoDetalhes> 
             </ConteinerDetalhes>
@@ -207,8 +221,12 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
             <div>
                 <ConteinerGrade>
                     <ConteinerVideo>
+                        <Teste1>
                 {renderizarPlaylist}
+                        </Teste1>
+                        <Teste2>
                 {renderizarMusica}
+                        </Teste2>
                     </ConteinerVideo>
                 {this.state.idPlay.length > 0 ?
                     <div>
