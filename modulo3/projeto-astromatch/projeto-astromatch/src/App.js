@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import Perfis from "./components/Perfis";
 import Matches from "./components/Matches";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -13,11 +13,12 @@ const GlobalStyle = createGlobalStyle`
 `
 const MainConteiner = styled.div`
 height:100vh;
-background-color:cyan;
+background-color:#FFF1CC;
+display:flex;
+justify-content:center;
 `
 const Card = styled.div`
 display:flex;
-justify-content:center;
 align-items:center;
     `
 function App() {
