@@ -17,11 +17,13 @@ const ConteinerMatch = styled.div`
     display:flex;
     align-items:center;
     `
-    const TextoPessoa = styled.p`
+const TextoPessoa = styled.p`
     padding-left:15px;
     `
 const ImagemPerfil = styled.img`
 border-radius:50px;
+`
+const ContainerBotao = styled.div`
 `
 
 function Matches(props) {
@@ -37,23 +39,23 @@ function Matches(props) {
                 console.log(err);
             });
     }, [])
-    const pegarMatch = () => {
-        axios.get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/Petrick/matches", {
-        }).then((resposta) => {
-            setMatcheList(resposta.data.matches)
+    const limparPerfil = () => {
+        axios.put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/Petrick/clear", {
+        }).then(() => {
+            alert("Limpo!")
         }).catch((erro) => {
-            console.log(erro.data)
+            console.log(erro)
         })
     }
     const Matches = matcheList.map(pessoa => {
         return (
-          <ConteinerMatch key={pessoa.name} value={pessoa.name}>
-            <ImagemPerfil src={pessoa.photo} width={50} height={50}></ImagemPerfil>
-            <TextoPessoa>
-                {pessoa.name}, {pessoa.age}
+            <ConteinerMatch key={pessoa.name} value={pessoa.name}>
+                <ImagemPerfil src={pessoa.photo} width={50} height={50}></ImagemPerfil>
+                <TextoPessoa>
+                    {pessoa.name}, {pessoa.age}
                 </TextoPessoa>
 
-          </ConteinerMatch>
+            </ConteinerMatch>
         );
     });
     return (
@@ -62,6 +64,7 @@ function Matches(props) {
             <TabelaMatche>
                 {Matches}
             </TabelaMatche>
+            <button onClick={limparPerfil}>Limpar Matches</button>
         </MainConteiner>
     );
 }
