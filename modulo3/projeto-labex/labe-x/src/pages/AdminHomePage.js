@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { Button, ButtonGroup } from '@chakra-ui/react'
 
-function AdminHomePage() {
+function AdminHomePage(props) {
   return (
 <div>
-    LabeX
+    <h1>Painel Administrativo</h1>
     <div>
-    <Button colorScheme='blue'>Ver Viagens</Button>
-    <Button colorScheme='blue'>Área de Admin</Button>
+    <Button colorScheme='purple' onClick={props.tela0}>Voltar</Button>
+    <Button colorScheme='blue' onClick={props.tela5}>Criar Viagem</Button>
+    <Button colorScheme='blue'>Logout</Button>
     </div>
 </div>
   );
