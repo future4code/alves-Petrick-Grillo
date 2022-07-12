@@ -2,8 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, Stack, Select, option } from '@chakra-ui/react'
+import { useNavigate } from "react-router-dom"
 
+const MainContainer = styled.div`
+height:100vh;
+`
 function CreateTripPage(props) {
+  const navigate = useNavigate()
+
+  const backPage = () =>{
+    navigate(-1)
+  }
   return (
     <div>
       <h1>Criar Viagem</h1>
@@ -21,8 +30,8 @@ function CreateTripPage(props) {
             <Input variant='filled' placeholder='Duração em dias' />
           </Stack>
         </div>
-        <Button colorScheme='purple' onClick={props.tela3}>Voltar</Button>
-        <Button colorScheme='blue' onClick={props.tela2}>Enviar</Button>
+        <Button colorScheme='purple' onClick={backPage}>Voltar</Button>
+        <Button colorScheme='blue' >Enviar</Button>
       </div>
     </div>
   );

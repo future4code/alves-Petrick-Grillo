@@ -1,16 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button, ButtonGroup, Text } from '@chakra-ui/react'
+import { useNavigate } from "react-router-dom"
+
+const MainContainer = styled.div`
+`
+const ContainerFilho = styled.div`
+height:100vh;
+display:flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+const ContainerButton = styled.div`
+display:flex;
+`
 
 function HomePage(props) {
+  const navigate = useNavigate()
+
+  const goToTrips = () => {
+    navigate("/Trips")
+  }
+  const goToAdmin = () => {
+    navigate("/Login")
+  }
   return (
-<div>
-<h1>LabeX</h1>
-    <div>
-    <Button colorScheme='purple' onClick={props.tela1}>Ver Viagens</Button>
-    <Button colorScheme='blue' onClick={props.tela2}>Área de Admin</Button>
-    </div>
-</div>
+    <MainContainer>
+      <ContainerFilho>
+      <Text fontSize={32}>LabeX</Text>
+      <ContainerButton>
+        <Button colorScheme='purple' onClick={() => goToTrips("Trips")}>Ver Viagens</Button>
+        <Button colorScheme='blue' onClick={() => goToAdmin("Admin")}>Área de Admin</Button>
+      </ContainerButton>
+      </ContainerFilho>
+    </MainContainer>
   );
 }
 

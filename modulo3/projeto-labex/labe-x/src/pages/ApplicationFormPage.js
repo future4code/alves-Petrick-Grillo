@@ -2,8 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, Stack, Select } from '@chakra-ui/react'
+import {useNavigate} from "react-router-dom"
 
+const MainContainer = styled.div`
+height:100vh;
+`
 function ApplicationFormPage(props) {
+const navigate = useNavigate()
+
+const backPage = () => {
+  navigate(-1)
+}
+
   return (
     <div>
       <h1>Inscreva-se para uma viagem</h1>
@@ -22,8 +32,8 @@ function ApplicationFormPage(props) {
             <Select variant='filled' placeholder='Escolha seu País' />
           </Stack>
         </div>
-        <Button colorScheme='purple' onClick={props.tela1}>Voltar</Button>
-        <Button colorScheme='blue' onClick={props.tela2}>Enviar</Button>
+        <Button colorScheme='purple' onClick={backPage}>Voltar</Button>
+        <Button colorScheme='blue' >Enviar</Button>
       </div>
     </div>
   );
