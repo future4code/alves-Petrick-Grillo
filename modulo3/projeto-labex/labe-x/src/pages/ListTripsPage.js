@@ -1,23 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ButtonGroup, Text } from '@chakra-ui/react'
+import { Button, ButtonGroup, Text, Box,} from '@chakra-ui/react'
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 const ContainerMapViagem = styled.div`
 border:solid black 1px;
+border-radius:5px;
 margin-top:1%;
-width:50%;
+padding:1%;
+width:80%;
 display:flex;
 flex-direction: column;
 justify-content: space-evenly;
+align-items: stretch;
 `
 const ContainerViagem = styled.div`
 padding-top:1%;
-display:grid;
-grid-template-columns:1fr 1fr;
-justify-items: center;
+display:flex;
+justify-content: center;
+flex-direction:column;
+align-items: center;
 `
 const MainContainer = styled.div`
 height:100vh;
@@ -25,8 +29,16 @@ width:100vw;
 `
 const ContainerBotao = styled.div`
 display:flex;
-justify-content: space-evenly;
+justify-content: center;
 padding-top:1%;
+margin-left:1%;
+`
+const ContainerBotaoF = styled.div`
+padding-left:2%;
+`
+const Titutlo = styled.div`
+display:flex;
+justify-content: center;
 `
 
 function ListTripsPage(props) {
@@ -53,22 +65,28 @@ function ListTripsPage(props) {
   console.log(trips)
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
-      <p>{viagem.name}</p>
-      <p>{viagem.description}</p>
-      <p>{viagem.planet}</p>
-      <p>{viagem.durationInDays}</p>
-      <p>{viagem.date}</p>
+      <p>Titulo: {viagem.name}</p>
+      <p>Descrição da viagem: {viagem.description}</p>
+      <p>Planeta: {viagem.planet}</p>
+      <p>Duração em dias: {viagem.durationInDays}</p>
+      <p>Data de saida: {viagem.date}</p>
     </ContainerMapViagem>
   })
   return (
     <MainContainer>
-      <Text fontSize={32}>Pagina</Text>
+      <Titutlo>
+        <Text fontSize={32}>Viagens Disponíveis!</Text>
+      </Titutlo>
       <ContainerViagem>
-      {viagens}
+          {viagens}
       </ContainerViagem>
       <ContainerBotao>
-        <Button colorScheme='purple' onClick={backPage}>Voltar</Button>
-        <Button colorScheme='purple' onClick={ApplyPage}>Inscrever-se</Button>
+        <ContainerBotaoF>
+          <Button colorScheme='purple' onClick={backPage}>Voltar</Button>
+        </ContainerBotaoF>
+        <ContainerBotaoF>
+          <Button colorScheme='purple' onClick={ApplyPage}>Inscrever-se</Button>
+        </ContainerBotaoF>
       </ContainerBotao>
     </MainContainer>
   );
