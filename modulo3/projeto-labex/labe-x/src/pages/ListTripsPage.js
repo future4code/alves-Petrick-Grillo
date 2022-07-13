@@ -25,7 +25,7 @@ align-items: center;
 `
 const MainContainer = styled.div`
 height:100vh;
-width:100vw;
+width:98vw;
 `
 const ContainerBotao = styled.div`
 display:flex;
@@ -59,7 +59,7 @@ function ListTripsPage(props) {
     navigate(-1)
   }
   const ApplyPage = () => {
-    navigate("/ApplyTrip")
+    navigate("/ApplyTrip/:id")
   }
   useEffect(() => {
     axios

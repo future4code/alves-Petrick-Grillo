@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
+import { useProtectedPage } from "./TripDetailsPage";
+import axios from "axios";
 
 const MainContainer = styled.div`
 height:100vh;
@@ -73,12 +75,53 @@ const BotaoCriar = styled.button`
 `
 
 function CreateTripPage(props) {
+  useProtectedPage()
   const [nome, setNome] = useState("")
+  const [planeta, setPlaneta] = useState("")
+  const [date, setDate] = useState("")
+  const [descricao, setDescricao] = useState("")
+  const [duracao, setDuracao] = useState("")
 
   const navigate = useNavigate()
-
   const backPage = () => {
     navigate(-1)
+  }
+  // const dataTeste = ((date.getDate()))
+  const token = localStorage.getItem("token")
+
+  const addTrip = () => {
+    const bodyUser = {
+      name: nome,
+      planet: planeta,
+      date: date,
+      description: descricao,
+      durationInDays: duracao
+    }
+    axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips", bodyUser, {
+      headers: {
+        auth: token
+      }
+    }
+    ).then((resposta) => {
+      alert("Viagem Criada!")
+    }).catch((erro) => {
+      console.log(erro)
+    })
+  }
+  const onChangeNome = (event) => {
+    setNome(event.target.value)
+  }
+  const onChangePlaneta = (event) => {
+    setPlaneta(event.target.value)
+  }
+  const onChangeDate = (event) => {
+    setDate(event.target.value)
+  }
+  const onChangeDescricao = (event) => {
+    setDescricao(event.target.value)
+  }
+  const onChangeDuracao = (event) => {
+    setDuracao(event.target.value)
   }
   return (
     <MainContainer>
@@ -90,22 +133,33 @@ function CreateTripPage(props) {
           <ContainerPergunta>
             <EspaçoPergunta
               placeholder="Nome"
+              value={nome}
+              onChange={onChangeNome}
             />
-            <Select>
-              <option disabled selected>Escolha sua viagem</option>
-              <option value='option1'>Option 1</option>
-              <option value='option2'>Option 2</option>
-              <option value='option3'>Option 3</option>
+            <Select value={planeta} onChange={onChangePlaneta}>
+              <option value="" disabled selected>Escolha sua viagem</option>
+              <option value='Mercurio'>Mercúrio</option>
+              <option value='Venus'>Vênus</option>
+              <option value='Terra'>Terra</option>
+              <option value='Marte'>Marte</option>
+              <option value='Saturno'>Saturno</option>
+              <option value='Urano'>Urano</option>
             </Select>
             <EspaçoPergunta
               id="date"
               type="date"
+              value={date}
+              onChange={onChangeDate}
             />
             <EspaçoPergunta
               placeholder="Descrição da viagem"
+              value={descricao}
+              onChange={onChangeDescricao}
             />
             <EspaçoPergunta
               placeholder="Duração em dias"
+              value={duracao}
+              onChange={onChangeDuracao}
             />
           </ContainerPergunta>
         </ContainerInteração>
@@ -114,7 +168,7 @@ function CreateTripPage(props) {
             <BotaoV onClick={backPage}>Voltar</BotaoV>
           </ContainerBotao>
           <ContainerBotao>
-            <BotaoCriar>Criar</BotaoCriar>
+            <BotaoCriar onClick={addTrip}>Criar</BotaoCriar>
           </ContainerBotao>
         </ContainerPaiBotao>
       </ContainerPai>

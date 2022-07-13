@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useProtectedPage } from "./TripDetailsPage";
+import TripDetailsPage from "./TripDetailsPage";
 
 const MainContainer = styled.div`
 height:100%;
@@ -58,13 +59,13 @@ align-items:center;
 `
 const BotaoExcluir = styled.button`
 :hover{
-  box-shadow:0 0 35px #A1AA7D;
+  box-shadow:0 0 35px red;
   letter-spacing:0em;
 }
 `
 const BotaoInfo = styled.button`
 :hover{
-  box-shadow:0 0 35px #A1AA7D;
+  box-shadow:0 0 35px greenyellow;
   letter-spacing:0em;
 }
 `
@@ -72,14 +73,33 @@ const ContainerBotao = styled.div`
 `
 
 function AdminHomePage(props) {
+  useProtectedPage()
   const [trips, setTrips] = useState("")
+  const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
+  const [id, setId] = useState("")
 
   const backPage = () => {
     navigate("/")
   }
+  const detailPage = (id) => {
+    navigate(`/DetailsTrip/${id}`)
+  }
   const createTrip = () => {
     navigate("/CreateTrip")
+  }
+  const delTrip = (id) => {
+    const token = localStorage.getItem("token")
+    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${id}`, {
+      headers: {
+        auth: token
+      }
+    }).then((resposta) => {
+      console.log(resposta.data.success)
+    }).catch((erro) => {
+      console.log(erro)
+    })
+
   }
   useEffect(() => {
     axios
@@ -89,18 +109,25 @@ function AdminHomePage(props) {
         console.log(res.data.trips)
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   }, [])
+
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
       <p><b>{viagem.name}</b></p>
+
       <div>
-      <BotaoInfo>+</BotaoInfo>
-      <BotaoExcluir>X</BotaoExcluir>
+        <BotaoInfo onClick={() => detailPage(viagem.id)}>+</BotaoInfo>
+        <BotaoExcluir onClick={delTrip}>X</BotaoExcluir>
       </div>
     </ContainerMapViagem>
   })
+  const onClickLimparCache = () => {
+    localStorage.clear("token");
+    navigate("/Login")
+    alert("Sucesso!")
+  }
   return (
     <MainContainer>
       <ContainerPai>
@@ -108,11 +135,11 @@ function AdminHomePage(props) {
           <h1>Painel Administrativo</h1>
         </Titulo>
         <div>
-        <ContainerBotao>
-          <BotaoV onClick={backPage}>Voltar</BotaoV>
-          <BotaoCriar onClick={createTrip}>Criar Viagem</BotaoCriar>
-          <BotaoLogout >Logout</BotaoLogout>
-        </ContainerBotao>
+          <ContainerBotao>
+            <BotaoV onClick={backPage}>Voltar</BotaoV>
+            <BotaoCriar onClick={createTrip}>Criar Viagem</BotaoCriar>
+            <BotaoLogout onClick={onClickLimparCache}>Logout</BotaoLogout>
+          </ContainerBotao>
         </div>
         <ContainerTrips>
           {viagens}

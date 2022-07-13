@@ -69,41 +69,73 @@ const BotaoEnviar = styled.button`
   box-shadow:0 0 35px #68AFF5;
 }
 `
-const ContainerMapViagem = styled.div `
+const ContainerMapViagem = styled.div`
 `
 
 function ApplicationFormPage(props) {
+  const [trips, setTrips] = useState([])
   const [nome, setNome] = useState("")
   const [idade, setIdade] = useState("")
   const [texto, setTexto] = useState("")
-  const [profissao, setProfrissao] = useState("")
-  const [trips, setTrips] = useState([])
-  const [quantidade, setQuantidade] = useState("")
+  const [profissao, setProfissao] = useState("")
+  const [pais, setPais] = useState("")
+  const [id, setId] = useState("")
 
   const navigate = useNavigate()
-
+  
   const backPage = () => {
     navigate(-1)
   }
-
-useEffect(() => {
-  axios
-  .get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips")
-  .then((res) => {
-    setTrips(res.data.trips)
-    console.log(res.data.trips)
+  useEffect(() => {
+    axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips")
+      .then((res) => {
+        setTrips(res.data.trips)
+        // console.log(res.data.trips)
       })
       .catch((err) => {
         console.log(err);
       });
-    }, [])
-
+  }, [])
   const viagens = trips && trips.map((viagem, index) => {
-    return <option>{viagem.name}</option>
+    return <option key={index}>{viagem.name}</option>
   })
-
-
-
+  const token = localStorage.getItem("token")
+  const applyTrip = () => {
+    const bodyUser = {
+      name: nome,
+      age: idade,
+      applicationText: texto,
+      profession: profissao,
+      country: pais
+    }
+    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${viagens.id}/apply`, bodyUser, {
+      headers: {
+        auth: token
+      }
+    }
+    ).then((resposta) => {
+      console.log("Aplicação feita com sucesso!", resposta.data.success)
+      alert("Aplicação feita com sucesso!")
+    }).catch((erro) => {
+      console.log(erro.data)
+    })
+  }
+  const onChangeNome = (event) => {
+    setNome(event.target.value)
+  }
+  const onChangeIdade = (event) => {
+    setIdade(event.target.value)
+  }
+  const onChangeTexto = (event) => {
+    setTexto(event.target.value)
+  }
+  const onChangeProfissao = (event) => {
+    setProfissao(event.target.value)
+  }
+  const onChangePais = (event) => {
+    setPais(event.target.value)
+  }
+  console.log(pais)
   return (
     <MainContainer>
       <ContainerPai>
@@ -118,21 +150,38 @@ useEffect(() => {
             </Select>
             <EspaçoPergunta
               placeholder="Nome"
+              value={nome}
+              onChange={onChangeNome}
             />
             <EspaçoPergunta
               placeholder="Idade"
+              value={idade}
+              onChange={onChangeIdade}
             />
             <EspaçoPergunta
               placeholder="Texto de Candidatura"
+              value={texto}
+              onChange={onChangeTexto}
             />
             <EspaçoPergunta
               placeholder="Profissão"
+              value={profissao}
+              onChange={onChangeProfissao}
             />
-            <Select>
-              <option disabled selected>Selecione seu país</option>
-              <option value='option1'>Option 1</option>
-              <option value='option2'>Option 2</option>
-              <option value='option3'>Option 3</option>
+            <Select value={pais} onChange={onChangePais}>
+              <option value="" disabled selected>Selecione seu país</option>
+              <option value='Argentina'>Argentina</option>
+              <option value='Bolívia'>Bolívia</option>
+              <option value='Brasil'>Brasil</option>
+              <option value='Chile'>Chile</option>
+              <option value='Colômbia'>Colômbia</option>
+              <option value='Equador'>Equador</option>
+              <option value='Guiana'>Guiana</option>
+              <option value='Paraguai'>Paraguai</option>
+              <option value='Peru'>Peru</option>
+              <option value='Suriname'>Suriname</option>
+              <option value='Uruguai'>Uruguai</option>
+              <option value='Venezuela'>Venezuela</option>
             </Select>
           </ContainerPergunta>
         </ContainerInteração>
@@ -141,7 +190,7 @@ useEffect(() => {
             <BotaoV onClick={backPage}>Voltar</BotaoV>
           </ContainerBotao>
           <ContainerBotao>
-            <BotaoEnviar >Enviar</BotaoEnviar>
+            <BotaoEnviar onClick={applyTrip}>Enviar</BotaoEnviar>
           </ContainerBotao>
         </ContainerPaiBotao>
       </ContainerPai>
