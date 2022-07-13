@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import { useProtectedPage } from "./TripDetailsPage";
 
 const MainContainer = styled.div`
-height:100vh;
-width:100vw;
+height:100%;
+width:100%;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
 `
 const ContainerPai = styled.div`
+width:70%;
+height:20%;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -37,9 +41,9 @@ color:white;
 const ContainerMapViagem = styled.div`
 border:solid black 1px;
 border-radius:5px;
-margin-top:1%;
-padding:4.5%;
-width:100%;
+margin-top:2%;
+padding:2%;
+width:80%;
 background-color:#fbe0c2;
 display:flex;
 justify-content:space-between;
@@ -47,12 +51,24 @@ align-items:center;
 `
 const ContainerTrips = styled.div`
 width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 `
 const BotaoExcluir = styled.button`
 :hover{
-  box-shadow:0 0 35px #F51100;
+  box-shadow:0 0 35px #A1AA7D;
   letter-spacing:0em;
 }
+`
+const BotaoInfo = styled.button`
+:hover{
+  box-shadow:0 0 35px #A1AA7D;
+  letter-spacing:0em;
+}
+`
+const ContainerBotao = styled.div`
 `
 
 function AdminHomePage(props) {
@@ -60,7 +76,7 @@ function AdminHomePage(props) {
   const navigate = useNavigate()
 
   const backPage = () => {
-    navigate(-1)
+    navigate("/")
   }
   const createTrip = () => {
     navigate("/CreateTrip")
@@ -79,7 +95,10 @@ function AdminHomePage(props) {
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
       <p><b>{viagem.name}</b></p>
+      <div>
+      <BotaoInfo>+</BotaoInfo>
       <BotaoExcluir>X</BotaoExcluir>
+      </div>
     </ContainerMapViagem>
   })
   return (
@@ -89,9 +108,11 @@ function AdminHomePage(props) {
           <h1>Painel Administrativo</h1>
         </Titulo>
         <div>
+        <ContainerBotao>
           <BotaoV onClick={backPage}>Voltar</BotaoV>
           <BotaoCriar onClick={createTrip}>Criar Viagem</BotaoCriar>
           <BotaoLogout >Logout</BotaoLogout>
+        </ContainerBotao>
         </div>
         <ContainerTrips>
           {viagens}

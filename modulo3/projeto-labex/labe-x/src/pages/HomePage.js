@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
+import { useProtectedPage } from "./TripDetailsPage";
 
 const MainContainer = styled.div`
 height:100vh;

@@ -85,11 +85,6 @@ function ApplicationFormPage(props) {
   const backPage = () => {
     navigate(-1)
   }
-  const quantidadeViagem = ()=>{
-    setQuantidade(trips.length)
-  }
-console.log(quantidade)
-
 
 useEffect(() => {
   axios
@@ -102,16 +97,9 @@ useEffect(() => {
         console.log(err);
       });
     }, [])
-    
-    useEffect(()=>{
-    quantidadeViagem()
-    },[trips])
-
 
   const viagens = trips && trips.map((viagem, index) => {
-    return <ContainerMapViagem key={index}>
-      <p>{viagem.name}</p>
-    </ContainerMapViagem>
+    return <option>{viagem.name}</option>
   })
 
 
@@ -126,7 +114,7 @@ useEffect(() => {
           <ContainerPergunta>
             <Select>
               <option disabled selected>Escolha sua viagem</option>
-              <option value='option1'>{viagens[0]}</option>
+              {viagens}
             </Select>
             <EspaçoPergunta
               placeholder="Nome"
