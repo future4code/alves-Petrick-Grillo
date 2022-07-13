@@ -12,6 +12,17 @@ width:40%;
 padding-top:0.7%;
 margin-top:1%;
 margin-bottom:1%;
+padding:10px 0px 10px 0px;
+border: none;
+border-radius: 4px;
+background-color: #f1f1f1;
+::placeholder {
+  padding-left:10px;
+}
+::type {
+  padding-left:10px;
+  color:#27282c;
+}
 `
 const ContainerPergunta = styled.div`
 display:flex;
@@ -37,9 +48,13 @@ justify-content:center;
 margin:1%;
 `
 const Select = styled.select`
-width:40.7%;
+width:40%;
 margin-top:1%;
 margin-bottom:1%;
+padding: 6px 10px;
+border: none;
+border-radius: 4px;
+background-color: #f1f1f1;
 `
 const ContainerPaiBotao = styled.div`
 display:flex;
@@ -72,27 +87,27 @@ function CreateTripPage(props) {
           <h1>Criar Viagem</h1>
         </Titulo>
         <ContainerInteração>
-            <ContainerPergunta>
-              <EspaçoPergunta
-                placeholder="Nome"
-              />
-              <Select>
-                <option disabled selected>Escolha sua viagem</option>
-                <option value='option1'>Option 1</option>
-                <option value='option2'>Option 2</option>
-                <option value='option3'>Option 3</option>
-              </Select>
-              <EspaçoPergunta
-                id="date"
-                type="date"
-              />
-              <EspaçoPergunta
-                placeholder="Descrição da viagem"
-              />
-              <EspaçoPergunta
-                placeholder="Duração em dias"
-              />
-            </ContainerPergunta>
+          <ContainerPergunta>
+            <EspaçoPergunta
+              placeholder="Nome"
+            />
+            <Select>
+              <option disabled selected>Escolha sua viagem</option>
+              <option value='option1'>Option 1</option>
+              <option value='option2'>Option 2</option>
+              <option value='option3'>Option 3</option>
+            </Select>
+            <EspaçoPergunta
+              id="date"
+              type="date"
+            />
+            <EspaçoPergunta
+              placeholder="Descrição da viagem"
+            />
+            <EspaçoPergunta
+              placeholder="Duração em dias"
+            />
+          </ContainerPergunta>
         </ContainerInteração>
         <ContainerPaiBotao>
           <ContainerBotao>
