@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ButtonGroup, Text,Box } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
 
 const MainContainer = styled.div`
 height:100vh;
-width:100vw;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -22,6 +20,7 @@ justify-content: center;
 padding-top:1%;
 margin-left:1%;
 `
+
 const ContainerButtonMain = styled.div`
 display:flex;
 justify-content: center;
@@ -31,6 +30,21 @@ margin-left:1%;
 const ContainerTexto = styled.div`
 display:flex;
 justify-content:center;
+color:#1e9bff;
+`
+const BotaoV = styled.button`
+font-size:1.5em;
+background:#322F38;
+:hover{
+  box-shadow:0 0 35px #6eff3e;
+}
+`
+const BotaoA = styled.button`
+font-size:1.5em;
+background:#322F38;
+:hover{
+  box-shadow:0 0 35px #ff1867;
+}
 `
 
 function HomePage(props) {
@@ -44,19 +58,18 @@ function HomePage(props) {
   }
   return (
     <MainContainer>
-
       <ContainerFilho>
         <ContainerTexto>
-      <Text fontSize={32}>LabeX</Text>
+          <h1>LabeX</h1>
         </ContainerTexto>
-      <ContainerButtonMain>
-      <ContainerButton>
-        <Button colorScheme='purple' onClick={() => goToTrips("Trips")}>Ver Viagens</Button>
-      </ContainerButton>
-      <ContainerButton>
-        <Button colorScheme='blue' onClick={() => goToAdmin("Admin")}>Área de Admin</Button>
-      </ContainerButton>
-      </ContainerButtonMain>
+        <ContainerButtonMain>
+          <ContainerButton>
+            <BotaoV onClick={() => goToTrips("Trips")}>Seção Viagens</BotaoV>
+          </ContainerButton>
+          <ContainerButton>
+            <BotaoA onClick={() => goToAdmin("Admin")}>Área de Admin</BotaoA>
+          </ContainerButton>
+        </ContainerButtonMain>
       </ContainerFilho>
     </MainContainer>
   );

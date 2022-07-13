@@ -24,6 +24,7 @@ display:flex;
 flex-direction:column;
 justify-content: center;
 align-items: center;
+color:white;
 `
 const ContainerPai = styled.div`
 display:flex;
@@ -36,7 +37,7 @@ justify-content:center;
 margin:1%;
 `
 const Select = styled.select`
-width:41%;
+width:40.7%;
 margin-top:1%;
 margin-bottom:1%;
 `
@@ -44,6 +45,16 @@ const ContainerPaiBotao = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
+`
+const BotaoV = styled.button`
+:hover{
+  box-shadow:0 0 35px #EDE18C;
+}
+`
+const BotaoCriar = styled.button`
+:hover{
+  box-shadow:0 0 35px #68AFF5;
+}
 `
 
 function CreateTripPage(props) {
@@ -85,10 +96,10 @@ function CreateTripPage(props) {
         </ContainerInteração>
         <ContainerPaiBotao>
           <ContainerBotao>
-            <button onClick={backPage}>Voltar</button>
+            <BotaoV onClick={backPage}>Voltar</BotaoV>
           </ContainerBotao>
           <ContainerBotao>
-            <button>Criar</button>
+            <BotaoCriar>Criar</BotaoCriar>
           </ContainerBotao>
         </ContainerPaiBotao>
       </ContainerPai>

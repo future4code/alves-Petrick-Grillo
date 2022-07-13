@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ButtonGroup, Text, Box,} from '@chakra-ui/react'
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -15,6 +14,7 @@ display:flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: stretch;
+background-color:#9F8DB5;
 `
 const ContainerViagem = styled.div`
 padding-top:1%;
@@ -39,8 +39,18 @@ padding-left:2%;
 const Titutlo = styled.div`
 display:flex;
 justify-content: center;
+color:white;
 `
-
+const BotaoV = styled.button`
+:hover{
+  box-shadow:0 0 35px #EDE18C;
+}
+`
+const BotaoApply = styled.button`
+:hover{
+  box-shadow:0 0 35px #B164F5;
+}
+`
 function ListTripsPage(props) {
   const [trips, setTrips] = useState("")
   const navigate = useNavigate()
@@ -65,27 +75,27 @@ function ListTripsPage(props) {
   console.log(trips)
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
-      <p>Titulo: {viagem.name}</p>
-      <p>Descrição da viagem: {viagem.description}</p>
-      <p>Planeta: {viagem.planet}</p>
-      <p>Duração em dias: {viagem.durationInDays}</p>
-      <p>Data de saida: {viagem.date}</p>
+      <p><b>Titulo:</b> {viagem.name}</p>
+      <p><b>Descrição da viagem:</b>{viagem.description}</p>
+      <p><b>Planeta:</b> {viagem.planet}</p>
+      <p><b>Duração em dias:</b> {viagem.durationInDays}</p>
+      <p><b>Data de saida:</b> {viagem.date}</p>
     </ContainerMapViagem>
   })
   return (
     <MainContainer>
       <Titutlo>
-        <Text fontSize={32}>Viagens Disponíveis!</Text>
+        <h1>Viagens Disponíveis!</h1>
       </Titutlo>
       <ContainerViagem>
           {viagens}
       </ContainerViagem>
       <ContainerBotao>
         <ContainerBotaoF>
-          <Button colorScheme='purple' onClick={backPage}>Voltar</Button>
+          <BotaoV onClick={backPage}>Voltar</BotaoV>
         </ContainerBotaoF>
         <ContainerBotaoF>
-          <Button colorScheme='purple' onClick={ApplyPage}>Inscrever-se</Button>
+          <BotaoApply onClick={ApplyPage}>Inscrever-se</BotaoApply>
         </ContainerBotaoF>
       </ContainerBotao>
     </MainContainer>

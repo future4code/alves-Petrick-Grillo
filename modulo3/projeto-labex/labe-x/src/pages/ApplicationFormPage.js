@@ -24,6 +24,7 @@ display:flex;
 flex-direction:column;
 justify-content: center;
 align-items: center;
+color:#fbe0c2;
 `
 const ContainerPai = styled.div`
 display:flex;
@@ -36,7 +37,7 @@ justify-content:center;
 margin:1%;
 `
 const Select = styled.select`
-width:41%;
+width:40.7%;
 margin-top:1%;
 margin-bottom:1%;
 `
@@ -44,6 +45,16 @@ const ContainerPaiBotao = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
+`
+const BotaoV = styled.button`
+:hover{
+  box-shadow:0 0 35px #EDE18C;
+}
+`
+const BotaoEnviar = styled.button`
+:hover{
+  box-shadow:0 0 35px #68AFF5;
+}
 `
 
 function ApplicationFormPage(props) {
@@ -63,7 +74,9 @@ function ApplicationFormPage(props) {
         </Titulo>
         <ContainerInteração>
           <ContainerPergunta>
-            <h2>Escolha uma viagem</h2>
+            <Titulo>
+              <h2>Escolha uma viagem</h2>
+            </Titulo>
             <Select>
               <option disabled selected>Escolha sua viagem</option>
               <option value='option1'>Option 1</option>
@@ -92,10 +105,10 @@ function ApplicationFormPage(props) {
         </ContainerInteração>
         <ContainerPaiBotao>
           <ContainerBotao>
-            <button onClick={backPage}>Voltar</button>
+            <BotaoV onClick={backPage}>Voltar</BotaoV>
           </ContainerBotao>
           <ContainerBotao>
-            <button >Enviar</button>
+            <BotaoEnviar >Enviar</BotaoEnviar>
           </ContainerBotao>
         </ContainerPaiBotao>
       </ContainerPai>
