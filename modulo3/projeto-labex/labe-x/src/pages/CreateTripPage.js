@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
-import { useProtectedPage } from "./TripDetailsPage";
 import axios from "axios";
+import useProtectedPage from "../Hooks/useProtectedPage";
 
 const MainContainer = styled.div`
 height:100vh;

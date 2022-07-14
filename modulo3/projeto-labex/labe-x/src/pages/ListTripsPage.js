@@ -5,9 +5,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const ContainerMapViagem = styled.div`
-border:solid black 1px;
+border:solid black 2px;
 border-radius:5px;
-margin-top:1%;
+margin-top:3%;
 padding:1%;
 width:80%;
 display:flex;
@@ -15,6 +15,7 @@ flex-direction: column;
 justify-content: space-evenly;
 align-items: stretch;
 background-color:#9F8DB5;
+box-shadow: 0 0 1em white;
 `
 const ContainerViagem = styled.div`
 padding-top:1%;
@@ -66,13 +67,11 @@ function ListTripsPage(props) {
       .get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips")
       .then((res) => {
         setTrips(res.data.trips)
-        console.log(res.data.trips)
       })
       .catch((err) => {
         console.log(err);
       });
   }, [])
-  console.log(trips)
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
       <p><b>Titulo:</b> {viagem.name}</p>

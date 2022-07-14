@@ -13,6 +13,12 @@ p {
 }
 body{
   background:#27282c;
+  max-height:100vh;
+  max-width:100vw;
+  /* display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column; */
 }
 button{
 position:relative;

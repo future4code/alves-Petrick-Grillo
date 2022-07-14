@@ -97,8 +97,9 @@ function ApplicationFormPage(props) {
       });
   }, [])
   const viagens = trips && trips.map((viagem, index) => {
-    return <option key={index}>{viagem.name}</option>
+    return <option value={viagem.id} key={index}>{viagem.name}</option>
   })
+  console.log(id)
   const token = localStorage.getItem("token")
   const applyTrip = () => {
     const bodyUser = {
@@ -108,7 +109,7 @@ function ApplicationFormPage(props) {
       profession: profissao,
       country: pais
     }
-    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${viagens.id}/apply`, bodyUser, {
+    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${id}/apply`, bodyUser, {
       headers: {
         auth: token
       }
@@ -135,6 +136,9 @@ function ApplicationFormPage(props) {
   const onChangePais = (event) => {
     setPais(event.target.value)
   }
+  const onChangeId = (event) =>{
+    setId(event.target.value)
+  }
   console.log(pais)
   return (
     <MainContainer>
@@ -144,7 +148,7 @@ function ApplicationFormPage(props) {
         </Titulo>
         <ContainerInteração>
           <ContainerPergunta>
-            <Select>
+            <Select onChange={onChangeId}>
               <option disabled selected>Escolha sua viagem</option>
               {viagens}
             </Select>
@@ -190,7 +194,7 @@ function ApplicationFormPage(props) {
             <BotaoV onClick={backPage}>Voltar</BotaoV>
           </ContainerBotao>
           <ContainerBotao>
-            <BotaoEnviar onClick={applyTrip}>Enviar</BotaoEnviar>
+            <BotaoEnviar onClick={()=> applyTrip(viagens.id)}>Enviar</BotaoEnviar>
           </ContainerBotao>
         </ContainerPaiBotao>
       </ContainerPai>

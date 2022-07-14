@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
-import { useProtectedPage } from "./TripDetailsPage";
-import TripDetailsPage from "./TripDetailsPage";
+import useProtectedPage from "../Hooks/useProtectedPage";
 
 const MainContainer = styled.div`
 height:100%;
@@ -78,6 +77,7 @@ function AdminHomePage(props) {
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
   const [id, setId] = useState("")
+  const [viagem, setViagem] = useState(true)
 
   const backPage = () => {
     navigate("/")
@@ -88,38 +88,38 @@ function AdminHomePage(props) {
   const createTrip = () => {
     navigate("/CreateTrip")
   }
+
   const delTrip = (id) => {
+    console.log(id)
     const token = localStorage.getItem("token")
     axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${id}`, {
       headers: {
         auth: token
       }
     }).then((resposta) => {
+      setViagem(!viagem)
       console.log(resposta.data.success)
     }).catch((erro) => {
       console.log(erro)
     })
-
   }
   useEffect(() => {
     axios
       .get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips")
       .then((res) => {
         setTrips(res.data.trips)
-        console.log(res.data.trips)
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, [])
+  }, [viagem])
 
   const viagens = trips && trips.map((viagem, index) => {
     return <ContainerMapViagem key={index}>
       <p><b>{viagem.name}</b></p>
-
       <div>
         <BotaoInfo onClick={() => detailPage(viagem.id)}>+</BotaoInfo>
-        <BotaoExcluir onClick={delTrip}>X</BotaoExcluir>
+        <BotaoExcluir onClick={()=>delTrip(viagem.id)}>X</BotaoExcluir>
       </div>
     </ContainerMapViagem>
   })
