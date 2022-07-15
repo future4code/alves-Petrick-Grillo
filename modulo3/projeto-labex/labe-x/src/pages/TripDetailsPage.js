@@ -51,17 +51,26 @@ function TripDetailsPage() {
   const [aprovados, setAprovados] = useState("")
   const [candidatos, setCandidatos] = useState("")
   const [idCandidatos, setIdCandidatos] = useState("")
+  const [permissao, setPermissao] = useState(false)
+
   useProtectedPage()
 
   const params = useParams()
-  const aprovar = 
-    axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/:aluno/trips/${params.id}/candidates/${idCandidatos.id}/decide`, {
+  const aprovar = (idCandidatos) => {
+    const body = {
+      approve: permissao
+    }
+    const token = localStorage.getItem("token")
+    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${params.id}/candidates/${idCandidatos.id}/decide`, body, {
+      headers: {
+        auth: token
+      }
     }).then((resposta) => {
-      console.log(resposta)
+      console.log(resposta.data)
     }).catch((erro) => {
       console.log(erro.response.data)
     })
-
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -79,21 +88,41 @@ function TripDetailsPage() {
     })
   }, [])
   console.log(idCandidatos)
-  // console.log(confirmados)
+
+  // useEffect(()=>{
+  // if(permissao === true){
+  // return aprovar
+  // }
+  // },[permissao])
+  // console.log(permissao) 
   const confirmados = aprovados && aprovados.map((candidatos) => {
     return <div>
       <p>{candidatos.name}</p>
     </div>
   })
-  const idCan = idCandidatos && idCandidatos.map((candidatos) => {
-    return <div>
-      <p>{candidatos.id}</p>
-    </div>
-  })
+
+  
+  
   const backPage = () => {
     navigate("/AdminHome")
   }
-
+  const onClickAprovar = () => {
+    aprovar(idCandidatos)
+    setPermissao(true)
+  }
+  const onClickNegar = () => {
+    aprovar(idCandidatos)
+    setPermissao(false)
+  }
+  
+    const idCan = idCandidatos && idCandidatos.map((candidatos) => {
+      return <div>
+        <p>{candidatos.name}</p>
+        <button onClick={onClickNegar}>Negar</button>
+        <button onClick={onClickAprovar}>Aprovar</button>
+      </div>
+    })
+  console.log(permissao)
   return (
     <MainContainer>
       <Titulo>
@@ -107,13 +136,13 @@ function TripDetailsPage() {
           <b>Duração de: </b>{id.durationInDays} Dias<br />
           <b>Data: </b>{id.date}
         </Container2>
-      <Container4>
-        <h3>Candidatos aprovados</h3>
-        {confirmados}
-      </Container4>
-      <div>
-        {idCan}
-      </div>
+        <Container4>
+          <h3>Candidatos aprovados</h3>
+          {confirmados}
+        </Container4>
+        <div>
+          {idCan}
+        </div>
       </Container1>
       <Container3>
         <button onClick={backPage}>Voltar</button>
