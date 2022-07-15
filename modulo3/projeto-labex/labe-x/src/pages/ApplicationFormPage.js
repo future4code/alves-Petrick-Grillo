@@ -160,6 +160,7 @@ function ApplicationFormPage(props) {
             <EspaçoPergunta
               placeholder="Idade"
               value={idade}
+              type="number"
               onChange={onChangeIdade}
             />
             <EspaçoPergunta

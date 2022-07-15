@@ -13,27 +13,13 @@ display:flex;
 align-items:center;
 justify-content:center;
 `
-const Container1 = styled.div`
+const ContainerPai = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 `
-const Container2 = styled.div`
-display:flex;
-justify-content:center;
-flex-direction:column;
-align-items:center;
-background-color:#fbe0c2;
-height:40%;
-width:60%;
-`
-const Container3 = styled.div`
-display:flex;
-align-items:center;
-justify-content:center;
-`
-const Container4 = styled.div`
+const ContainerInfo = styled.div`
 display:flex;
 justify-content:center;
 flex-direction:column;
@@ -41,9 +27,69 @@ align-items:center;
 background-color:#fbe0c2;
 height:40%;
 width:60%;
+`
+const ContainerAprovados = styled.div`
+display:flex;
+justify-content:center;
+flex-direction:column;
+align-items:center;
+background-color:#fbe0c2;
+height:40%;
+width:30%;
 border: 2px solid black;
 margin-top:2%;
 `
+const ContainerParaAprovar = styled.div`
+display:flex;
+/* justify-content:center; */
+flex-direction:column;
+align-items:center;
+background-color:#fbe0c2;
+height:40%;
+width:30%;
+border: 2px solid black;
+margin-top:2%;
+`
+const ContainerPaiCandidatos = styled.div`
+display:flex;
+height:40%;
+width:100%;
+justify-content:space-evenly;
+`
+const Container7 = styled.div`
+flex-direction:column;
+height:40%;
+display:flex;
+justify-content:center;
+flex-direction:column;
+align-items:stretch;
+width:80%;
+`
+const Container8 = styled.div`
+padding-left:2%;
+border: 5px solid black;
+box-shadow:0 0 10px black;
+width:80%;
+margin:2%;
+display:flex;
+flex-wrap:wrap;
+`
+const BotaoAprovar = styled.button`
+:hover{
+  box-shadow:0 0 35px green;
+}
+`
+const BotaoNegar = styled.button`
+:hover{
+  box-shadow:0 0 35px red;
+}
+`
+const BotaoVoltar = styled.button`
+:hover{
+  box-shadow:0 0 35px #fbe0c2;
+}
+`
+
 function TripDetailsPage() {
   const navigate = useNavigate()
 
@@ -51,26 +97,31 @@ function TripDetailsPage() {
   const [aprovados, setAprovados] = useState("")
   const [candidatos, setCandidatos] = useState("")
   const [idCandidatos, setIdCandidatos] = useState("")
-  const [permissao, setPermissao] = useState(false)
+  const [permissao, setPermissao] = useState("inicial")
 
   useProtectedPage()
-
   const params = useParams()
-  const aprovar = (idCandidatos) => {
+
+  const aprovar = (id, permissao) => {
+    console.log(permissao)
     const body = {
       approve: permissao
     }
     const token = localStorage.getItem("token")
-    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${params.id}/candidates/${idCandidatos.id}/decide`, body, {
+
+    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Petrick-Alves/trips/${params.id}/candidates/${id}/decide`, body, {
       headers: {
         auth: token
       }
     }).then((resposta) => {
       console.log(resposta.data)
+      console.log(id)
     }).catch((erro) => {
       console.log(erro.response.data)
     })
   }
+  useEffect(() => {
+  }, [permissao])
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -88,65 +139,54 @@ function TripDetailsPage() {
     })
   }, [])
   console.log(idCandidatos)
-
-  // useEffect(()=>{
-  // if(permissao === true){
-  // return aprovar
-  // }
-  // },[permissao])
-  // console.log(permissao) 
   const confirmados = aprovados && aprovados.map((candidatos) => {
     return <div>
       <p>{candidatos.name}</p>
     </div>
   })
 
-  
-  
   const backPage = () => {
     navigate("/AdminHome")
   }
-  const onClickAprovar = () => {
-    aprovar(idCandidatos)
-    setPermissao(true)
-  }
-  const onClickNegar = () => {
-    aprovar(idCandidatos)
-    setPermissao(false)
-  }
-  
-    const idCan = idCandidatos && idCandidatos.map((candidatos) => {
-      return <div>
-        <p>{candidatos.name}</p>
-        <button onClick={onClickNegar}>Negar</button>
-        <button onClick={onClickAprovar}>Aprovar</button>
-      </div>
-    })
+  console.log(idCandidatos)
+  const idCan = idCandidatos && idCandidatos.map((candidatos) => {
+    return <Container8>
+      <Container7>
+        <p>Nome: {candidatos.name}</p>
+        <p>Texto de Candidatura: {candidatos.applicationText}</p>
+        <p>País: {candidatos.country}</p>
+        <p>Profissão: {candidatos.profession}</p>
+      </Container7>
+      <BotaoAprovar onClick={() => aprovar(candidatos.id, true)}>Aprovar</BotaoAprovar>
+      <BotaoNegar onClick={() => aprovar(candidatos.id, false)}>Negar</BotaoNegar>
+    </Container8>
+  })
   console.log(permissao)
   return (
     <MainContainer>
+      <BotaoVoltar onClick={backPage}>Voltar</BotaoVoltar>
       <Titulo>
         <h1><b>DETALHE VIAGEM</b></h1>
       </Titulo>
-      <Container1>
-        <Container2>
+      <ContainerPai>
+        <ContainerInfo>
           <b>Titulo: </b>{id.name}<br />
           <b>Descrição: </b>{id.description}<br />
           <b>Planeta: </b>{id.planet}<br />
           <b>Duração de: </b>{id.durationInDays} Dias<br />
           <b>Data: </b>{id.date}
-        </Container2>
-        <Container4>
-          <h3>Candidatos aprovados</h3>
-          {confirmados}
-        </Container4>
-        <div>
-          {idCan}
-        </div>
-      </Container1>
-      <Container3>
-        <button onClick={backPage}>Voltar</button>
-      </Container3>
+        </ContainerInfo>
+        <ContainerPaiCandidatos>
+          <ContainerAprovados>
+            <h3>Candidatos aprovados</h3>
+            {confirmados}
+          </ContainerAprovados>
+          <ContainerParaAprovar>
+            <h3>Candidatos para aprovar</h3>
+            {idCan}
+          </ContainerParaAprovar>
+        </ContainerPaiCandidatos>
+      </ContainerPai>
     </MainContainer>
   );
 }

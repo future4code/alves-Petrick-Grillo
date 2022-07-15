@@ -159,6 +159,7 @@ function CreateTripPage(props) {
             <EspaçoPergunta
               placeholder="Duração em dias"
               value={duracao}
+              type="number"
               onChange={onChangeDuracao}
             />
           </ContainerPergunta>
