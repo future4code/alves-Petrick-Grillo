@@ -1,31 +1,14 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import {MainContainer,Titulo,Input,Container1,Container2,Container3,Container4,Container5,Container6,BotaoLogin,BotaoCriar,Form,Line} from "./styled";
 import useForm from "../../hooks/useForm";
 import { BASE_URL } from "../../constants/urls"
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import GlobalContext from "../../Global/GlobalContext";
 import Logo from "../../img/LogoTXT.png"
+import Linha from "../../img/Linha.png"
 
-const MainContainer = styled.div`
-`
-const Titulo = styled.div`
-padding:1%;
-margin:2%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-`
-const Input = styled.input`
-padding:1%;
-`
-const Imagem = styled.img`
-#grad {
-  background-image: linear-gradient(red, yellow, green);
-}
-`
 function Login() {
     useUnprotectedPage()
     const { form, onChange } = useForm({ email: "", password: "" })
@@ -54,38 +37,49 @@ function Login() {
                 console.log(erro)
             })
     }
-
+    const conferirLogin = () => {
+        if (localStorage.getItem("token") === true)
+            return goToPost()
+    }
+    useEffect(() => {
+        conferirLogin()
+    }, [])
     return (
         <MainContainer>
             <Titulo>
                 <img src={Logo} />
                 <h3>O projeto de rede social da Labenu</h3>
             </Titulo>
-            <div>
-                <form onSubmit={onSubmitLogin}>
-                    <Input
-                        name={"email"}
-                        placeholder="E-mail"
-                        type={"email"}
-                        value={form.email}
-                        onChange={onChange}
-                        required
-                        pattern={"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"}
-                    />
-                    <Input
-                        name={"password"}
-                        value={form.password}
-                        onChange={onChange}
-                        placeholder="Senha"
-                        type={"password"}
-                        required
-                    />
-                    <button type={"submit"}>Entrar</button>
-                </form>
-            </div>
-            <div>
-                <button onClick={goToSignUp}>Inscreva-se</button>
-            </div>
+            <Container1>
+                <Form onSubmit={onSubmitLogin}>
+                    <Container2>
+                        <Input
+                            name={"email"}
+                            placeholder="E-mail"
+                            type={"email"}
+                            value={form.email}
+                            onChange={onChange}
+                            required
+                            pattern={"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"}
+                        />
+                    </Container2>
+                    <Container2>
+                        <Input
+                            name={"password"}
+                            value={form.password}
+                            onChange={onChange}
+                            placeholder="Senha"
+                            type={"password"}
+                            required
+                        />
+                    </Container2>
+                    <BotaoLogin type={"submit"}>Continuar</BotaoLogin>
+                </Form>
+            </Container1>
+            <Line src={Linha} />
+            <Container4>
+                <BotaoCriar onClick={goToSignUp}>Crie uma conta!</BotaoCriar>
+            </Container4>
         </MainContainer>
     )
 }
