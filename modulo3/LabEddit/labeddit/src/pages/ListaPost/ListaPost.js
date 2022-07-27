@@ -11,11 +11,14 @@ import { clear } from "@testing-library/user-event/dist/clear";
 import iconcomentario from "../../img/iconcomentario.png"
 import SetaBaixo from "../../img/SetaBaixo.png"
 import SetaCima from "../../img/SetaCima.png"
+import SetaBaixoVermelha from "../../img/SetaBaixoVermelha.png"
+import SetaCimaVerde from "../../img/SetaCimaVerde.png"
 import Linha from "../../img/Linha.png"
 
 
 const MainContainer = styled.div`
 width:100%;
+background:${props => props.backColor};
 `
 const Input = styled.input`
 height: 17vh;
@@ -59,12 +62,14 @@ flex-direction:column;
 justify-content:center;
 margin:3%;
 border-radius:9px;
+/* height:15vh; */
 `
 const Container5 = styled.div`
 color:grey;
 align-items:left;
 font-family: 'Noto Sans', sans-serif;
-padding-left:1%;
+padding-left:1.4%;
+padding-top:1%;
 `
 const Container6 = styled.div`
 padding:4% 0% 4% 1%;
@@ -74,27 +79,29 @@ const Container7 = styled.div`
 display:flex;
 `
 const Container8 = styled.div`
-margin-left:2%;
-margin-bottom:2%;
+margin-left:4%;
+margin-bottom:5%;
 padding-left:4%;
 padding-right:4%;
 width:15vw;
-border:1px solid grey;
+border:0.1px solid grey;
 border-radius:10px;
 display:flex;
 justify-content:space-between;
+color:grey;
 `
 const Container9 = styled.div`
-margin-bottom:2%;
 display:flex;
 justify-content:space-between;
 width:13vw;
 border:1px solid grey;
 border-radius:10px;
 margin-left:4%;
+margin-bottom:5%;
 `
 const Container10 = styled.div`
-margin-left:5%;
+margin-right:7%;
+color:grey;
 `
 const Container11 = styled.div`
 margin-right:5%;
@@ -110,6 +117,11 @@ margin-left:4%;
 const BotaoSeta = styled.button`
 background:none;
 border:none;
+`
+const BotaoSetaBaixo = styled.button`
+background:none;
+border:none;
+padding-top:6%;
 `
 const BotaoTeste = styled.button`
 border:none;
@@ -151,9 +163,9 @@ font-family: 'Noto Sans', sans-serif;
 function ListaPost() {
     useProtectedPage()
     const { form, onChange } = useForm({ title: "", body: "" })
-    const { setPost } = useContext(GlobalContext)
-    const posts = useRequestData([], `${BASE_URL}/posts`)
-    console.log(posts)
+    const { setPost, mode, colorTeste } = useContext(GlobalContext)
+    const [refresh, setRefresh] = useState(false)
+    const posts = useRequestData([], `${BASE_URL}/posts`, refresh)
     const navigate = useNavigate()
 
     const createPost = () => {
@@ -162,11 +174,10 @@ function ListaPost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
-            alert(resposta.data)
-            clear()
+            console.log(resposta.data)
+            setRefresh(!refresh)
         }).catch((erro) => {
-            alert("Falha ao enviar, tente novamente")
-            console.log(erro.message)
+            console.log(erro.response.data)
         })
     }
     const votePost = (id) => {
@@ -178,19 +189,32 @@ function ListaPost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
+            setRefresh(!refresh)
             console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
     }
-    useEffect(() => {
-
-    },[posts])
+    // useEffect(() => {
+    //     getPost()
+    // }, [mode])
     const unVotePost = (id) => {
         const body = {
             direction: -1
         }
         axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        }).then((resposta) => {
+            setRefresh(!refresh)
+            console.log(resposta.data)
+        }).catch((erro) => {
+            console.log(erro.response.data)
+        })
+    }
+    const delVotePost = (id) => {
+        axios.delete(`${BASE_URL}/posts/${id}/votes`, {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
@@ -208,7 +232,7 @@ function ListaPost() {
         goToDetal(id)
     }
     const renderizarPost = posts && posts.map((post) => {
-        return <Container4 key={post.id}>
+        return <Container4  key={post.id}>
             <BotaoTeste onClick={() => onClickCard(post.id)}>
                 <Container5>
                     <h6>Enviado por: {post.username}</h6>
@@ -221,16 +245,17 @@ function ListaPost() {
                 <Container8>
                     <BotaoSeta onClick={() => votePost(post.id)}><img src={SetaCima} width={14} /></BotaoSeta>
                     {post.voteSum}
-                    <BotaoSeta onClick={() => unVotePost(post.id)}><img src={SetaBaixo} width={14} /></BotaoSeta>
+                    <BotaoSetaBaixo onClick={() => unVotePost(post.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
+                    {/* <button onClick={() => delVotePost(post.id)}>Teste DEL</button> */}
                 </Container8>
                 <Container9>
+                    <Container11>
+                        <BotaoComentario onClick={() => onClickCard(post.id)}><img src={iconcomentario} width={20} />
+                        </BotaoComentario>
+                    </Container11>
                     <Container10>
                         {post.commentCount >= 1 ? post.commentCount : 0}
                     </Container10>
-                    <Container11>
-                        <BotaoComentario onClick={console.log}><img src={iconcomentario} width={20} />
-                        </BotaoComentario>
-                    </Container11>
                 </Container9>
             </Container7>
         </Container4>
@@ -241,7 +266,7 @@ function ListaPost() {
     }
 
     return (
-        <MainContainer>
+        <MainContainer backColor={colorTeste}>
             <Container3>
                 <Container1>
                     <Form>

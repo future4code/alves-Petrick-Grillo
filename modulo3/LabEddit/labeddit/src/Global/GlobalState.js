@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
 import axios from "axios"
 
@@ -7,7 +7,12 @@ const GlobalState = (props) => {
     const [rightButtonText, setRightButtonText] = useState(token ? "Logout" : "Login")
     const [post, setPost] = useState([])
     const [mode, setMode] = useState(true)
-    const [colorTeste, setColor] = useState(mode ? "white" : "#27282c")
+    const [colorTeste, setColor] = useState("white")
+
+    useEffect(() => {
+        const cores = mode ? "white" : "#27282c"
+        setColor(mode ? "white" : "#27282c")
+    }, [mode])
 
     const values = {
         rightButtonText,
@@ -16,6 +21,7 @@ const GlobalState = (props) => {
         setPost,
         mode,
         colorTeste,
+        setMode,
     }
     return (
         <GlobalContext.Provider value={values}>

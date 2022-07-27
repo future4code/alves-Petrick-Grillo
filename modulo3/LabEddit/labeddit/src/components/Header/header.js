@@ -50,16 +50,17 @@ text-align:right;
 export default function ButtonAppBar() {
     const navigate = useNavigate()
 
+    const { rightButtonText, setRightButtonText, setMode, mode } = useContext(GlobalContext)
     const goToPosts = () => {
         navigate("/ListaPost")
     }
-    const [mode, setMode] = useState(true)
-    const [color, setColor] = useState(mode ? "white" : "#27282c")
     const [corMode, setCorMode] = useState(mode ? SolMode : DarkMode)
     const goToLogin = () => {
         navigate("/")
     }
-    console.log(mode)
+    const goToPost = () => {
+        navigate("/ListaPost")
+    }
     const changeBackground = () => {
         setMode(!mode)
     }
@@ -67,7 +68,6 @@ export default function ButtonAppBar() {
         localStorage.removeItem("token")
     }
     const token = localStorage.getItem("token")
-    const { rightButtonText, setRightButtonText } = useContext(GlobalContext)
     const rightButtonAction = () => {
         if (token) {
             logout()
