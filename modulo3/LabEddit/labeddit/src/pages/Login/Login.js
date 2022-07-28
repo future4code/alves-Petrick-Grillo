@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {MainContainer,Titulo,Input,Container1,Container2,Container3,Container4,Container5,Container6,BotaoLogin,BotaoCriar,Form,Line} from "./styled";
+import { MainContainer, Titulo, Input, Container1, Container2, Container3, Container4, Container5, Container6, BotaoLogin, BotaoCriar, Form, Line } from "./styled";
 import useForm from "../../hooks/useForm";
 import { BASE_URL } from "../../constants/urls"
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
@@ -13,7 +13,7 @@ function Login() {
     useUnprotectedPage()
     const { form, onChange } = useForm({ email: "", password: "" })
     console.log(form)
-    const { setRightButtonText } = useContext(GlobalContext)
+    const { setRightButtonText, colorTeste } = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const goToSignUp = () => {
@@ -45,7 +45,7 @@ function Login() {
         conferirLogin()
     }, [])
     return (
-        <MainContainer>
+        <MainContainer backColor={colorTeste}>
             <Titulo>
                 <img src={Logo} />
                 <h3>O projeto de rede social da Labenu</h3>

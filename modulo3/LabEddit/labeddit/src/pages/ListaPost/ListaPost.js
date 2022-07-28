@@ -159,6 +159,18 @@ border:none;
 margin-bottom:2%;
 padding:1%;
 font-family: 'Noto Sans', sans-serif;
+height: 53px;
+width: 364px;
+/* left: 30px; */
+/* top: 122px; */
+border-radius: 12px;
+`
+
+const ContainerGif = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 `
 function ListaPost() {
     useProtectedPage()
@@ -231,8 +243,36 @@ function ListaPost() {
         setPost(posts)
         goToDetal(id)
     }
+
+    let setaPositivo
+    let setaNegativo
+    let postChangeCorNegativo
+    let postChangeCorPositivo
     const renderizarPost = posts && posts.map((post) => {
-        return <Container4  key={post.id}>
+        if (post.userVote >= 1) {
+            setaPositivo = <img src={SetaCimaVerde} width={14} />
+        } else {
+            setaPositivo = <img src={SetaCima} width={14} />
+        }
+
+        if (post.userVote < 0) {
+            setaNegativo = <img src={SetaBaixoVermelha} width={14} />
+        } else {
+            setaNegativo = <img src={SetaBaixo} width={14} />
+        }
+
+        if (post.userVote < 0) {
+            postChangeCorNegativo = () => delVotePost(post.id)
+        } else {
+            postChangeCorNegativo = () => unVotePost(post.id)
+        }
+
+        if (post.userVote >= 1) {
+            postChangeCorPositivo = () => delVotePost(post.id)
+        } else {
+            postChangeCorPositivo = () => votePost(post.id)
+        }
+        return <Container4 key={post.id}>
             <BotaoTeste onClick={() => onClickCard(post.id)}>
                 <Container5>
                     <h6>Enviado por: {post.username}</h6>
@@ -243,9 +283,9 @@ function ListaPost() {
             </BotaoTeste >
             <Container7>
                 <Container8>
-                    <BotaoSeta onClick={() => votePost(post.id)}><img src={SetaCima} width={14} /></BotaoSeta>
-                    {post.voteSum}
-                    <BotaoSetaBaixo onClick={() => unVotePost(post.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
+                    <BotaoSeta onClick={postChangeCorPositivo}>{setaPositivo}</BotaoSeta>
+                    {post.voteSum === 0 ? 0 : post.voteSum}
+                    <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
                     {/* <button onClick={() => delVotePost(post.id)}>Teste DEL</button> */}
                 </Container8>
                 <Container9>
@@ -292,9 +332,14 @@ function ListaPost() {
                 <Line src={Linha} />
             </div>
             <div>
-                {renderizarPost}
+                {posts.length > 1 ?
+                    renderizarPost :
+                    <ContainerGif>
+                        <img src="https://uploads-ssl.webflow.com/5e790d30d198385b09366d8f/5efbb5055f2478ba2bc322d0_icone_gif.gif" width={200} />
+                    </ContainerGif>
+                }
             </div>
-        </MainContainer>
+        </MainContainer >
     )
 }
 

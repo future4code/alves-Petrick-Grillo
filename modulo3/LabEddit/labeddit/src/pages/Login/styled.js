@@ -1,10 +1,11 @@
 import styled from "styled-components"
 
 export const MainContainer = styled.div`
+background:${props => props.backColor};
+height: 100vh;
 `
 export const Titulo = styled.div`
 padding:1%;
-margin:2%;
 display:flex;
 flex-direction:column;
 justify-content:center;

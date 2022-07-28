@@ -12,6 +12,7 @@ import SetaCima from "../../img/SetaCima.png"
 import SetaBaixoVermelha from "../../img/SetaBaixoVermelha.png"
 import SetaCimaVerde from "../../img/SetaCimaVerde.png"
 import iconcomentario from "../../img/iconcomentario.png"
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const Container8 = styled.div`
 margin-left:2%;
@@ -145,20 +146,41 @@ width:100%;
 function DetalhePost() {
     useProtectedPage()
     const params = useParams()
-    const { post, colorTeste } = useContext(GlobalContext)
+    const { post, colorTeste, setPost } = useContext(GlobalContext)
     const navigate = useNavigate()
     const { form, onChange } = useForm({ body: "" })
     const [result, setResult] = useState()
     const [refresh, setRefresh] = useState(false)
+    const posts = useRequestData([], `${BASE_URL}/posts`, refresh)
     const comentarios = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`, refresh)
     console.log(comentarios)
-
-    // let result
-
+    console.log(post)
     useEffect(() => {
-        setResult(post.find(idpost => idpost.id === params.id))
-    }, [result])
+        setResult(post?.filter(idpost => idpost.id === params.id))
+    }, [])
 
+    const renderPostMain = post && post.map((teste) => {
+        if (params.id === post.id) {
+            return <Container5>
+                <Container6>
+                    <h6>Enviado PorA: {teste?.username}</h6>
+                </Container6>
+                <Container7>
+                    {teste?.body}
+                </Container7>
+                <Container22>
+                    <Container8>
+                        <BotaoSeta onClick={() => mainVotePost(teste?.id)}><img src={SetaCima} width={14} /></BotaoSeta>
+                        {teste?.userVote}
+                        <BotaoSetaBaixo onClick={() => mainUnVotePost(teste?.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
+                    </Container8>
+                    <ContainerTeste>
+                        {teste?.commentCount}<img src={iconcomentario} width={20} />
+                    </ContainerTeste>
+                </Container22>
+            </Container5>
+        }
+    })
     const createComment = (event) => {
         event.preventDefault()
         console.log(form)
@@ -184,6 +206,7 @@ function DetalhePost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
+            setPost(posts)
             setRefresh(!refresh)
             console.log(resposta.data)
         }).catch((erro) => {
@@ -200,6 +223,7 @@ function DetalhePost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
+            setPost(posts)
             setRefresh(!refresh)
             console.log("un", resposta.data)
         }).catch((erro) => {
@@ -277,6 +301,7 @@ function DetalhePost() {
             }
         }).then((resposta) => {
             setRefresh(!refresh)
+
             console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
@@ -298,28 +323,13 @@ function DetalhePost() {
         })
     }
     console.log(result)
+    const onClickCard = (id) => {
+        setPost(posts)
+    }
     return (
         <Container4 backColor={colorTeste}>
             <div>
-                <Container5>
-                    <Container6>
-                        <h6>Enviado Por: {result?.username}</h6>
-                    </Container6>
-                    <Container7>
-                        {result?.body}
-                    </Container7>
-                    <Container22>
-                        <Container8>
-                            <BotaoSeta onClick={() => mainVotePost(result?.id)}><img src={SetaCima} width={14} /></BotaoSeta>
-                            {result?.userVote}
-                            <BotaoSetaBaixo onClick={() => mainUnVotePost(result?.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
-                            {/* <button onClick={() => delVotePost(result?.id)}>Teste DEL</button> */}
-                        </Container8>
-                        <ContainerTeste>
-                            {result?.commentCount}<img src={iconcomentario} width={20} />
-                        </ContainerTeste>
-                    </Container22>
-                </Container5>
+                {renderPostMain}
             </div>
             <Container9>
                 <Form onSubmit={createComment}>
