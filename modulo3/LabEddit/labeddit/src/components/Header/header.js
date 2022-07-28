@@ -54,7 +54,7 @@ export default function ButtonAppBar() {
     const goToPosts = () => {
         navigate("/ListaPost")
     }
-    const [corMode, setCorMode] = useState(mode ? SolMode : DarkMode)
+    const colorTeste = (mode ? SolMode : DarkMode)
     const goToLogin = () => {
         navigate("/")
     }
@@ -83,7 +83,7 @@ export default function ButtonAppBar() {
                 <Container2>
                     <BotaoX onClick={goToPosts}>Voltar</BotaoX>
                     <Botao onClick={changeBackground}>
-                        <img src={corMode} width={30} />
+                        <img src={colorTeste} width={30} />
                         {/* <img src={Logo} width={30} /> */}
                     </Botao>
                     <BotaoAcao onClick={rightButtonAction}>{rightButtonText}</BotaoAcao>

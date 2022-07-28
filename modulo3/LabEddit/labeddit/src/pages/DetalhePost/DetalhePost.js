@@ -9,8 +9,9 @@ import useRequestData from "../../hooks/useRequestData";
 import styled from "styled-components";
 import SetaBaixo from "../../img/SetaBaixo.png"
 import SetaCima from "../../img/SetaCima.png"
+import SetaBaixoVermelha from "../../img/SetaBaixoVermelha.png"
+import SetaCimaVerde from "../../img/SetaCimaVerde.png"
 import iconcomentario from "../../img/iconcomentario.png"
-import { Refresh } from "@mui/icons-material";
 
 const Container8 = styled.div`
 margin-left:2%;
@@ -70,7 +71,7 @@ padding:4% 0% 4% 5%;
 font-family: 'Noto Sans', sans-serif;
 `
 const Container4 = styled.div`
-width:100%;
+width:98%;
 display:flex;
 /* align-items:center; */
 flex-direction:column;
@@ -147,12 +148,16 @@ function DetalhePost() {
     const { post, colorTeste } = useContext(GlobalContext)
     const navigate = useNavigate()
     const { form, onChange } = useForm({ body: "" })
+    const [result, setResult] = useState()
     const [refresh, setRefresh] = useState(false)
     const comentarios = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`, refresh)
     console.log(comentarios)
 
+    // let result
+
     useEffect(() => {
-    }, [])
+        setResult(post.find(idpost => idpost.id === params.id))
+    }, [result])
 
     const createComment = (event) => {
         event.preventDefault()
@@ -168,12 +173,6 @@ function DetalhePost() {
             alert("Falha ao enviar, tente novamente")
             console.log(erro.response)
         })
-    }
-    const result = post.find(idpost => idpost.id === params.id)
-
-    /* IF ELSE BOTAO COLORIDO*/
-    if (result.userVote >= 1) {
-        return
     }
 
     const votePost = (id) => {
@@ -214,12 +213,42 @@ function DetalhePost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
+            setRefresh(!refresh)
             console.log("dele", resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
     }
+    let setaPositivo
+    let setaNegativo
+    let postChangeCorNegativo
+    let postChangeCorPositivo
     const renderizarComentario = comentarios && comentarios.map((comentario) => {
+
+        if (comentario.userVote >= 1) {
+            setaPositivo = <img src={SetaCimaVerde} width={14} />
+        } else {
+            setaPositivo = <ImgSetaCima src={SetaCima} width={14} />
+        }
+
+        if (comentario.userVote < 0) {
+            setaNegativo = <img src={SetaBaixoVermelha} width={14} />
+        } else {
+            setaNegativo = <img src={SetaBaixo} width={14} />
+        }
+
+        if (comentario.userVote < 0) {
+            postChangeCorNegativo = () => delVotePost(comentario.id)
+        } else {
+            postChangeCorNegativo = () => unVotePost(comentario.id)
+        }
+
+        if (comentario.userVote >= 1) {
+            postChangeCorPositivo = () => delVotePost(comentario.id)
+        } else {
+            postChangeCorPositivo = () => votePost(comentario.id)
+        }
+
         return <Container1>
             <Container4>
                 <Container2>
@@ -230,9 +259,10 @@ function DetalhePost() {
                 </Container3>
             </Container4>
             <Container8>
-                <BotaoSeta onClick={() => votePost(comentario.id)}><ImgSetaCima src={SetaCima} width={14} /></BotaoSeta>
+                <BotaoSeta onClick={postChangeCorPositivo}>{setaPositivo}</BotaoSeta>
                 {comentario.voteSum}
-                <BotaoSetaBaixo onClick={() => unVotePost(comentario.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
+                <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
+
                 {/* <button onClick={() => delVotePost(comentario.id)}>TESTE DEL</button> */}
             </Container8>
         </Container1>
@@ -273,20 +303,20 @@ function DetalhePost() {
             <div>
                 <Container5>
                     <Container6>
-                        <h6>Enviado Por: {result.username}</h6>
+                        <h6>Enviado Por: {result?.username}</h6>
                     </Container6>
                     <Container7>
-                        {result.body}
+                        {result?.body}
                     </Container7>
                     <Container22>
                         <Container8>
-                            <BotaoSeta onClick={() => mainVotePost(result.id)}><img src={SetaCima} width={14} /></BotaoSeta>
-                            {result.userVote}
-                            <BotaoSetaBaixo onClick={() => mainUnVotePost(result.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
-                            {/* <button onClick={() => delVotePost(result.id)}>Teste DEL</button> */}
+                            <BotaoSeta onClick={() => mainVotePost(result?.id)}><img src={SetaCima} width={14} /></BotaoSeta>
+                            {result?.userVote}
+                            <BotaoSetaBaixo onClick={() => mainUnVotePost(result?.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
+                            {/* <button onClick={() => delVotePost(result?.id)}>Teste DEL</button> */}
                         </Container8>
                         <ContainerTeste>
-                            {result.commentCount}<img src={iconcomentario} width={20} />
+                            {result?.commentCount}<img src={iconcomentario} width={20} />
                         </ContainerTeste>
                     </Container22>
                 </Container5>
