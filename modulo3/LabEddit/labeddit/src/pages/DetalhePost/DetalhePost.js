@@ -159,28 +159,6 @@ function DetalhePost() {
         setResult(post?.filter(idpost => idpost.id === params.id))
     }, [])
 
-    const renderPostMain = post && post.map((teste) => {
-        if (params.id === post.id) {
-            return <Container5>
-                <Container6>
-                    <h6>Enviado PorA: {teste?.username}</h6>
-                </Container6>
-                <Container7>
-                    {teste?.body}
-                </Container7>
-                <Container22>
-                    <Container8>
-                        <BotaoSeta onClick={() => mainVotePost(teste?.id)}><img src={SetaCima} width={14} /></BotaoSeta>
-                        {teste?.userVote}
-                        <BotaoSetaBaixo onClick={() => mainUnVotePost(teste?.id)}><img src={SetaBaixo} width={14} /></BotaoSetaBaixo>
-                    </Container8>
-                    <ContainerTeste>
-                        {teste?.commentCount}<img src={iconcomentario} width={20} />
-                    </ContainerTeste>
-                </Container22>
-            </Container5>
-        }
-    })
     const createComment = (event) => {
         event.preventDefault()
         console.log(form)
@@ -290,6 +268,51 @@ function DetalhePost() {
                 {/* <button onClick={() => delVotePost(comentario.id)}>TESTE DEL</button> */}
             </Container8>
         </Container1>
+    })
+    const renderPostMain = post && post.map((teste) => {
+        if (params.id === teste.id) {
+            if (teste.userVote >= 1) {
+                setaPositivo = <img src={SetaCimaVerde} width={14} />
+            } else {
+                setaPositivo = <ImgSetaCima src={SetaCima} width={14} />
+            }
+
+            if (teste.userVote < 0) {
+                setaNegativo = <img src={SetaBaixoVermelha} width={14} />
+            } else {
+                setaNegativo = <img src={SetaBaixo} width={14} />
+            }
+
+            if (teste.userVote < 0) {
+                postChangeCorNegativo = () => delVotePost(teste.id)
+            } else {
+                postChangeCorNegativo = () => unVotePost(teste.id)
+            }
+
+            if (teste.userVote >= 1) {
+                postChangeCorPositivo = () => delVotePost(teste.id)
+            } else {
+                postChangeCorPositivo = () => votePost(teste.id)
+            }
+            return <Container5>
+                <Container6>
+                    <h6>Enviado PorA: {teste.username}</h6>
+                </Container6>
+                <Container7>
+                    {teste.body}
+                </Container7>
+                <Container22>
+                    <Container8>
+                        <BotaoSeta onClick={postChangeCorPositivo}>{setaPositivo}</BotaoSeta>
+                        {teste.userVote}
+                        <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
+                    </Container8>
+                    <ContainerTeste>
+                        {teste?.commentCount}<img src={iconcomentario} width={20} />
+                    </ContainerTeste>
+                </Container22>
+            </Container5>
+        }
     })
     const mainVotePost = (id) => {
         const body = {
