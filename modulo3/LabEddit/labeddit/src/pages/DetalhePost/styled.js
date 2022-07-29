@@ -60,7 +60,7 @@ display:flex;
 flex-wrap:wrap;
 `
 export const MainContainer = styled.div`
-width:98%;
+width:99%;
 display:flex;
 flex-direction:column;
 background:${props => props.backColor};

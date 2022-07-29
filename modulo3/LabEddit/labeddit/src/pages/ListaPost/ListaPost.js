@@ -28,7 +28,6 @@ function ListaPost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
-            console.log(resposta.data)
             setRefresh(!refresh)
         }).catch((erro) => {
             console.log(erro.response.data)
@@ -44,7 +43,6 @@ function ListaPost() {
             }
         }).then((resposta) => {
             setRefresh(!refresh)
-            console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
@@ -59,7 +57,6 @@ function ListaPost() {
             }
         }).then((resposta) => {
             setRefresh(!refresh)
-            console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
@@ -70,7 +67,6 @@ function ListaPost() {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
-            console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })

@@ -23,23 +23,15 @@ function DetalhePost() {
     const [refresh, setRefresh] = useState(false)
     const posts = useRequestData([], `${BASE_URL}/posts`, refresh)
     const comentarios = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`, refresh)
-    console.log(comentarios)
-    console.log(post)
-    console.log(result)
-    useEffect(() => {
-        setResult(post?.filter(idpost => idpost.id === params.id))
-    }, [])
 
     const createComment = (event) => {
         event.preventDefault()
-        console.log(form)
         axios.post(`${BASE_URL}/posts/${params.id}/comments`, form, {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
         }).then((resposta) => {
             setRefresh(!refresh)
-            console.log(resposta.data)
         }).catch((erro) => {
             alert("Falha ao enviar, tente novamente")
             console.log(erro.response)
@@ -57,7 +49,6 @@ function DetalhePost() {
         }).then((resposta) => {
             setPost(posts)
             setRefresh(!refresh)
-            console.log(resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
@@ -74,7 +65,6 @@ function DetalhePost() {
         }).then((resposta) => {
             setPost(posts)
             setRefresh(!refresh)
-            console.log("un", resposta.data)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
@@ -87,7 +77,34 @@ function DetalhePost() {
             }
         }).then((resposta) => {
             setRefresh(!refresh)
-            console.log("dele", resposta.data)
+        }).catch((erro) => {
+            console.log(erro.response.data)
+        })
+    }
+    const mainVotePost = (id) => {
+        const body = {
+            direction: 1
+        }
+        axios.post(`${BASE_URL}/posts/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        }).then((resposta) => {
+            setRefresh(!refresh)
+        }).catch((erro) => {
+            console.log(erro.response.data)
+        })
+    }
+    const mainUnVotePost = (id) => {
+        const body = {
+            direction: -1
+        }
+        axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        }).then((resposta) => {
+            setRefresh(!refresh)
         }).catch((erro) => {
             console.log(erro.response.data)
         })
@@ -96,6 +113,51 @@ function DetalhePost() {
     let setaNegativo
     let postChangeCorNegativo
     let postChangeCorPositivo
+    const renderPostMain = posts && posts.map((post) => {
+        if (params.id === post.id) {
+            if (post.userVote >= 1) {
+                setaPositivo = <img src={SetaCimaVerde} width={14} />
+            } else {
+                setaPositivo = <ImgSetaCima src={SetaCima} width={14} />
+            }
+
+            if (post.userVote < 0) {
+                setaNegativo = <img src={SetaBaixoVermelha} width={14} />
+            } else {
+                setaNegativo = <img src={SetaBaixo} width={14} />
+            }
+
+            if (post.userVote < 0) {
+                postChangeCorNegativo = () => delVotePost(post.id)
+            } else {
+                postChangeCorNegativo = () => mainUnVotePost(post.id)
+            }
+
+            if (post.userVote >= 1) {
+                postChangeCorPositivo = () => delVotePost(post.id)
+            } else {
+                postChangeCorPositivo = () => mainVotePost(post.id)
+            }
+            return <MainContainerMap key={post.id}>
+                <ContainerUsuario>
+                    <h6>Enviado PorA: {post?.username}</h6>
+                </ContainerUsuario>
+                <ContainerBody>
+                    {post?.body}
+                </ContainerBody>
+                <MainContainerInteracao>
+                    <ContainerBotaoInteracao>
+                        <BotaoSeta onClick={postChangeCorPositivo}>{setaPositivo}</BotaoSeta>
+                        {post?.userVote}
+                        <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
+                    </ContainerBotaoInteracao>
+                    <ContainerNumeroComentario>
+                        {post?.commentCount}<img src={iconcomentario} width={20} />
+                    </ContainerNumeroComentario>
+                </MainContainerInteracao>
+            </MainContainerMap>
+        }
+    })
     const renderizarComentario = comentarios && comentarios.map((comentario) => {
 
         if (comentario.userVote >= 1) {
@@ -122,7 +184,7 @@ function DetalhePost() {
             postChangeCorPositivo = () => votePost(comentario.id)
         }
 
-        return <MainContainerMap>
+        return <MainContainerMap key={comentario.id}>
             <MainContainer>
                 <ContainerUsuario>
                     <h6>Enviado por: {comentario.username}</h6>
@@ -137,84 +199,6 @@ function DetalhePost() {
                 <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
             </ContainerBotaoInteracao>
         </MainContainerMap>
-    })
-    const mainVotePost = (id) => {
-        const body = {
-            direction: 1
-        }
-        axios.post(`${BASE_URL}/posts/${id}/votes`, body, {
-            headers: {
-                Authorization: localStorage.getItem("token")
-            }
-        }).then((resposta) => {
-            setRefresh(!refresh)
-
-            console.log(resposta.data)
-        }).catch((erro) => {
-            console.log(erro.response.data)
-        })
-    }
-    const mainUnVotePost = (id) => {
-        const body = {
-            direction: -1
-        }
-        axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
-            headers: {
-                Authorization: localStorage.getItem("token")
-            }
-        }).then((resposta) => {
-            setRefresh(!refresh)
-            console.log(resposta.data)
-        }).catch((erro) => {
-            console.log(erro.response.data)
-        })
-    }
-    console.log(result)
-    const renderPostMain = result && result.map((post) => {
-        console.log(post.id)
-        if (params.id === post.id) {
-            if (post.userVote >= 1) {
-                setaPositivo = <img src={SetaCimaVerde} width={14} />
-            } else {
-                setaPositivo = <ImgSetaCima src={SetaCima} width={14} />
-            }
-
-            if (post.userVote < 0) {
-                setaNegativo = <img src={SetaBaixoVermelha} width={14} />
-            } else {
-                setaNegativo = <img src={SetaBaixo} width={14} />
-            }
-
-            if (post.userVote < 0) {
-                postChangeCorNegativo = () => delVotePost(post.id)
-            } else {
-                postChangeCorNegativo = () => mainUnVotePost(post.id)
-            }
-
-            if (post.userVote >= 1) {
-                postChangeCorPositivo = () => delVotePost(post.id)
-            } else {
-                postChangeCorPositivo = () => mainVotePost(post.id)
-            }
-            return <MainContainerMap>
-                <ContainerUsuario>
-                    <h6>Enviado PorA: {post.username}</h6>
-                </ContainerUsuario>
-                <ContainerBody>
-                    {post.body}
-                </ContainerBody>
-                <MainContainerInteracao>
-                    <ContainerBotaoInteracao>
-                        <BotaoSeta onClick={postChangeCorPositivo}>{setaPositivo}</BotaoSeta>
-                        {post.voteSum}
-                        <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
-                    </ContainerBotaoInteracao>
-                    <ContainerNumeroComentario>
-                        {post?.commentCount}<img src={iconcomentario} width={20} />
-                    </ContainerNumeroComentario>
-                </MainContainerInteracao>
-            </MainContainerMap>
-        }
     })
     return (
         <MainContainer backColor={colorTeste}>
