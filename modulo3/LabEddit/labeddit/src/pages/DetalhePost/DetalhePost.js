@@ -152,7 +152,7 @@ function DetalhePost() {
                         <BotaoSetaBaixo onClick={postChangeCorNegativo}>{setaNegativo}</BotaoSetaBaixo>
                     </ContainerBotaoInteracao>
                     <ContainerNumeroComentario>
-                        {post?.commentCount}<img src={iconcomentario} width={20} />
+                        <img src={iconcomentario} width={20} />{post?.commentCount}
                     </ContainerNumeroComentario>
                 </MainContainerInteracao>
             </MainContainerMap>

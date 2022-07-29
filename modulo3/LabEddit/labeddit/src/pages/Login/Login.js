@@ -12,7 +12,6 @@ import Linha from "../../img/Linha.png"
 function Login() {
     useUnprotectedPage()
     const { form, onChange } = useForm({ email: "", password: "" })
-    console.log(form)
     const { setRightButtonText, colorTeste } = useContext(GlobalContext)
     const navigate = useNavigate()
 
@@ -29,7 +28,6 @@ function Login() {
     const login = () => {
         axios.post(`${BASE_URL}/users/login`, form)
             .then((resposta) => {
-                console.log(resposta.data)
                 localStorage.setItem("token", resposta.data.token)
                 setRightButtonText("LOGOUT")
                 goToPost()

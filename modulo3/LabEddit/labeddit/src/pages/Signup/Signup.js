@@ -10,7 +10,6 @@ import { MainContainer, Titulo, Input, Form, BotaoCadastro } from "./styled"
 function Signup() {
     useUnprotectedPage()
     const { form, onChange } = useForm({ username: "", email: "", password: "" })
-    console.log(form)
     const { setRightButtonText, colorTeste } = useContext(GlobalContext)
     const navigate = useNavigate()
 
@@ -25,7 +24,6 @@ function Signup() {
     const signUp = () => {
         axios.post(`${BASE_URL}/users/signup`, form)
             .then((resposta) => {
-                console.log(resposta.data.token)
                 localStorage.setItem("token", resposta.data.token)
                 setRightButtonText("LOGOUT")
                 goToLogin()
