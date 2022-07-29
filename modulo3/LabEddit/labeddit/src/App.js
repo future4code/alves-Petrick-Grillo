@@ -14,10 +14,7 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
       }
 `
-
 function App() {
-
-  
   return (
     <GlobalState >
       <GlobalStyle />
