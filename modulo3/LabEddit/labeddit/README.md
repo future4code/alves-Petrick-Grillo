@@ -29,8 +29,8 @@ A thread post é capaz de visualizar comentarios feito por outros usuarios regis
 ## Imagens do projeto:
 ### Imagens retiradas das dimensões de iPhone 6/7/8
 
-image.png
-image.png
-image.png
-image.png
-image.png
+![image](https://user-images.githubusercontent.com/104538955/181772300-2248784e-d3bd-4d46-93b1-99617d9ee371.png)
+![image](https://user-images.githubusercontent.com/104538955/181772259-d6ff1be7-d415-4fe7-a97f-b1389e6d5f9c.png)
+![image](https://user-images.githubusercontent.com/104538955/181772171-aa165c6f-e1b5-435a-8f58-6b3619f39713.png)
+![image](https://user-images.githubusercontent.com/104538955/181772208-ae8d328b-2271-40d5-877d-8f0adfc778d8.png)
+![image](https://user-images.githubusercontent.com/104538955/181772068-2eb3709d-3168-4c90-9d05-bc381dd74c0b.png)
