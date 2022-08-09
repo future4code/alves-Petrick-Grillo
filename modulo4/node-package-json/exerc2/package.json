@@ -1,0 +1,11 @@
+{
+  "name": "exerc2",
+  "version": "1.0.0",
+  "description": "Exercicio 2 09/08/22",
+  "main": "exerc2.js",
+  "scripts": {
+    "exerc2": "node ./exerc2.js"
+  },
+  "author": "Petrick Grillo",
+  "license": "ISC"
+}

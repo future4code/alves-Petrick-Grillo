@@ -1,0 +1,11 @@
+{
+  "name": "exerc3",
+  "version": "1.0.0",
+  "description": "Exercicio 3 09/08/22",
+  "main": "exerc3.js",
+  "scripts": {
+    "exerc3": "node ./exerc3.js"
+  },
+  "author": "Petrick Grillo",
+  "license": "ISC"
+}
