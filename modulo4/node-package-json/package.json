@@ -1,0 +1,13 @@
+{
+  "name": "package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "exerc2": "node ./exerc2.js",
+    "exerc3": "node ./exerc3.js"
+  },
+  "author": "Petrick Grillo",
+  "license": "ISC"
+}
