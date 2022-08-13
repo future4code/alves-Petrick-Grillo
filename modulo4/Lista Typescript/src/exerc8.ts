@@ -1,19 +1,22 @@
-// function checaRenovacaoRG(anoNascimento: string, anoEmissao: string) {
-//     const dividirDataNas: string[] = anoNascimento.split("/")
-//     const dividirDataEmi: string[] = anoEmissao.split("/")
-//     const teste1 = Integer.parseInt()
-//     let idade = dividirDataEmi[2] - dividirDataNas[2]
+// Escreva uma função que pergunta ao usuário a data de nascimento de uma pessoa (ex.: “24/04/1993”, e a data de emissão da sua carteira de identidade (ex.: “07/11/2015”).
+//  A função deve retornar um booleano que indica se a carteira precisa ser renovada ou não. A carteira precisa ser renovada segundo os seguintes critérios:
 
-//     if (idade <= 20) {
-//         return tempoCarteira >= 5 ? "passou dos 5 anos precisa renovar" : "ainda não passou os 5 anos"
+// const dataFormatada = (data.getDate()) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear()
+const data = new Date()
+const anoAtual = (data.getFullYear())
+function verificaRG(anoAtual: number, anoNascimento: number, anoEmissao: number) {
+    let idade = anoAtual - anoNascimento
+    let tempoCarteira = anoAtual - anoEmissao
 
-//     } else if (idade >= 20 || idade <= 50) {
-//         return tempoCarteira >= 10 ? "passou dos 10 anos precisa renovar" : "ainda não passou os 10 anos"
+    if (idade <= 20) {
+        return tempoCarteira >= 5 ? true : false
 
-//     } else if (idade > 50) {
-//         return tempoCarteira >= 15 ? "passou dos 15 anos precisa renovar" : "ainda não passou os 15 anos"
+    } else if (idade >= 20 || idade <= 50) {
+        return tempoCarteira >= 10 ? true : false
 
-//     } else {
-//         return "error"
-//     }
-// }
+    } else if (idade > 50) {
+        return tempoCarteira >= 15 ? true : false
+
+    }
+}
+console.log(verificaRG(anoAtual, 2015, 2020))
