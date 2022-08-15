@@ -29,7 +29,6 @@ const exerc2User: bodyexerc2[] = [
 
 // Exercicio 03
 exercicios.post("/addUser", (req: Request, res: Response) => {
-    console.log(req.body)
     const bodyUser: bodyexerc2 = {
         id: req.body.id,
         name: req.body.name,
@@ -48,31 +47,23 @@ exercicios.post("/addUser", (req: Request, res: Response) => {
 
 // Exercicio 04
 exercicios.get("/getUser", (req: Request, res: Response) => {
-    console.log(exerc2User)
     res.send({ "usuario": exerc2User })
 })
 
 // Exercicio 07
 exercicios.get("/getPost", (req: Request, res: Response) => {
-    console.log("Console da variavel", exerc2User)
     const postsMap = exerc2User.map((parametro) => {
         return parametro.posts
     }).flat()
-    console.log("CONSOLE TESTE", postsMap)
     const renderMap = postsMap.flat()
-    console.log(renderMap)
     res.send(renderMap)
 
 })
 // Exercicio 08
-exercicios.get("/getUser/:id", (req: Request, res: Response) => {
-    console.log("bodyEspecifico", req.params.id)
-    const idUser = req.params.id
-    const filtrarUser = exerc2User.filter((parametro) => {
-        console.log("consolePARAMEOTR", parametro.id)
-        return parametro.id === idUser
-    })
-    console.log({ "consolemap": filtrarUser })
+exercicios.get("/getUser/:name", (req: Request, res: Response) => {
+    const nameUser = req.params.name
+    const filtrarUser = exerc2User.filter(parametro => parametro.name === nameUser)
+    res.send(filtrarUser)
 })
 
 
