@@ -11,17 +11,11 @@ type bodyexerc2 = {
     phone: number,
     email: string,
     website: string,
-    // posts: {        //Exercicio 06 / acho melhor criar junto para que as informações nao se percam com facilidade
-    //     id: number | string,
-    //     title: string,
-    //     body: string
-    // }[]
-}
-type bodyexerc5 = {
-    id: number
-    title: string
-    body: string
-    userId: number
+    posts: {        //Exercicio 06 / acho melhor criar junto para que as informações nao se percam com facilidade
+        id: number | string,
+        title: string,
+        body: string
+    }[]
 }
 
 const exerc2User: bodyexerc2[] = [
@@ -34,61 +28,49 @@ const exerc2User: bodyexerc2[] = [
 
 // Exercicio 03
 exercicios.post("/addUser", (req: Request, res: Response) => {
-    const teste: bodyexerc2 = {
+    const bodyUser: bodyexerc2 = {
         id: req.body.id,
         name: req.body.name,
         phone: req.body.phone,
         email: req.body.email,
         website: req.body.website,
-        // posts: {
-        //     id: req.body.id,
-        //     title: req.body.title,
-        //     body: req.body.body
-        // }
+        posts: [{
+            id: req.body.id,
+            title: req.body.title,
+            body: req.body.body
+        }]
     }
-    exerc2User.push(teste)
+    exerc2User.push(bodyUser)
     res.send({ "criado": exerc2User })
 })
 
 // Exercicio 04
-// exercicios.get("/getUser", (req: Request, res: Response) => {
-//     console.log(exerc2User)
-//     res.send(exerc2User)
-// })
-
-// EXERCICIO 05
-exercicios.post("/addPost", (req: Request, res: Response) => {
-    const teste: bodyexerc2 = {
-        id: req.body.id,
-        name: req.body.name,
-        phone: req.body.phone,
-        email: req.body.email,
-        website: req.body.website,
-        // posts: {
-        //     id: req.body.id,
-        //     title: req.body.title,
-        //     body: req.body.body
-        // }
-    }
-    exerc2User.push(teste)
-    res.send({ "criado": exerc2User })
+exercicios.get("/getUser", (req: Request, res: Response) => {
+    console.log(exerc2User)
+    res.send({ "usuario": exerc2User })
 })
+
 // Exercicio 07
 exercicios.get("/getPost", (req: Request, res: Response) => {
-    // console.log("body", req.body)
     console.log("Console da variavel", exerc2User)
-    const teste = exerc2User.map((parametro) => {
+    const postsMap = exerc2User.map((parametro) => {
         return parametro.posts
     }).flat()
-    console.log("CONSOLE TESTE", teste)
-    const teste2 = teste.flat()
-    console.log(teste2)
-    res.send(teste2)
+    console.log("CONSOLE TESTE", postsMap)
+    const renderMap = postsMap.flat()
+    console.log(renderMap)
+    res.send(renderMap)
 
 })
 // Exercicio 08
 exercicios.get("/getUser/:id", (req: Request, res: Response) => {
-    // console.log("bodyEspecifico", req.body)
+    console.log("bodyEspecifico", req.params.id)
+    const idUser = req.params.id
+    const filtrarUser = exerc2User.filter((parametro) => {
+        console.log("consolePARAMEOTR", parametro.id)
+        return parametro.id === idUser
+    })
+    console.log({ "consolemap": filtrarUser })
 })
 
 
