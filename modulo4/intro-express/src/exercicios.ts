@@ -11,12 +11,13 @@ type bodyexerc2 = {
     phone: number,
     email: string,
     website: string,
-    posts: {        //Exercicio 06 / acho melhor criar junto para que as informações nao se percam com facilidade
+    posts: {
         id: number | string,
         title: string,
         body: string
     }[]
 }
+//Exercicio 06 / acho melhor criar junto para que as informações nao se percam com facilidade
 
 const exerc2User: bodyexerc2[] = [
 ]
@@ -28,6 +29,7 @@ const exerc2User: bodyexerc2[] = [
 
 // Exercicio 03
 exercicios.post("/addUser", (req: Request, res: Response) => {
+    console.log(req.body)
     const bodyUser: bodyexerc2 = {
         id: req.body.id,
         name: req.body.name,
@@ -35,9 +37,9 @@ exercicios.post("/addUser", (req: Request, res: Response) => {
         email: req.body.email,
         website: req.body.website,
         posts: [{
-            id: req.body.id,
-            title: req.body.title,
-            body: req.body.body
+            id: req.body.posts.id,
+            title: req.body.posts.title,
+            body: req.body.posts.body
         }]
     }
     exerc2User.push(bodyUser)
