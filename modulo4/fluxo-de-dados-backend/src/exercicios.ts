@@ -22,8 +22,12 @@ exercicios.post("/addProduct", (req: Request, res: Response) => {
     try {
         if (!req.body.name || !req.body.price) {
             res.status(404).send("Esta faltando inserir os dados corretamente")
-        } else if (req.body.name) {
-
+        } else if (typeof (req.body.name) !== "string") {
+            res.status(400).send("Insira um string")
+        } else if (typeof (req.body.price) !== "number") {
+            res.status(400).send("Insira um number")
+        } else if (req.body.price <= 0) {
+            res.status(400).send("Insira um numero maior que 0")
         } else {
             const addUser: data = {
                 id: Date.now() + Date.now(),
@@ -46,12 +50,20 @@ exercicios.put("/changeNumber/:id", (req: Request, res: Response) => {
     const idUser: number = +(req.params.id)
     const searchID = arrayData.findIndex(parametro => parametro.id === idUser)
     try {
-        if (searchID === 0) {
-            res.status(404).send("usuario não encontrado")
+        if (!req.body.price) {
+            res.status(404).send("Preço nao recebido")
+        } else if (typeof (req.body.price) !== "number") {
+            res.status(400).send("Insira um number")
+        } else if (req.body.price <= 0) {
+            res.status(400).send("Insira um numero maior que 0")
+        } else if (!idUser) {
+            res.status(400).send("Insira um ID")
+        } else if (!searchID) {
+            res.status(400).send("Produto não encontrado")
         } else {
             arrayData[searchID].price = req.body.price
+            res.status(200).send({ "Preço modificado com sucesso!": arrayData })
         }
-        res.status(200).send({ "Preço modificado com sucesso!": arrayData })
     } catch (error: any) {
         res.status(res.statusCode || 500).send({ message: error.message })
     }
@@ -61,8 +73,14 @@ exercicios.delete("/delUser/:id", (req: Request, res: Response) => {
     const idUser: number = +(req.params.id)
     const searchID = arrayData.findIndex(parametro => parametro.id === idUser)
     try {
-        arrayData.splice(searchID, 1)
-        res.status(200).send("usuario deletado com sucesso")
+        if (!idUser) {
+            res.status(400).send("Insira um ID")
+        } else if (!searchID) {
+            res.status(400).send("Produto não encontrado")
+        } else {
+            arrayData.splice(searchID, 1)
+            res.status(200).send("usuario deletado com sucesso")
+        }
     } catch (error: any) {
         res.status(res.statusCode || 500).send({ message: error.message })
     }
