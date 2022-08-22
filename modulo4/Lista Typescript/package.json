@@ -1,0 +1,30 @@
+{
+  "name": "lista-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node ./build/index.js",
+    "exerc1": "tsc && node ./build/exerc1.js",
+    "exerc2": "tsc && node ./build/exerc2.js",
+    "exerc3": "tsc && node ./build/exerc3.js",
+    "exerc4": "tsc && node ./build/exerc4.js",
+    "exerc5": "tsc && node ./build/exerc5.js",
+    "exerc6": "tsc && node ./build/exerc6.js",
+    "exerc7": "tsc && node ./build/exerc7.js",
+    "exerc8": "tsc && node ./build/exerc8.js",
+    "exerc9": "tsc && node ./build/exerc9.js",
+    "exerc10": "tsc && node ./build/exerc10.js",
+    "exerc11": "tsc && node ./build/exerc11.js"
+  },
+  "keywords": [],
+  "author": "Petrick Grillo",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.2"
+  }
+}
