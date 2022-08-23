@@ -1,0 +1,68 @@
+### Exercicio 01)
+A)O comando ALTER TABLE Actor DROP COLUMN salary; iria alterar a tabela de salario dos autores para uma coluna "dropando"/mostrando seus salarios
+B)O comando ALTER TABLE Actor CHANGE gender sex VARCHAR(6); altera o valor gender para sex e colocando a capacidade maxima de caracteres de 6
+C)O comando ALTER TABLE Actor CHANGE gender gender VARCHAR(255); muda o valor gender para o maximo de caracteres para 255
+D)ALTER TABLE Actor CHANGE gender gender VARCHAR(100);
+
+### Exercicio 02)
+A)UPDATE Actor
+SET name = "Moacyr Franco",
+	birth_date = "1970-07-19"
+WHERE id = "003";
+
+B)SELECT UPPER(name)
+from Actor;
+
+SELECT LOWER(name)
+from Actor;
+
+C)UPDATE Actor
+SET name = "Moacyr Franco",
+	birth_date = "1970-07-19",
+    gender = "male",
+    salary = 23263
+WHERE id = "005";
+D)UPDATE Actor
+SET name = "Moacyr Franco",
+	birth_date = "1970-07-19",
+    gender = "male",
+    testeTable = "",
+    salary = 23263
+WHERE id = "005";     o erro que retorna é de que o campo na lista chamado "teste table" é desconhecido
+
+### Exercicio 03)
+
+A)DELETE FROM Actor WHERE name = "Fernanda Montenegro"
+B)DELETE FROM Actor WHERE gender = "male" and salary > 1000000
+
+
+### Exercicio 04)
+A)SELECT MAX(salary)
+FROM Actor;
+B)SELECT MIN(salary)
+FROM Actor
+WHERE gender = "female";
+C)SELECT COUNT(*)
+FROM Actor
+WHERE gender = "female";
+D)SELECT SUM(salary) FROM Actor
+
+### Exercicio 05)
+A)O resultado se tem pois se agrupam por genero e a partir deste agrupamento ele faz a contagem/soma dos generos que contem os mesmos generos
+B)SELECT * FROM Actor ORDER BY name,id ASC
+C)SELECT * FROM Actor ORDER BY salary DESC;
+D)SELECT * FROM Actor
+ORDER BY salary DESC
+LIMIT 3
+E)SELECT SUM(salary), gender
+FROM Actor
+GROUP BY gender;
+
+### Exercicio 06)
+A)ALTER TABLE Movie ADD playing_limit_date DATE;
+B)ALTER TABLE Movie CHANGE rating rating FLOAT;
+C)ALTER TABLE Movie CHANGE rating rating FLOAT;
+UPDATE Movie SET playing_limit_date = "2021-01-01"
+WHERE id = "001";
+D)DELETE FROM Movie WHERE id = "001"
+
