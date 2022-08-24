@@ -1,0 +1,15 @@
+GET http://localhost:3003/actor/003
+###
+GET http://localhost:3003/actor1/Tony Ramos
+###
+GET http://localhost:3003/actor2/Female
+###
+PUT http://localhost:3003/actorSalary
+###
+DELETE http://localhost:3003/actorDel
+###
+GET http://localhost:3003/avgGender
+###
+GET http://localhost:3003/actor?gender=female
+###
+PUT http://localhost:3003/actor
