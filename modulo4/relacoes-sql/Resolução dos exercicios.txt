@@ -1,0 +1,33 @@
+### Exercicio 01)
+A) Chave estrangeira é uma especie de avisar o workbench que vira uma primary key da tabela que ficara linkada com outra.
+B) INSERT INTO Rating values
+("03","Comentario Avaliativo 02",6,"004");
+C)Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`alves-petrick-grillo`.`Rating`, CONSTRAINT `Rating_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`id`))	0.140 sec
+D)Error Code: 1054. Unknown column 'rating' in 'where clause'	0.156 sec
+
+### Exercicio 02)
+A)A tabela de moviecast tem apenas 2 id's, aonde a tabela tem como função ser uma especie de ponte entre a tabela de movie e actor, linkando seus id's
+B)INSERT INTO Actor (id,name,salary,birth_date,gender)
+VALUES (
+"010",
+"Neymar Marquito Junior",
+6,
+"2000-02-02",
+"male"
+);
+
+C)Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`alves-petrick-grillo`.`MovieCast`, CONSTRAINT `MovieCast_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`id`))	0.141 sec
+O erro diz que nao é possivel achar ou que a foreing key nao é compativel com o banco de dados e a table selecionada.
+
+D)Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`alves-petrick-grillo`.`MovieCast`, CONSTRAINT `MovieCast_ibfk_2` FOREIGN KEY (`actor_id`) REFERENCES `Actor` (`id`))	0.140 sec
+Não é possivel pois esta linkada/fazendo referencia a table de Atores
+
+### Exercicio 03)
+A)O operador ON tem como função verificar se a table que for selecionada no inner join tem seja o nome da pessoa nas tables que forem selecionadas na hora
+B)SELECT comment,Rating.movie_id,rate FROM Movie
+INNER JOIN Rating
+ON Movie.id = Rating.movie_id;
+
+
+
+
