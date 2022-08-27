@@ -22,10 +22,56 @@ const app: Express = express();
 app.use(express.json());
 app.use(cors());
 
-// async function mySelect(params:type) {
+app.get("/user/all", async (req: Request, res: Response) => {
+    try {
+        const getTaskById = await connection("todolist_user")
+            .select("todolist_user.nickname","todolist_user.id")
+            console.log(getTaskById)
+        res.status(200).send(getTaskById)
+    } catch (erro) {
+        console.log(erro);
+        res.status(500).send("Aconteceu um erro inesperado")
+    }
+})
 
-// }
+app.get("/user/:id", async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const getActorById = await connection("todolist_user")
+            .select("*")
+            .where("id", id)
+        if (getActorById[0] === undefined) {
+            res.status(400).send("Usuario Não encontrado!")
+        }
+        res.status(200).send(getActorById)
+    } catch (erro) {
+        console.log(erro);
+        res.status(500).send("Aconteceu um erro inesperado")
+    }
+})
 
+app.get("/task/:id", async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const getTaskById = await connection("todolist_task")
+            .select("todolist_task.id", "todolist_task.title", "todolist_task.limitDate", "todolist_task.creatorUserId", "todolist_task.description", "todolist_task.status")
+            .where("id", id)
+        if (getTaskById[0] === undefined) {
+            res.status(400).send("Usuario Não encontrado!")
+        }
+        res.status(200).send({
+            id: getTaskById[0].id,
+            title: getTaskById[0].title,
+            limitDate: moment(getTaskById[0].limitDate, "YYY-MM-DD").format("DD/MM/YYYY"),
+            creatorUserId: getTaskById[0].creatorUserId,
+            description: getTaskById[0].description,
+            status: getTaskById[0].status,
+        })
+    } catch (erro) {
+        console.log(erro);
+        res.status(500).send("Aconteceu um erro inesperado")
+    }
+})
 
 app.post("/user", async (req: Request, res: Response) => {
     try {
@@ -47,49 +93,7 @@ app.post("/user", async (req: Request, res: Response) => {
         res.status(200).send("Usuario Criado!")
     } catch (erro) {
         console.log(erro);
-        res.status(500).send("Aconteceu um erro inesperado")
-    }
-})
-app.get("/user/:id", async (req: Request, res: Response) => {
-    try {
-        const id = req.params.id
-        // if (!id) {
-        //     res.status(400).send("Usuario Não encontrado!")
-        // }
-        // if (id.length > 1) {
-        //     res.status(400).send("Usuario Não encontrado252!")
-        // }
-        // if(id){
-        //     res.status(400).send("Usuario Não encontrado25234!")
-        // }
-        const getActorById = await connection("todolist_user")
-            .select("*")
-            .where("id", id)
-        res.status(200).send(getActorById)
-    } catch (erro) {
-        console.log(erro);
-        res.status(500).send("Aconteceu um erro inesperado")
-    }
-})
-
-app.put("/user/edit/:id", async (req: Request, res: Response) => {
-    try {
-        const id: number = +(req.params.id)
-        const name: string = req.body.name
-        const nickname: string = req.body.nickname
-        const editUser = async (id: Number, name: string, nickname: string): Promise<any> => {
-            await connection("todolist_user")
-                .update({
-                    name,
-                    nickname
-                })
-                .where("id", id)
-        }
-        await editUser(id, name, nickname)
-        res.status(200).send("Usuario Criado!")
-    } catch (erro) {
-        console.log(erro);
-        res.status(500).send("Aconteceu um erro inesperado")
+        res.status(500).send(`Aconteceu um erro inesperado`)
     }
 })
 
@@ -99,6 +103,9 @@ app.post("/task", async (req: Request, res: Response) => {
         const description: string = req.body.description
         const limitDate: string = req.body.limitDate
         const creatorUserId: number = +(req.body.creatorUserId)
+        if (!title || !description || !limitDate || !creatorUserId) {
+            res.status(400).send("Preencha todos os campos")
+        }
         console.log(creatorUserId)
         const addTask = async (creatorUserId: number, description: string, limitDate: string, title: string): Promise<any> => {
             await connection("todolist_task")
@@ -111,32 +118,40 @@ app.post("/task", async (req: Request, res: Response) => {
         }
         await addTask(creatorUserId, description, limitDate, title)
         console.log("ss")
-        res.status(200).send("Usuario Criado!")
+        res.status(200).send("Tarefa Criada!")
     } catch (erro) {
         console.log(erro);
         res.status(500).send("Aconteceu um erro inesperado")
     }
 })
 
-app.get("/task/:id", async (req: Request, res: Response) => {
+app.put("/user/edit/:id", async (req: Request, res: Response) => {
     try {
-        const id = req.params.id
-        const getActorById = await connection("todolist_task")
-            .select("todolist_task.id", "todolist_task.title", "todolist_task.limitDate", "todolist_task.creatorUserId", "todolist_task.description","todolist_task.status")
-            .where("id", id)
-        res.status(200).send({
-            id: getActorById[0].id,
-            title: getActorById[0].title,
-            limitDate: moment(getActorById[0].limitDate, "YYY-MM-DD").format("DD/MM/YYYY"),
-            creatorUserId: getActorById[0].creatorUserId,
-            description: getActorById[0].description,
-            status:getActorById[0].status,
-        })
+        const id: number = +(req.params.id)
+        const name: string = req.body.name
+        const nickname: string = req.body.nickname
+        if (!name || !nickname) {
+            res.status(400).send("Preencha todos os campos")
+        }
+        const editUser = async (id: Number, name: string, nickname: string): Promise<any> => {
+            await connection("todolist_user")
+                .update({
+                    name,
+                    nickname
+                })
+                .where("id", id)
+        }
+        await editUser(id, name, nickname)
+        res.status(200).send("Usuario Modificado!")
     } catch (erro) {
         console.log(erro);
         res.status(500).send("Aconteceu um erro inesperado")
     }
 })
+
+
+
+
 
 
 
