@@ -27,6 +27,6 @@ content-type: application/json
 "creatorUserId": "018"
 }
 ###
-GET http://localhost:3003/task/2
+GET http://localhost:3003/task/1
 ###
 

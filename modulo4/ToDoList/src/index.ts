@@ -3,6 +3,7 @@ import knex from "knex";
 import cors from "cors";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
+import moment from "moment";
 
 dotenv.config();
 
@@ -120,15 +121,23 @@ app.post("/task", async (req: Request, res: Response) => {
 app.get("/task/:id", async (req: Request, res: Response) => {
     try {
         const id = req.params.id
-        const [getActorById] = await connection("todolist_task")
-            .select("*")
+        const getActorById = await connection("todolist_task")
+            .select("todolist_task.id", "todolist_task.title", "todolist_task.limitDate", "todolist_task.creatorUserId", "todolist_task.description","todolist_task.status")
             .where("id", id)
-        res.status(200).send(getActorById)
+        res.status(200).send({
+            id: getActorById[0].id,
+            title: getActorById[0].title,
+            limitDate: moment(getActorById[0].limitDate, "YYY-MM-DD").format("DD/MM/YYYY"),
+            creatorUserId: getActorById[0].creatorUserId,
+            description: getActorById[0].description,
+            status:getActorById[0].status,
+        })
     } catch (erro) {
         console.log(erro);
         res.status(500).send("Aconteceu um erro inesperado")
     }
 })
+
 
 
 
