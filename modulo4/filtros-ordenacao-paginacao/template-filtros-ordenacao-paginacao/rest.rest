@@ -1,0 +1,15 @@
+GET http://localhost:3003/recipes?title=S
+
+###
+GET http://localhost:3003/recipes?title=a&sort=created_at&order=desc
+###
+GET http://localhost:3003/recipes?&sort=title&order=asc&page=100
+###
+GET http://localhost:3003/users?sort=type&order=asc
+###
+GET http://localhost:3003/users?name=Soter
+###
+GET http://localhost:3003/users?sort=type&order=asc&page=2
+###
+GET http://localhost:3003/users?sort=type&order=asc&page=2
+
