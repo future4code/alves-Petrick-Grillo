@@ -1,0 +1,7 @@
+POST http://localhost:3003/createAdress/79900640
+content-type: application/json
+
+{
+    "bairro": ""
+}
+###
