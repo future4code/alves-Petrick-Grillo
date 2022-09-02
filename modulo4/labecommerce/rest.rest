@@ -14,7 +14,7 @@ content-type: application/json
 
 {
     "name": "ImagemparaTeste",
-	"price": 60,
+	"price": 123,
     "imageurl": "https://i.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68"
 }
 ###
@@ -26,8 +26,9 @@ POST http://localhost:3003/purchases
 content-type: application/json
 
 {
-    "user_id": "1",
-	"product_id ": "3",
-    "quantity": "3"
+    "user_id": "7",
+	"product_id": "4",
+    "quantity": 31
 }
 ###
+GET http://localhost:3003/users/1/purchases
