@@ -1,0 +1,35 @@
+POST http://localhost:3003/user
+content-type: application/json
+
+{
+    "name": "Parce2dssdsdl32 pontocom",
+	"nickname":"ssssdsd",
+	"email": "Pads@dds.com"
+}
+###
+GET http://localhost:3003/user/1
+###
+PUT http://localhost:3003/user/edit/1
+content-type: application/json
+
+{
+    "name": "Astro Dev31114",
+	"nickname": "astrodev31114"
+}
+###
+POST http://localhost:3003/task
+content-type: application/json
+
+{
+"title": "Criarw11 banco dos alunos",
+"description": "Dewvem11os criar o banco dos alunos para o módulo do backend",
+"limitDate": "04/05/2020",
+"creatorUserId": "018"
+}
+###
+GET http://localhost:3003/task/2
+###
+
+GET http://localhost:3003/user/all
+###
+
