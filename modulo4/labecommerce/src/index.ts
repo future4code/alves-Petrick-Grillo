@@ -98,11 +98,11 @@ const createBuyList = async (req: Request, res: Response) => {
             product_id: req.body.product_id,
             quantity: req.body.quantity
         }
-        const userProd: any = await getProductbyID(prod.product_id)
-        const somaProduc = userProd[0].price * prod.quantity
         if (!prod.user_id || !prod.product_id || !prod.quantity) {
             res.status(400).send("Preencha todos os campos!")
         }
+        const userProd: any = await getProductbyID(prod.product_id)
+        const somaProduc = userProd[0].price * prod.quantity
         await connection("labecommerce_purchases")
             .insert({
                 user_id: prod.user_id,
