@@ -10,7 +10,7 @@ class User {
         name: string,
         password: string,
     ) {
-        console.log("Chamando o construtor da classe User")
+        // console.log("Chamando o construtor da classe User")
         this.id = id
         this.email = email
         this.name = name
@@ -55,7 +55,7 @@ class Customer extends User {
         creditCard: string
     ) {
         super(id, email, name, password);
-        console.log("Chamando o construtor da classe Customer");
+        // console.log("Chamando o construtor da classe Customer");
         this.creditCard = creditCard;
     }
 
@@ -97,7 +97,7 @@ const client01: Client = {
         return 2
     }
 }
-console.log(client01)
+// console.log(client01)
 // A)Name, registr,consum e calculate, porem o calculate me retornou uma function
 
 // ### Exercicio 02)
@@ -108,8 +108,122 @@ export abstract class Place {
         return this.cep;
     }
 }
-const exerc02: Place = new Place("cep01")
 //  A) Não é possível criar uma instância de uma classe abstrata.
 //  B) Adicionar uma parametro privado para deixar de ser abstrata
 // ### Exercicio 03
+// 1) para criar uma instância de uma classe abstrata
+//  precisamos declarar uma classe filha e criar uma instância dessa última.
+// 2) Pois ela não possui uma instacia filha, sendo apenas uma especie de esqueleto
+// 3) Pois nao possui uma outro classe para chama-la
+export class Residence extends Place {
+    constructor(
+        protected residentsQuantity: number,
+        // Refere-se ao número de moradores da casa
 
+        cep: string
+    ) {
+        super(cep);
+    }
+}
+export class Commerce extends Place {
+    constructor(
+        protected floorsQuantity: number,
+        // Refere-se à quantidade de andares do lugar
+
+        cep: string
+    ) {
+        super(cep);
+    }
+}
+export class Industry extends Place {
+    constructor(
+        protected machinesQuantity: number,
+        // Refere-se à quantidade de máquinas do local 
+
+        cep: string
+    ) {
+        super(cep);
+    }
+}
+
+// const exerc02A: Residence = new Residence(1,"ceep1")
+// console.log(exerc02A)
+// const exerc02B: Commerce = new Commerce(1,"ceep1")
+// console.log(exerc02B)
+// const exerc02C: Industry = new Industry(1,"ceep1")
+// console.log(exerc02C)
+
+class ResidentialClient extends Residence implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        private cpf: string,
+        residentsQuantity: number,
+        cep: string
+    ) {
+        super(residentsQuantity, cep);
+    }
+
+    public getCpf(): string {
+        return this.cpf;
+    }
+
+    public calculateBill(): number {
+        return this.consumedEnergy * 0.75;
+    }
+}
+// const exerc04: ResidentialClient = new ResidentialClient("nome01", 1, 2323, "cpf123", 23, "cep")
+// console.log(exerc04)
+// console.log(exerc04.calculateBill())
+class CommercialClient extends Commerce implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        private cnpj: string,
+        floorsQuantity: number,
+        cep: string
+    ) {
+        super(floorsQuantity, cep);
+    }
+
+    public calculateBill(): number {
+        return this.consumedEnergy * 0.53;
+    }
+
+    public getCnpj(): string {
+        return this.cnpj;
+    }
+}
+// const exerc05: CommercialClient = new CommercialClient("nome01", 1, 2323, "cpf123", 23, "cep")
+// console.log(exerc05)
+// console.log(exerc05.getCnpj())
+// console.log(exerc05.calculateBill())
+//   As diferenças são de acordo com sua moradia, apartamento por exemplo e as semelhanças sao os consumos de energia
+//   e seu numero de registro
+
+class IndustrialClinet extends Industry implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        private insdustryNumber: string, // tanto faz ser string ou number
+        machinesQuantity: number,
+        cep: string
+    ) {
+        super(machinesQuantity, cep);
+    }
+
+    public getIndustryNumber(): string {
+        return this.insdustryNumber;
+    }
+
+    public calculateBill(): number {
+        return this.consumedEnergy * 0.45 + this.machinesQuantity * 100;
+    }
+}
+const exerc06: IndustrialClinet = new IndustrialClinet("nome01", 23, 324, "numeroindustrial", 4, "cep1234")
+console.log(exerc06)
+// A) Industry, pois o cliente tem conexão com o clienteinsdustrial
+// B) Tudo exceto o CEP e machineryQnt que ja continha
