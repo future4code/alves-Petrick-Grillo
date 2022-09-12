@@ -1,0 +1,18 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+	"email": "Usuario04@usua04.com",
+	"password": "12301234"
+}
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+	"email": "Usuario0333@usua0333.com",
+	"password": "12301234"
+}
+###
+GET http://localhost:3003/user/profile
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGNhNDM1LTIzMzMtNDJlZi1hMjM1LWI4M2FjMmFkYWQ3ZCIsImlhdCI6MTY2MzAxNjUxNCwiZXhwIjoxNjYzMDE2NTc0fQ.GunDIdKzSfShblOI0gWcwmzn54dDUCYgXBeWavAQgRI
