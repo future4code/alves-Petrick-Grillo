@@ -1,0 +1,30 @@
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "UserTeste1123",
+    "email": "beltrano1322@gmail.com",
+    "password": "abc123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "beltrano@gmail.com",
+    "password": "abc123"
+}
+### 3) Create Post
+POST http://localhost:3003/post
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3MDY3ZWJkLThhOGQtNGQ3YS04NjY4LTNlOGRhYzA4MTgzZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM4NjY5MDEsImV4cCI6MTY2Mzk1MzMwMX0.vQlVGCzQ94o1t6W7YpgGU36npR0Ps1NitQj0l_0PbMY
+
+{
+    "content": "2DSAAAAAxAAAA2"
+}
+
+### 4) Get posts
+GET http://localhost:3003/post/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3MDY3ZWJkLThhOGQtNGQ3YS04NjY4LTNlOGRhYzA4MTgzZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM4NzY4NDEsImV4cCI6MTY2Mzk2MzI0MX0.GRBpHfpsV69mQ1MY8d2MM57H3ep-CRcMc5pvHwJiBvU
