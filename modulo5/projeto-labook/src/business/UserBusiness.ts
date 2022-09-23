@@ -70,7 +70,7 @@ export class UserBusiness {
         }
         let payload: payload = {
             id: user.id,
-            role: USER_ROLES.NORMAL
+            role: user.role
         }
         const token = this.generateToken.generateToken(payload)
         const response: response = {
