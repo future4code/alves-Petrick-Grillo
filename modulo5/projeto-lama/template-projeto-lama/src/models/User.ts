@@ -27,7 +27,7 @@ export interface payload {
     role: USER_ROLES
 }
 export interface responseSign {
-    usuario: string
+    message: string
     token: string
 }
 

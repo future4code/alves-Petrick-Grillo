@@ -1,6 +1,6 @@
 import { UserDatabase } from "../database/UserDatabase"
 import { ParamsError } from "../errors/ParamsError"
-import { IUserDB, loginUserDTO, payload, response, responseSign, signupUserDTO, USER_ROLES } from "../models/User"
+import { IUserDB, loginUserDTO, payload, response, responseSign, signupUserDTO, User, USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -34,14 +34,21 @@ export class UserBusiness {
         }
         const passwordHash = await this.hashManager.hash(password)
         const id = this.idGenerator.generate()
-        await this.userDatabase.createUser(id, name, email, passwordHash, USER_ROLES.NORMAL)
+        const user = new User(
+            id,
+            name,
+            email,
+            passwordHash,
+            USER_ROLES.NORMAL
+        )
+        await this.userDatabase.createUser(user)
         let payload: payload = {
             id: id,
             role: USER_ROLES.NORMAL
         }
         const token = this.authenticator.generateToken(payload)
         const response: responseSign = {
-            usuario: name,
+            message: "Cadastro realizado com sucesso",
             token: token
         }
         return response

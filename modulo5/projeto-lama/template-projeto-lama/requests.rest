@@ -22,7 +22,7 @@ Content-Type: application/json
 ###
 POST http://localhost:3003/shows/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0NjZhZGFkLTEyYWQtNGYwMy04ZGM0LTFmMjRhMmRjMWE1ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODAwMDMsImV4cCI6MTY2NDU2NjQwM30.8Xlygy0fsAaplX5uCskkB8uhOy5k1M2UyrRFSqKb9eI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDQ4NzkyOSwiZXhwIjoxNjY0NTc0MzI5fQ.NuhEBhhXzk1LsaWxKWGfxT3rXvWfSa73JOM0ULcAaJM
 
 {
     "band": "Banda teste 01",
@@ -35,19 +35,19 @@ GET http://localhost:3003/shows
 ###
 POST http://localhost:3003/shows/claim
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1NjJiYmRiLTc5YzgtNGM2Ni1iZDg0LTRkNGQ0N2M0OGQ0ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODIxOTcsImV4cCI6MTY2NDU2ODU5N30.yI8yJabdUd8blbDY2zdtAo2dG69QIu4pGE8gWMVWvVE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2NTQxMDI0LWFmYWMtNDFkZS04MDNjLWE0ODJlNTIxMjBmYiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODc5NzEsImV4cCI6MTY2NDU3NDM3MX0.-kEByhdQrwMBhTjbYDzCcnwihUl9lbPtSkyDGQGIHsg
 
 {
-    "show_id": "202"
+    "show_id": "203"
 }
 
 ###
 POST http://localhost:3003/shows/unclaim
 Content-Type: application/json
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1NjJiYmRiLTc5YzgtNGM2Ni1iZDg0LTRkNGQ0N2M0OGQ0ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODIxOTcsImV4cCI6MTY2NDU2ODU5N30.yI8yJabdUd8blbDY2zdtAo2dG69QIu4pGE8gWMVWvVE
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2NTQxMDI0LWFmYWMtNDFkZS04MDNjLWE0ODJlNTIxMjBmYiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODc5NzEsImV4cCI6MTY2NDU3NDM3MX0.-kEByhdQrwMBhTjbYDzCcnwihUl9lbPtSkyDGQGIHsg
 
 {
-    "show_id": "202"
+    "show_id": "203"
 }
 
 ###
