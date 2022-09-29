@@ -1,0 +1,53 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+###
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "UserTeste01",
+    "email": "UserTeste01@gmail.com",
+    "password": "abc123"
+}
+### 2) Login
+    # "email": "astrodev@gmail.com",
+    # "password": "bananinha"
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+###
+POST http://localhost:3003/shows/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0NjZhZGFkLTEyYWQtNGYwMy04ZGM0LTFmMjRhMmRjMWE1ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODAwMDMsImV4cCI6MTY2NDU2NjQwM30.8Xlygy0fsAaplX5uCskkB8uhOy5k1M2UyrRFSqKb9eI
+
+{
+    "band": "Banda teste 01",
+    "starts_at": "2028-12-26"
+}
+
+###
+GET http://localhost:3003/shows
+
+###
+POST http://localhost:3003/shows/claim
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1NjJiYmRiLTc5YzgtNGM2Ni1iZDg0LTRkNGQ0N2M0OGQ0ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODIxOTcsImV4cCI6MTY2NDU2ODU5N30.yI8yJabdUd8blbDY2zdtAo2dG69QIu4pGE8gWMVWvVE
+
+{
+    "show_id": "202"
+}
+
+###
+POST http://localhost:3003/shows/unclaim
+Content-Type: application/json
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1NjJiYmRiLTc5YzgtNGM2Ni1iZDg0LTRkNGQ0N2M0OGQ0ZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ0ODIxOTcsImV4cCI6MTY2NDU2ODU5N30.yI8yJabdUd8blbDY2zdtAo2dG69QIu4pGE8gWMVWvVE
+
+{
+    "show_id": "202"
+}
+
+###
