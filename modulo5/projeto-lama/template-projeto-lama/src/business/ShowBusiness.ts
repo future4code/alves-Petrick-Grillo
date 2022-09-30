@@ -1,4 +1,5 @@
 import { ShowDatabase } from "../database/ShowDatabase"
+import { ParamsError } from "../errors/ParamsError"
 import { createShowDTO, infoUserDTO, Show } from "../models/Show"
 import { USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
@@ -16,20 +17,20 @@ export class ShowBusiness {
         let { band, starts_at } = input
         const tokenUser = this.authenticator.getTokenPayload(token)
         if (!tokenUser) {
-            throw new Error("Invalid token")
+            throw new ParamsError("Invalid token")
         }
         if (tokenUser.role !== USER_ROLES.ADMIN) {
-            throw new Error("Somente admins podem criar shows de outra pessoa")
+            throw new ParamsError("Somente admins podem criar shows de outra pessoa")
         }
         const dateFormated = new Date(starts_at)
         const dateEvent = new Date("2022-12-05")
         if (dateFormated < dateEvent) {
-            throw new Error("Data do show é antes do evento")
+            throw new ParamsError("Data do show é antes do evento")
         }
         const idShow = this.idGenerator.generate()
         const teste = this.showDatabase.getShowsbyDate(starts_at)
         if (await teste) {
-            throw new Error("Não podem ocorrer 2 shows no mesmo dia")
+            throw new ParamsError("Não podem ocorrer 2 shows no mesmo dia")
         }
         await this.showDatabase.createShow(idShow, band, starts_at)
         const msgShow = ({ message: "Show Criado!" })
@@ -51,19 +52,19 @@ export class ShowBusiness {
     claimTicket = async (input: infoUserDTO) => {
         const tokenUser = this.authenticator.getTokenPayload(input.token)
         if (!tokenUser) {
-            throw new Error("Invalid token")
+            throw new ParamsError("Invalid token")
         }
         const getTicketUser = await this.showDatabase.getAllReserves(input.show_id, tokenUser.id)
         if (getTicketUser.length) {
-            throw new Error("Você somente pode resgatar um ticket por pessoa!")
+            throw new ParamsError("Você somente pode resgatar um ticket por pessoa!")
         }
         const getShowbyId = await this.showDatabase.getShowbyId(input.show_id)
-        if(!getShowbyId){
-            throw new Error("Você precisa inserir um show valido!")
+        if (!getShowbyId) {
+            throw new ParamsError("Você precisa inserir um show valido!")
         }
         const verifyClaim = await this.showDatabase.getClaimsTickets(input.show_id)
         if (verifyClaim > 5000) {
-            throw new Error("Ingressos Esgotados!")
+            throw new ParamsError("Ingressos Esgotados!")
         }
         const idTicket = this.idGenerator.generate()
         await this.showDatabase.claimTicket(idTicket, input.show_id, tokenUser.id)
@@ -73,15 +74,15 @@ export class ShowBusiness {
     unClaimTicket = async (input: infoUserDTO) => {
         const tokenUser = this.authenticator.getTokenPayload(input.token)
         if (!tokenUser) {
-            throw new Error("Invalid token")
+            throw new ParamsError("Invalid token")
         }
         const getShowbyId = await this.showDatabase.getShowbyId(input.show_id)
-        if(!getShowbyId){
-            throw new Error("Você precisa inserir um show valido!")
+        if (!getShowbyId) {
+            throw new ParamsError("Você precisa inserir um show valido!")
         }
         const getTicketUser = await this.showDatabase.getAllReserves(input.show_id, tokenUser.id)
         if (!getTicketUser.length) {
-            throw new Error("Você precisa resgatar o ticket!")
+            throw new ParamsError("Você precisa resgatar o ticket!")
         }
         await this.showDatabase.deleteTicket(input.show_id, tokenUser.id)
         const unClaimed = ({ message: "Ticket retirado com sucesso!" })

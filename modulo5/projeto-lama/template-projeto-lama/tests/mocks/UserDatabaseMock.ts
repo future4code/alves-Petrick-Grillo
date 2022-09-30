@@ -32,7 +32,7 @@ export class UserDatabaseMock extends BaseDatabase {
                     id: "id-mock",
                     name: "Astrodev",
                     email: "astrodev@gmail.com",
-                    password: "hash-bananinha",
+                    password: "$2a$12$RBAWOHpUvGTE.MEeIohAzec9tlVqtNA/x2PMPt/Hrt0vI437cQdJC",
                     role: USER_ROLES.ADMIN
                 }
 

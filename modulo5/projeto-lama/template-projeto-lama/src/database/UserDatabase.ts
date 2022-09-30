@@ -21,7 +21,7 @@ export class UserDatabase extends BaseDatabase {
             .connection(UserDatabase.TABLE_USERS)
             .insert(userDB)
     }
-    getUserByEmail = async (email: string): Promise<IUserDB> => {
+    getUserByEmail = async (email: string): Promise<IUserDB | undefined> => {
         const result: IUserDB[] = await BaseDatabase.connection()
             .select("*")
             .from(UserDatabase.TABLE_USERS)
