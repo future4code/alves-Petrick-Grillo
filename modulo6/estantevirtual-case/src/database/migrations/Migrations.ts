@@ -1,6 +1,6 @@
 import { BaseDatabase } from "../BaseDatabase";
 import { CompDatabase } from "../CompDatabase";
-import { users } from "./data";
+import { nameComps, users } from "./data";
 
 class Migrations extends BaseDatabase {
     execute = async () => {
@@ -25,9 +25,18 @@ class Migrations extends BaseDatabase {
     }
     createTables = async () => {
         await BaseDatabase.connection.raw(`
+        drop table if exists ${CompDatabase.Estante_Comp};
+        drop table if exists ${CompDatabase.Estante_NameComp};
+
+        CREATE TABLE IF NOT EXISTS ${CompDatabase.Estante_NameComp}(
+            id VARCHAR (255) NOT NULL PRIMARY KEY,
+            competicao VARCHAR (255) NOT NULL
+        );
+
         CREATE TABLE IF NOT EXISTS ${CompDatabase.Estante_Comp}(
             id VARCHAR(255) PRIMARY KEY,
-            competicao VARCHAR(255) NOT NULL,
+            competicao_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (competicao_id) REFERENCES ${CompDatabase.Estante_NameComp}(id),
             atleta VARCHAR(255) NOT NULL UNIQUE,
             value VARCHAR(255) NOT NULL,
             unidade VARCHAR(255) NOT NULL);
@@ -35,8 +44,13 @@ class Migrations extends BaseDatabase {
     }
     insertData = async () => {
         await BaseDatabase
+            .connection(CompDatabase.Estante_NameComp)
+            .insert(nameComps)
+
+        await BaseDatabase
             .connection(CompDatabase.Estante_Comp)
             .insert(users)
+
     }
 }
 

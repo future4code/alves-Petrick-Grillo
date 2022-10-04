@@ -1,0 +1,7 @@
+###
+POST http://localhost:3003/comp/create
+Content-Type: application/json
+
+{
+    "competicao": "Teste de competicão 01"
+}
