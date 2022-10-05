@@ -53,18 +53,27 @@ export class CompDatabase extends BaseDatabase {
             .where({ competicao_id })
             .update({ status: status })
     }
-    getResult = async (competicao_id: string, order: string): Promise<any> => {
-        const result: IResultDB[] = await CompDatabase.connection()
-            .select(`"${order}"`)
-            .from(CompDatabase.Estante_Comp)
-            .where({ competicao_id })
-        return result
-    }
     getStatus = async (competicao_id: string): Promise<ICompleteDB | undefined> => {
         const result: ICompleteDB[] = await CompDatabase.connection()
             .select("*")
             .from(CompDatabase.Estante_Complete)
             .where({ competicao_id })
         return result[0]
+    }
+    getCompAll = async (competicao_id: string): Promise<IResultDB[] | undefined> => {
+        const result: IResultDB[] = await CompDatabase.connection()
+            .select("*")
+            .from(CompDatabase.Estante_Comp)
+            .where({ competicao_id })
+        return result
+    }
+    getResult = async (competicao_id: string, order: string): Promise<any> => {
+        const result: IResultDB[] = await CompDatabase.connection()
+            .select("*")
+            .table(CompDatabase.Estante_Comp)
+            .where({ competicao_id })
+            // .orderBy(["id", "competicao_id", "atleta", "value", "unidade", { column: "unidade", order: "ASC" }])
+            .orderBy("value", `${order}`)
+        return result
     }
 }

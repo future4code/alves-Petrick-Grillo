@@ -3,16 +3,16 @@ POST http://localhost:3003/comp/create
 Content-Type: application/json
 
 {
-    "competicao": "Teste de competicão 056"
+    "competicao": "Teste de competicão 1"
 }
 ### INSERT INFO COMP
 POST http://localhost:3003/comp/insert
 Content-Type: application/json
 
 {
-    "competicao_id": "16eb9b1d-4512-4285-84ba-38adc2f4dc87",
-    "atleta": "Atleta 03",
-    "value": "10.23",
+    "competicao_id": "bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b",
+    "atleta": "Atleta 16643446=-698653322324-3",
+    "value": 88.25,
     "unidade": "m"
 }
 ### CHANGE STATUS
@@ -23,4 +23,9 @@ Content-Type: application/json
     "competicao_id": "07a17542-8ac1-414d-98f0-56383a805039"
 }
 ### GET ALL ATHLETES BY COMP
-GET http://localhost:3003/comp/edit
+GET http://localhost:3003/comp/list
+Content-Type: application/json
+
+{
+    "competicao_id": "bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b"
+}

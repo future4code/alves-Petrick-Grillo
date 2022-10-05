@@ -20,3 +20,4 @@ const compController = new CompController(
 compRouter.post("/create", compController.createComp)
 compRouter.post("/insert", compController.signupResult)
 compRouter.put("/complete", compController.editStatus)
+compRouter.get("/list",compController.getListAthletes)

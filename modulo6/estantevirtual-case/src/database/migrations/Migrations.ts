@@ -39,7 +39,7 @@ class Migrations extends BaseDatabase {
             competicao_id VARCHAR(255) NOT NULL,
             FOREIGN KEY (competicao_id) REFERENCES ${CompDatabase.Estante_NameComp}(id),
             atleta VARCHAR(255) NOT NULL UNIQUE,
-            value VARCHAR(255) NOT NULL,
+            value FLOAT NOT NULL,
             unidade VARCHAR(255) NOT NULL);
 
         CREATE TABLE IF NOT EXISTS ${CompDatabase.Estante_Complete}(

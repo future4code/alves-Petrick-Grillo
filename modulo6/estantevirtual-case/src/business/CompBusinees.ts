@@ -1,3 +1,4 @@
+import { response } from "express";
 import { CompDatabase } from "../database/CompDatabase";
 import { ParamsError } from "../errors/ParamsError";
 import { Comp, ICompleteDB, ICompleteInputDB, INameCompDB, INameInputDB, IResultDB, IResultInputDB, responseCreate, Result, Status } from "../models/Comp";
@@ -42,8 +43,8 @@ export class CompBusiness {
         if (typeof atleta !== "string") {
             throw new ParamsError(`O ${atleta} não é do tipo string`)
         }
-        if (typeof value !== "string") {
-            throw new ParamsError(`O ${value} não é do tipo string`)
+        if (typeof value !== "number") {
+            throw new ParamsError(`O ${value} não é do tipo number`)
         }
         if (typeof unidade !== "string") {
             throw new ParamsError(`O ${unidade} não é do tipo string`)
@@ -67,15 +68,31 @@ export class CompBusiness {
         if (typeof competicao_id !== "string") {
             throw new ParamsError(`O ${competicao_id} não é do tipo string`)
         }
-        const teste = await this.compDatabase.getStatus(competicao_id)
+        const statusComp = await this.compDatabase.getStatus(competicao_id)
         let newStatus = "Concluído"
-        if (teste.status === "Em andamento") {
+        if (statusComp.status === "Em andamento") {
             newStatus = "Concluído"
             await this.compDatabase.editStatus(competicao_id, newStatus)
         }
         const response: responseCreate = {
             message: "Competição editada com sucesso!"
         }
+        return response
+    }
+    listAthletes = async (input: ICompleteInputDB) => {
+        const { competicao_id } = input
+        if (typeof competicao_id !== "string") {
+            throw new ParamsError(`O ${competicao_id} não é do tipo string`)
+        }
+        const arrayResult = await this.compDatabase.getCompAll(competicao_id)
+        const unidade = arrayResult[0].unidade
+        console.log(unidade)
+        let orderBy = "asc"
+        if (unidade === "m") {
+            orderBy = "desc"
+        }
+        console.log(orderBy)
+        const response = await this.compDatabase.getResult(competicao_id, orderBy)
         return response
     }
 }

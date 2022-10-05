@@ -2,13 +2,13 @@ export interface IResultDB {
     id: string,
     competicao_id: string,
     atleta: string,
-    value: string,
+    value: number,
     unidade: string
 }
 export interface IResultInputDB {
     competicao_id: string,
     atleta: string,
-    value: string,
+    value: number,
     unidade: string
 }
 export interface ICompleteDB {
@@ -71,7 +71,7 @@ export class Result {
         private id: string,
         private competicao_id: string,
         private atleta: string,
-        private value: string,
+        private value: number,
         private unidade: string
     ) { }
     public getId = () => {

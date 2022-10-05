@@ -55,4 +55,19 @@ export class CompController {
             res.status(500).send({ message: "Erro Inesperado" })
         }
     }
+    getListAthletes = async (req: Request, res: Response) => {
+        try {
+            const input: ICompleteInputDB = {
+                competicao_id: req.body.competicao_id,
+            }
+            const response = await this.compBusiness.listAthletes(input)
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro Inesperado" })
+        }
+    }
 }
