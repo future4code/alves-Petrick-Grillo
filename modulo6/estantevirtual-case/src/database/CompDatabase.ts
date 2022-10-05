@@ -1,9 +1,10 @@
-import { Comp, INameCompDB, IResultDB, Result } from "../models/Comp";
+import { Comp, ICompleteDB, INameCompDB, IResultDB, Result, Status } from "../models/Comp";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class CompDatabase extends BaseDatabase {
     public static Estante_NameComp = "Estante_NameComp"
     public static Estante_Comp = "Estante_Comp"
+    public static Estante_Complete = "Estante_Complete"
     toResultDBModel = (result: Result): IResultDB => {
         const resultDB: IResultDB = {
             id: result.getId(),
@@ -21,6 +22,13 @@ export class CompDatabase extends BaseDatabase {
         }
         return compDB
     }
+    toStatusDBModel = (status: Status): ICompleteDB => {
+        const statusDB: ICompleteDB = {
+            status: status.getStatus(),
+            competicao_id: status.getCompeticao_id(),
+        }
+        return statusDB
+    }
     createComp = async (comp: Comp): Promise<void> => {
         const resultDB = this.toCompDBModel(comp)
         await BaseDatabase
@@ -33,10 +41,29 @@ export class CompDatabase extends BaseDatabase {
             .connection(CompDatabase.Estante_Comp)
             .insert(resultDB)
     }
-    getComp = async (competicao_id: string) => {
+    insertStatus = async (status: Status): Promise<void> => {
+        const statusDB = this.toStatusDBModel(status)
+        await BaseDatabase
+            .connection(CompDatabase.Estante_Complete)
+            .insert(statusDB)
+    }
+    editStatus = async (competicao_id: string, status: string): Promise<void> => {
+        await CompDatabase.connection()
+            .from(CompDatabase.Estante_Complete)
+            .where({ competicao_id })
+            .update({ status: status })
+    }
+    getResult = async (competicao_id: string, order: string): Promise<any> => {
         const result: IResultDB[] = await CompDatabase.connection()
-            .select("*")
+            .select(`"${order}"`)
             .from(CompDatabase.Estante_Comp)
+            .where({ competicao_id })
+        return result
+    }
+    getStatus = async (competicao_id: string): Promise<ICompleteDB | undefined> => {
+        const result: ICompleteDB[] = await CompDatabase.connection()
+            .select("*")
+            .from(CompDatabase.Estante_Complete)
             .where({ competicao_id })
         return result[0]
     }
