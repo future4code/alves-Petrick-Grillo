@@ -1,17 +1,12 @@
-import { response } from "express";
 import { CompDatabase } from "../database/CompDatabase";
 import { ParamsError } from "../errors/ParamsError";
 import { Comp, ICompleteDB, ICompleteInputDB, INameCompDB, INameInputDB, IResultDB, IResultInputDB, responseCreate, Result, Status } from "../models/Comp";
-import { Authenticator } from "../services/Authenticator";
-import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 
 export class CompBusiness {
     constructor(
         private compDatabase: CompDatabase,
         private idGenerator: IdGenerator,
-        private hashManager: HashManager,
-        private authenticator: Authenticator
     ) { }
     createComp = async (input: INameInputDB) => {
         const { competicao } = input
@@ -49,6 +44,10 @@ export class CompBusiness {
         if (typeof unidade !== "string") {
             throw new ParamsError(`O ${unidade} não é do tipo string`)
         }
+        const verifyResult = await this.compDatabase.getStatus(competicao_id)
+        if (verifyResult.status === "Concluído") {
+            throw new ParamsError(`A competição com o id: ${competicao_id} ja foi finalizada!`)
+        }
         const idSignUp = this.idGenerator.generate()
         const result = new Result(
             idSignUp,
@@ -84,15 +83,22 @@ export class CompBusiness {
         if (typeof competicao_id !== "string") {
             throw new ParamsError(`O ${competicao_id} não é do tipo string`)
         }
+        const verifyResult = await this.compDatabase.getStatus(competicao_id)
+        let alertComp = "Concluído"
+        if (verifyResult.status === "Em andamento") {
+            alertComp = "Competição em andamento!"
+        }
         const arrayResult = await this.compDatabase.getCompAll(competicao_id)
         const unidade = arrayResult[0].unidade
-        console.log(unidade)
         let orderBy = "asc"
         if (unidade === "m") {
             orderBy = "desc"
         }
-        console.log(orderBy)
-        const response = await this.compDatabase.getResult(competicao_id, orderBy)
+        const resultsByOrder = await this.compDatabase.getResult(competicao_id, orderBy)
+        const response = {
+            "Status da competição": alertComp,
+            resultsByOrder
+        }
         return response
     }
 }
