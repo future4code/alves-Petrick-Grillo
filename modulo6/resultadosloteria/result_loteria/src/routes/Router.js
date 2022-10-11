@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { MegaSena } from "../pages/Mega-sena/mega-sena"
-import Quina from "../pages/quina/quina"
+import { MegaSena } from "../pages/Mega-sena/MegaSena"
+import Quina from "../pages/quina/Quina"
 
 
 export const Router = () => {
