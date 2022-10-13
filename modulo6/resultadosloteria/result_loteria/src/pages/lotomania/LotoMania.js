@@ -1,7 +1,15 @@
+import { DataSena } from "../../components/DataSena"
+import { NumerosSena } from "../../components/NumerosSena"
+import { SelectSena } from "../../components/SelectSena"
+
 function LotoMania() {
+
     return (
         <div>
-            <h1>teste LotoMania</h1>
+            <SelectSena />
+            <DataSena />
+            <NumerosSena />
+            <h1>LotoMania</h1>
         </div>
     )
 }

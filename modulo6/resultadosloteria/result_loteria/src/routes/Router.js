@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { SelectSena } from "../components/SelectSena"
 import DiaDeSorte from "../pages/dia_de_sorte/DiaDeSorte"
 import LotoFacil from "../pages/lotofacil/LotoFacil"
 import LotoMania from "../pages/lotomania/LotoMania"
@@ -10,6 +11,7 @@ import TimeMania from "../pages/timemania/TimeMania"
 export const Router = () => {
     return (
         <BrowserRouter>
+            {/* <SelectSena /> */}
             <Routes>
                 <Route index element={<MegaSena />} />
                 <Route path="Quina" element={<Quina />} />
