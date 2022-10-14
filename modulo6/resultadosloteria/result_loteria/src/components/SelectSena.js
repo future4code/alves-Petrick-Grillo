@@ -1,8 +1,24 @@
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
 import { BASE_URL } from "../constants/urls"
 import GlobalContext from "../Global/GlobalContext"
+
+const Select = styled.select`
+padding:20px 30px 20px 30px;
+border-radius:10px;
+margin-left:5%;
+margin-top:3%;
+
+`
+const MainContainer = styled.div`
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+`
 
 export function SelectSena() {
     const { nomesLoterias, idsConcursos, loteriaSelected, setLoteriaSelected, concurso, setConcurso } = useContext(GlobalContext)
@@ -63,11 +79,11 @@ export function SelectSena() {
     }, [loteriaSelected])
     console.log(concurso)
     return (
-        <div>
-            <select onChange={handleChangeLoteria}>
+        <MainContainer>
+            <Select onChange={handleChangeLoteria}>
                 <option selected="selected" value="teste" disabled >Selecione</option>
                 {loteriasMap}
-            </select>
-        </div>
+            </Select>
+        </MainContainer>
     )
 }
