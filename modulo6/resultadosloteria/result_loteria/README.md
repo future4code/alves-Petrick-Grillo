@@ -4,6 +4,7 @@
 Pétrick Machado de Almeida Grillo
 
 ## Link do Surge:
+- infamous-hammer.surge.sh
 
 ## O que Funciona:
 ### Loteria:
