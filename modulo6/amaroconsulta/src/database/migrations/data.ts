@@ -1,133 +1,96 @@
 import { IOutfitDB } from "../../models/Outfit";
+import { IdGenerator } from "../../services/IdGenerator";
 
 export const outfits: IOutfitDB[] = [
     {
         id: "8371",
         name: "VESTIDO TRICOT CHEVRON",
-        tags: ["balada", "neutro", "delicado", "festa"]
     },
     {
         id: "8367",
         name: "VESTIDO MOLETOM COM CAPUZ MESCLA",
-        tags: ["casual", "metal", "metal"]
-    },
-    {
-        id: "8363",
-        name: "VESTIDO CURTO MANGA LONGA LUREX",
-        tags: ["colorido", "metal", "delicado", "estampas", "passeio"]
-    },
-    {
-        id: "8360",
-        name: "VESTIDO FEMININO CANELADO",
-        tags: ["workwear", "viagem", "descolado"]
-    },
-    {
-        id: "8358",
-        name: "VESTIDO REGATA FEMININO COM GOLA",
-        tags: ["moderno", "inverno", "liso", "basics"]
-    },
-    {
-        id: "8314",
-        name: "VESTIDO PLISSADO ACINTURADO",
-        tags: ["casual", "viagem", "delicado"]
-    },
-    {
-        id: "8311",
-        name: "VESTIDO SLIPDRESS CETIM",
-        tags: ["balada", "metal", "boho", "descolado", "passeio"]
-    },
-    {
-        id: "8310",
-        name: "VESTIDO CURTO PONTO ROMA MANGA",
-        tags: ["casual", "metal", "delicado", "descolado", "elastano", "estampas"]
-    },
-    {
-        id: "8309",
-        name: "VESTIDO MOLETOM COM CAPUZ",
-        tags: ["inverno", "liso", "casual", "descolado"]
-    },
-    {
-        id: "8301",
-        name: "VESTIDO LONGO CREPE MANGA COMPRIDA",
-        tags: ["casual", "metal", "delicado", "descolado"]
-    },
-    {
-        id: "8300",
-        name: "VESTIDO MALHA COM FENDA",
-        tags: ["balada", "metal", "estampas", "moderno"]
-    },
-    {
-        id: "8293",
-        name: "VESTIDO CURTO VELUDO RECORTE GOLA",
-        tags: ["colorido", "viagem", "delicado", "descolado", "inverno"]
-    },
-    {
-        id: "8291",
-        name: "VESTIDO MANGA COMPRIDA COSTAS",
-        tags: ["inverno", "estampas", "delicado", "descolado", "casual", "passeio", "basics"]
-    },
-    {
-        id: "8264",
-        name: "VESTIDO CURTO VELUDO CRISTAL",
-        tags: ["casual", "viagem", "boho", "neutro", "festa"]
-    },
-    {
-        id: "8119",
-        name: "VESTIDO BABADOS KNIT",
-        tags: ["moderno", "metal", "descolado", "elastano", "festa", "colorido"]
-    },
-    {
-        id: "8110",
-        name: "VESTIDO CUT OUT TRICOT",
-        tags: ["casual", "colorido", "delicado", "descolado", "viagem", "inverno"]
-    },
-    {
-        id: "8109",
-        name: "VESTIDO BABADOS HORIZONTAIS",
-        tags: ["moderno", "boho", "festa", "descolado", "colorido"]
-    },
-    {
-        id: "8104",
-        name: "VESTIDO BABADO TURTLENECK",
-        tags: ["casual", "metal", "delicado", "neutro", "basics", "inverno", "viagem"]
-    },
-    {
-        id: "8091",
-        name: "VESTIDO MIDI VELUDO DECOTADO",
-        tags: ["couro", "veludo", "passeio", "viagem"]
-    },
-    {
-        id: "8083",
-        name: "VESTIDO LONGO ESTAMPADO",
-        tags: ["couro", "estampado", "passeio", "viagem"]
-    },
-    {
-        id: "8080",
-        name: "VESTIDO CURTO RENDA VISCOSE",
-        tags: ["neutro", "workwear", "moderno", "descolado", "liso", "elastano"]
-    },
-    {
-        id: "7613",
-        name: "VESTIDO LONGO BABADO",
-        tags: ["casual", "liso", "passeio", "colorido", "boho"]
-    },
-    {
-        id: "7533",
-        name: "VESTIDO COTTON DOUBLE",
-        tags: ["balada", "liso", "moderno", "descolado"]
-    },
-    {
-        id: "7518",
-        name: "VESTIDO CAMISETA FANCY",
-        tags: ["casual", "liso"]
-    },
-    {
-        id: "7516",
-        name: "VESTIDO WRAP FLEUR",
-        tags: ["neutro", "liso", "basics", "viagem"]
     }
 ]
-const removeDuplicate = outfits.map((parametro) => {
-    return parametro.tags
-})
-console.log([... new Set(removeDuplicate.flat(Infinity))])
+export const tags = [
+    {
+        tags: "balada"
+    },
+    {
+        tags: "neutro"
+    },
+    {
+        tags: "delicado"
+    },
+    {
+        tags: "festa"
+    },
+    {
+        tags: "casual"
+    },
+    {
+        tags: "metal"
+    }
+]
+export const products_Tags = [
+    {
+        id_robes: "8371",
+        id_tags: "balada"
+    },
+    {
+        id_robes: "8371",
+        id_tags: "neutro"
+    },
+    {
+        id_robes: "8371",
+        id_tags: "delicado"
+    },
+    {
+        id_robes: "8371",
+        id_tags: "festa"
+    },
+    {
+        id_robes: "8367",
+        id_tags: "casual"
+    },
+    {
+        id_robes: "8367",
+        id_tags: "metal"
+    }
+]
+
+// const removeDuplicate = outfits.map((parametro) => {
+//     return parametro.tags
+// })
+// export const teste = outfits.map((parametro) => {
+//     return ({
+//         id: parametro.id,
+//         name: parametro.name
+//     })
+// })
+// const testeRemo = [... new Set(removeDuplicate.flat(Infinity))]
+// export const testeReduce = testeRemo.map((parametro) => {
+//     return ({
+//         tags: parametro
+//     })
+// })
+// console.log(testeReduce)
+// console.log([... new Set(removeDuplicate.flat(Infinity))])
+/* for para percorrrer o array de outfits/arrayoriginal
+se existir a tag compativel add no
+*/
+// const linkIds = outfits.map((parametro) => {
+//     let verifyTag = []
+//     // if (parametro.tags === testeRemo) {
+
+//     // }
+//     for(let i = outfits.map((parametro)=>{return parametro.tags}); i ===  ;){
+
+//     }
+// })
+// for (let i = 0; i < outfits.length; i++) {
+//     console.log("posição: ", i)
+//     for (let j = 0; j < outfits[i].tags.length; j++) {
+//         console.log(outfits[j].tags)
+//     }
+
+// }
