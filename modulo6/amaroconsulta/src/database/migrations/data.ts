@@ -1,7 +1,7 @@
-import { IOutfitDB } from "../../models/Outfit";
+import { IOutfitRobesDB } from "../../models/Outfit";
 import { IdGenerator } from "../../services/IdGenerator";
 
-export const outfits: IOutfitDB[] = [
+export const outfits: IOutfitRobesDB[] = [
     {
         id: "8371",
         name: "VESTIDO TRICOT CHEVRON",
@@ -92,5 +92,4 @@ se existir a tag compativel add no
 //     for (let j = 0; j < outfits[i].tags.length; j++) {
 //         console.log(outfits[j].tags)
 //     }
-
 // }
