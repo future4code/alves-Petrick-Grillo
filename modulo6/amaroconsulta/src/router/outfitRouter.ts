@@ -15,7 +15,7 @@ const outfitController = new OutfitController(
 outfitRouter.post("/sign", outfitController.linkIds)
 outfitRouter.post("/tag", outfitController.signupTag)
 outfitRouter.post("/signout", outfitController.signupRobe)
-outfitRouter.post("/link", outfitController.signupTaginespecifyRobe)
+outfitRouter.post("/link", outfitController.signupTaginEspecifyRobe)
 outfitRouter.get("/tags", outfitController.getTags)
 outfitRouter.get("/robes", outfitController.getRobes)
 outfitRouter.get("/", outfitController.getOutfits)

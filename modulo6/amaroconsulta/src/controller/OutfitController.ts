@@ -53,13 +53,13 @@ export class OutfitController {
             res.status(500).send({ message: "Erro Inesperado" })
         }
     }
-    signupTaginespecifyRobe = async (req: Request, res: Response) => {
+    signupTaginEspecifyRobe = async (req: Request, res: Response) => {
         try {
             const input: IOutfitLinkInput = {
                 name: req.body.name,
                 tags: req.body.tags
             }
-            const response = await this.outfitBusiness.signupTaginespecifyRobe(input)
+            const response = await this.outfitBusiness.signupTaginEspecifyRobe(input)
             res.status(200).send(response)
         } catch (error) {
             console.log(error)
@@ -73,7 +73,7 @@ export class OutfitController {
         try {
             const response = await this.outfitBusiness.getTags()
             res.status(200).send(response)
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
@@ -85,7 +85,7 @@ export class OutfitController {
         try {
             const response = await this.outfitBusiness.getRobes()
             res.status(200).send(response)
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
@@ -97,7 +97,7 @@ export class OutfitController {
         try {
             const response = await this.outfitBusiness.getOutfits()
             res.status(200).send(response)
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })

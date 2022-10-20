@@ -18,20 +18,12 @@ export class OutfitBusiness {
         if (typeof name !== "string") {
             throw new ParamsError("Insira uma string!2")
         }
-
-        // if (typeof tags !== "string") {
-        //     throw new ParamsError("Insira uma string!1")
-        // }
         const idRobe = this.idGenerator.generate()
         const robe = new Robes(
             idRobe,
             name
         )
         await this.outfitDatabase.createRobe(robe)
-        // for (let i = 0; i < tags; i++) {
-        //     const tag = new Tags(
-        //         tags
-        //     )
         const tags_exists = await this.outfitDatabase.getTags()
 
 
@@ -39,6 +31,9 @@ export class OutfitBusiness {
             const tag = new Tags(
                 tag_name
             )
+            if(!tags_exists){
+                throw new ParamsError("Tag não encontrada")
+            }
             if (!tags_exists.find(function (name_tag_exist) {
                 return name_tag_exist === tag_name
             })) {
@@ -50,6 +45,9 @@ export class OutfitBusiness {
                 throw new ParamsError("Roupa não encontrada")
             }
             const verifyTag = await this.outfitDatabase.getUniqueTag(tag_name)
+            if (!verifyTag) {
+                throw new ParamsError("Roupa não encontrada")
+            }
             const ids = new Ids(
                 verifyRobe.id,
                 verifyTag.tags
@@ -97,7 +95,7 @@ export class OutfitBusiness {
         }
         return response
     }
-    signupTaginespecifyRobe = async (input: IOutfitLinkInput) => {
+    signupTaginEspecifyRobe = async (input: IOutfitLinkInput) => {
         let { name, tags } = input
 
         if (!name || name.length < 3) {
@@ -139,12 +137,18 @@ export class OutfitBusiness {
     getOutfits = async () => {
         const robes = await this.outfitDatabase.getRobes()
         const response = []
+        if (!robes) {
+            throw new ParamsError("robes não encontrada!")
+        }
         for (let robe of robes) {
             const id = new Outfits(
                 robe.id,
                 robe.name
             )
             const Idslink = await this.outfitDatabase.getIdsLinked(id.getId())
+            if (!Idslink) {
+                throw new ParamsError("Idslink não encontrada!")
+            }
             const id_tags = Idslink.map((parametro) => {
                 return parametro.id_tags
             })
@@ -159,7 +163,3 @@ export class OutfitBusiness {
     }
 
 }
-// for (let tag_name of tags) {
-//     const tag = new Tags(
-//         tag_name
-//     )

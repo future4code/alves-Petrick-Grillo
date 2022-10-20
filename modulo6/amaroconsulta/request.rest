@@ -3,7 +3,7 @@ POST http://localhost:3003/outfit/sign
 Content-Type: application/json
 
 {
-    "name": "Roupa teste geral1",
+    "name": "Roupa teste geral12",
     "tags": ["colorido", "metal", "delicado", "estampas", "passeio"]
 }
 ### Cadastrar roupa
@@ -11,14 +11,14 @@ POST http://localhost:3003/outfit/signout
 Content-Type: application/json
 
 {
-    "name": "Roupa teste 06 only1"
+    "name": "Roupa teste 06 only1236"
 }
 ### Adicionar tags
 POST http://localhost:3003/outfit/tag
 Content-Type: application/json
 
 {
-    "tags": "Tag teste 02333"
+    "tags": "Tag teste 023336"
 }
 
 ###Linkar novas tags a robes
@@ -26,7 +26,7 @@ POST http://localhost:3003/outfit/link
 Content-Type: application/json
 
 {
-    "name": "Roupa teste geral",
+    "name": "Roupa teste geral1",
     "tags": "metal"
 }
 
