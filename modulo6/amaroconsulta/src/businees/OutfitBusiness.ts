@@ -1,7 +1,7 @@
 import { tags } from "../database/migrations/data";
 import { OutfitDatabase } from "../database/OutfitDatabase";
 import { ParamsError } from "../errors/ParamsError";
-import { Ids, IOutfitLinkInput, IOutfitRobesInputDB, IOutfitTagsDB, Outfits, Robes, Tags } from "../models/Outfit";
+import { Ids, IOutfitLinkEspecifyInput, IOutfitLinkInput, IOutfitRobesInputDB, IOutfitTagsDB, Outfits, Robes, Tags } from "../models/Outfit";
 import { IdGenerator } from "../services/IdGenerator";
 
 export class OutfitBusiness {
@@ -16,7 +16,7 @@ export class OutfitBusiness {
             throw new ParamsError("Insira um nome valido!")
         }
         if (typeof name !== "string") {
-            throw new ParamsError("Insira uma string!2")
+            throw new ParamsError("Insira uma string!")
         }
         const idRobe = this.idGenerator.generate()
         const robe = new Robes(
@@ -46,7 +46,7 @@ export class OutfitBusiness {
             }
             const verifyTag = await this.outfitDatabase.getUniqueTag(tag_name)
             if (!verifyTag) {
-                throw new ParamsError("Roupa não encontrada")
+                throw new ParamsError("TAG não encontrada")
             }
             const ids = new Ids(
                 verifyRobe.id,
@@ -95,7 +95,7 @@ export class OutfitBusiness {
         }
         return response
     }
-    signupTaginEspecifyRobe = async (input: IOutfitLinkInput) => {
+    signupTagInEspecifyRobe = async (input: IOutfitLinkEspecifyInput) => {
         let { name, tags } = input
 
         if (!name || name.length < 3) {
@@ -147,7 +147,7 @@ export class OutfitBusiness {
             )
             const Idslink = await this.outfitDatabase.getIdsLinked(id.getId())
             if (!Idslink) {
-                throw new ParamsError("Idslink não encontrada!")
+                throw new ParamsError("roupas não foram linkadas!")
             }
             const id_tags = Idslink.map((parametro) => {
                 return parametro.id_tags

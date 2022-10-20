@@ -1,26 +1,28 @@
 import { OutfitBusiness } from "../../src/businees/OutfitBusiness"
 import { BaseError } from "../../src/errors/BaseError"
-import { IOutfitRobesInputDB } from "../../src/models/Outfit"
+import { IOutfitLinkInput } from "../../src/models/Outfit"
 import { OutfitDatabaseMock } from "../mocks/OutfitDatabaseMock"
 import { IdGeneratorMock } from "../mocks/services/IdGeneratorMock"
 
-describe("Testando o método de createRobe da OutfitBusiness", () => {
+describe("Testando o método de linkIds da OutfitBusiness", () => {
     const outfitBusiness = new OutfitBusiness(
         new OutfitDatabaseMock(),
         new IdGeneratorMock()
     )
     test("Testando a resposta de um cadastro bem-sucedido", async () => {
-        const input: IOutfitRobesInputDB = {
-            name: "VESTIDO TRICOT CHEVRON"
+        const input: IOutfitLinkInput = {
+            name: "VESTIDO TRICOT CHEVRON",
+            tags: ["balada", "neutro", "delicado", "festa", "casual", "metal"]
         }
-        const response = await outfitBusiness.signupRobe(input)
-        expect(response.message).toBe("Roupa cadastrada com sucesso!")
+        const response = await outfitBusiness.linkIds(input)
+        expect(response.message).toBe("Roupas registradas cadastrada com sucesso!")
     })
-    test("Erro quando o nome do vestido possui menos que 3 caracteres", async () => {
+    test("Erro quando o name do vestido possui menos que 3 caracteres", async () => {
         expect.assertions(2)
         try {
-            const input: IOutfitRobesInputDB = {
-                name: "V"
+            const input: IOutfitLinkInput = {
+                name: "VE",
+                tags: ["balada", "neutro", "delicado", "festa", "casual", "metal"]
             }
             await outfitBusiness.signupRobe(input)
         } catch (error) {
@@ -33,8 +35,9 @@ describe("Testando o método de createRobe da OutfitBusiness", () => {
     test("Erro quando o nome não for do tipo string", async () => {
         expect.assertions(2)
         try {
-            const input: IOutfitRobesInputDB = {
-                name: 1
+            const input: IOutfitLinkInput = {
+                name: 545,
+                tags: ["balada", "neutro", "delicado", "festa", "casual", "metal"]
             } as any
             await outfitBusiness.signupRobe(input)
         } catch (error) {
@@ -44,4 +47,4 @@ describe("Testando o método de createRobe da OutfitBusiness", () => {
             }
         }
     })
-})  
+})

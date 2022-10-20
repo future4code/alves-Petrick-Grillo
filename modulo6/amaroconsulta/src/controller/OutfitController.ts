@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { OutfitBusiness } from "../businees/OutfitBusiness";
 import { BaseError } from "../errors/BaseError";
-import { IOutfitLinkInput, IOutfitRobesInputDB, IOutfitTagsDB } from "../models/Outfit";
+import { IOutfitLinkEspecifyInput, IOutfitLinkInput, IOutfitRobesInputDB, IOutfitTagsDB } from "../models/Outfit";
 
 export class OutfitController {
     constructor(
@@ -55,11 +55,11 @@ export class OutfitController {
     }
     signupTaginEspecifyRobe = async (req: Request, res: Response) => {
         try {
-            const input: IOutfitLinkInput = {
+            const input: IOutfitLinkEspecifyInput = {
                 name: req.body.name,
                 tags: req.body.tags
             }
-            const response = await this.outfitBusiness.signupTaginEspecifyRobe(input)
+            const response = await this.outfitBusiness.signupTagInEspecifyRobe(input)
             res.status(200).send(response)
         } catch (error) {
             console.log(error)

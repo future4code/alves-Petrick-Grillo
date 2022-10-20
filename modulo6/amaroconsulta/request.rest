@@ -3,8 +3,8 @@ POST http://localhost:3003/outfit/sign
 Content-Type: application/json
 
 {
-    "name": "Roupa teste geral12",
-    "tags": ["colorido", "metal", "delicado", "estampas", "passeio"]
+    "name": "Roupa teste geral1322",
+    "tags": ["colorido", "metal", "delicado", "estampas", "passeio","anime"]
 }
 ### Cadastrar roupa
 POST http://localhost:3003/outfit/signout

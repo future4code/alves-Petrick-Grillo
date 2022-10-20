@@ -17,6 +17,10 @@ export interface IOutfitLinkInput {
     name: string,
     tags: string[]
 }
+export interface IOutfitLinkEspecifyInput {
+    name: string,
+    tags: string
+}
 export interface IOutfits {
     id: string,
     name: string,
