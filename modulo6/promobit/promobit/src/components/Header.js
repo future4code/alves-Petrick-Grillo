@@ -5,16 +5,16 @@ import logo from "../img/TMDB-logo-branca.png"
 export const MainContainer = styled.div`
 height:100%;
 width:100%;
-
-/* padding-left:5%; */
 `
 export const Container1 = styled.div`
+padding-left:5%;
+/* height:5%; */
 background-color:#5C16C5;
 display:flex;
 align-items:center;
 `
 export const ImageLogo = styled.img`
-height:100px;
+height:40px;
 `
 export const ButtonLogo = styled.button`
 height:50%;
