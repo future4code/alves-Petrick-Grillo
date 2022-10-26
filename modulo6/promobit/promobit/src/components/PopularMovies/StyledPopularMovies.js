@@ -13,7 +13,7 @@ width:100vw;
 export const ContainerCardMap = styled.div`
 width:20%;
 `
-export const Container3 = styled.div`
+export const CardWrap = styled.div`
 display:flex;
 flex-wrap:wrap;
 align-items:center;
@@ -67,6 +67,7 @@ border-radius: 4px;
 padding: 8px 16px 8px 16px;
 width:100%;
 border:none;
+background:${props => props.backgroundColor};
 `
 export const ContainerFilter = styled.div`
 color:white;
@@ -75,22 +76,22 @@ align-items:center;
 justify-content:center;
 padding-bottom:1%;
 `
-export const Container1 = styled.div`
+export const ContainerGenresWrap = styled.div`
 display:flex;
 flex-wrap:wrap;
 align-items:center;
 justify-content:center;
 `
-export const Container2 = styled.div`
+export const BlockFilter = styled.div`
 padding-top:2%;
 `
-export const Container4 = styled.div`
+export const DataFormatada = styled.div`
 color:#646464;
 font-weight: 300;
 font-size: 20px;
 letter-spacing: 0.015em;
 `
-export const Container5 = styled.div`
+export const MainTitleMovie = styled.div`
 `
 export const TitleMovie = styled.h2`
 font-family: Roboto;
