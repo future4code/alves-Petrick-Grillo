@@ -1,6 +1,4 @@
-import { useContext } from "react"
-import { PopularMovies } from "../../components/PopularMovies"
-import GlobalContext from "../../Global/GlobalContext"
+import { PopularMovies } from "../../components/PopularMovies/PopularMovies"
 
 export function PopularPage() {
     return (
