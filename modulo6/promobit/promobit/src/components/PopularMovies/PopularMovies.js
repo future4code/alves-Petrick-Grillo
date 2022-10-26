@@ -1,4 +1,5 @@
 import moment from "moment/moment"
+import 'moment/locale/pt-br'
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { BASE_URL_IMG } from "../../constants/urls"
@@ -54,16 +55,18 @@ export function PopularMovies() {
             53: '#D18000',
             10752: '#D18000',
             37: "#D18000"
-        }[idGenre]
+        }[generos.id]
+        console.log(idGenre)
         console.log(generos)
+        console.log(backColor)
         return <ContainerGenres key={generos?.id}>
-            <ButtonGenres onClick={() => onChangeGenre(generos?.id)} backgroundColor={backColor}>
+            <ButtonGenres onClick={() => onChangeGenre(generos?.id)} backgroundColor={generos.id === idGenre ? backColor : ""} >
                 {generos?.name}
             </ButtonGenres>
         </ContainerGenres>
     })
     const renderMovies = renderGenre(idGenre)?.map((movie) => {
-        const dataFormated = moment(movie.release_date).format('ll')
+        const dataFormated = moment(movie.release_date).locale("pt-br").format('D MMM YYYY')
         return <ContainerCardMap key={movie?.id}>
             <MainCard>
                 <Card onClick={() => onChangeDetail(movie.id)}>

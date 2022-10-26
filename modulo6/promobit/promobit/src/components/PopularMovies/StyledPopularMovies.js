@@ -8,20 +8,22 @@ export const ContainerCard = styled.div`
 display:flex;
 align-items:center;
 justify-content:center;
-width:100vw;
+/* width:100vw; */
+/* background-color:black; */
 `
 export const ContainerCardMap = styled.div`
-width:20%;
+width:32%;
+/* width:100%; */
 `
 export const CardWrap = styled.div`
 display:flex;
 flex-wrap:wrap;
 align-items:center;
 justify-content:center;
+width:100%;
 `
 export const MainCard = styled.div`
 display:flex;
- width:30vw;
  flex-wrap:wrap;
  height:40vh;
 `
@@ -102,8 +104,8 @@ letter-spacing: 0em;
 text-align: left;
 `
 export const ImageMovie = styled.img`
-height: 264px;
-left: 320px;
-top: 534px;
-border-radius: 4px;
+/* height: 264px; */
+/* left: 320px; */
+/* top: 534px; */
+border-radius: 20px;
 `
