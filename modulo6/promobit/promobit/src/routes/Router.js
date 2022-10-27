@@ -9,7 +9,7 @@ export const Router = () => {
             <Header />
             <Routes>
                 <Route index element={<PopularPage />} />
-                <Route path="details" element={<PageDetail />} />
+                <Route path="details/:id" element={<PageDetail />} />
             </Routes>
         </BrowserRouter>
     )

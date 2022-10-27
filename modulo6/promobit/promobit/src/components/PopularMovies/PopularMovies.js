@@ -12,8 +12,8 @@ export function PopularMovies() {
     const filmes = popularFilmes?.results
     const genres = genresMovies?.genres
     const navigate = useNavigate()
-    const goToDetail = () => {
-        navigate("/details")
+    const goToDetail = (id) => {
+        navigate(`/details/${id}`)
     }
     const renderGenre = (idGenre) => {
         const arrayFilter = []
@@ -28,11 +28,11 @@ export function PopularMovies() {
         setIdGenre(genre)
     }
     const onChangeDetail = (id) => {
-        addMovie(id)
-        goToDetail()
+        goToDetail(id)
     }
     useEffect(() => {
         renderGenre(idGenre)
+        console.log(renderGenre(idGenre))
     }, [idGenre])
     const renderGenres = genres?.map((generos) => {
         const backColor = {
@@ -56,21 +56,19 @@ export function PopularMovies() {
             10752: '#D18000',
             37: "#D18000"
         }[generos.id]
-        console.log(idGenre)
-        console.log(generos)
-        console.log(backColor)
         return <ContainerGenres key={generos?.id}>
             <ButtonGenres onClick={() => onChangeGenre(generos?.id)} backgroundColor={generos.id === idGenre ? backColor : ""} >
                 {generos?.name}
             </ButtonGenres>
         </ContainerGenres>
     })
+    console.log(genres)
     const renderMovies = renderGenre(idGenre)?.map((movie) => {
         const dataFormated = moment(movie.release_date).locale("pt-br").format('D MMM YYYY')
         return <ContainerCardMap key={movie?.id}>
             <MainCard>
                 <Card onClick={() => onChangeDetail(movie.id)}>
-                    <ImageMovie src={`${BASE_URL_IMG}${movie?.backdrop_path}`} alt={movie?.title} />
+                    <ImageMovie src={`${BASE_URL_IMG}${movie?.poster_path}`} alt={movie?.title} />
                     <MainTitleMovie>
                         <TitleMovie>
                             {movie?.title}

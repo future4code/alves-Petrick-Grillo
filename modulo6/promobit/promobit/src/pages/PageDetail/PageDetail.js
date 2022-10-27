@@ -1,4 +1,5 @@
-import { DetailMovie } from "../../components/DetailMovie";
+import { DetailMovie } from "../../components/DetailMovies/DetailMovie";
+
 
 export function PageDetail() {
     return (

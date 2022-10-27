@@ -3,17 +3,17 @@ import styled from "styled-components"
 export const MainContainer = styled.div`
 height:100%;
 width:100%;
+background-color:#E9DEED;
 `
 export const ContainerCard = styled.div`
+height:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-/* width:100vw; */
-/* background-color:black; */
 `
 export const ContainerCardMap = styled.div`
-width:32%;
-/* width:100%; */
+width:16.6%;
+/* width:25%; widht 2º */
 `
 export const CardWrap = styled.div`
 display:flex;
@@ -23,18 +23,19 @@ justify-content:center;
 width:100%;
 `
 export const MainCard = styled.div`
-display:flex;
- flex-wrap:wrap;
- height:40vh;
+ height:45vh;
+ /* ----------------------------------------- */
 `
 export const Card = styled.button`
 display:flex;
 flex-direction:column;
 border-radius:10px;
-margin:2%;
-padding:1.5%;
+margin-top:10%;
+margin-left:10%;
 border:none;
 background:none;
+width:50%;
+ /* width:176px; */
 `
 export const MainContainerTitle = styled.div`
 height:25vh;
@@ -47,7 +48,8 @@ export const ContainerTitle = styled.div`
 export const TXTTitle = styled.div`
 color:white;
 font-weight: 700;
-font-size: 40px;
+font-size: 20px;
+/* mobile 20 font-size -------------*/
 line-height: 56px;
 text-align: center;
 letter-spacing: -0.005em;
@@ -63,6 +65,7 @@ margin:0.2%;
 display:flex;
 align-items:center;
 justify-content:center;
+/* width:100vw; */
 `
 export const ButtonGenres = styled.button`
 border-radius: 4px;
@@ -81,31 +84,40 @@ padding-bottom:1%;
 export const ContainerGenresWrap = styled.div`
 display:flex;
 flex-wrap:wrap;
+/* --------------------------------------------------- */
 align-items:center;
-justify-content:center;
+/* overflow-x: scroll; */
+/* para mobile retirar o justify content */
 `
 export const BlockFilter = styled.div`
-padding-top:2%;
+/* padding-top:2%; */
 `
 export const DataFormatada = styled.div`
 color:#646464;
 font-weight: 300;
-font-size: 20px;
+font-size: 16px;
+line-height: 24px;
 letter-spacing: 0.015em;
 `
 export const MainTitleMovie = styled.div`
 `
 export const TitleMovie = styled.h2`
 font-family: Roboto;
-font-size: 16px;
+font-size: 22px;
 font-weight: 700;
-line-height: 24px;
+line-height: 34px;
 letter-spacing: 0em;
 text-align: left;
 `
 export const ImageMovie = styled.img`
+/* border-radius: 10px; */
 /* height: 264px; */
-/* left: 320px; */
-/* top: 534px; */
-border-radius: 20px;
+/* width: 176px;
+ */
+width:100%;
+height:100%;
+left: 112px;
+top: 534px;
+border-radius: 4px;
+
 `
