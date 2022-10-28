@@ -1,4 +1,4 @@
-# LabEddit
+# Loteria
 
 ## Feito por:
 Pétrick Machado de Almeida Grillo
